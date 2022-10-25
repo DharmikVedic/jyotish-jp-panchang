@@ -6,7 +6,7 @@ class MyDocument extends Document {
         return (
             <Html class="scroll-smooth">
                 <Head>
-                    <Script strategy="afterInteractive" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoNbkWHS1EaPzZ_3gClPD7VihjX1j7EUk&libraries=places"></Script>
+                    <Script strategy="beforeInteractive" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoNbkWHS1EaPzZ_3gClPD7VihjX1j7EUk&libraries=places"></Script>
                     <link rel="shortcut icon" href="/favicon.ico" />
                     <meta name="theme-color" content="#ffffff" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
