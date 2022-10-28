@@ -1,5 +1,5 @@
 import {SunTable} from "../../components/table/suntable";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {formatAMPM} from "../../components/json/country";
 import {FetchAPI, FetchApi} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
@@ -19,22 +19,20 @@ export default function Index(){
             tzone: 9,
             year: dateobj.getFullYear(),
     };
-    const [loader,setloader] = useState(false);
+    const [loader,setloader] = useState(true);
     const [input, setinput] = useState(defaultobject);
     const [data,setdata] = useState({panchang:"",tamil:""});
-    
-
 
 useEffect(()=>{
 let mouted = true;
 if(mouted){
-    Apicall();
+    Apicall(input);
 }
 return()=> {mouted = false};
-},[input]);
+},[]);
 
 
-    const Apicall =async()=>{
+    const Apicall =async(input)=>{
         setloader(true);
         const panchang = await FetchAPI("advanced_panchang",input);
         const tamil_panchang = await FetchAPI("tamil_panchang",input);
@@ -47,12 +45,22 @@ return()=> {mouted = false};
         if(input.country !== "japan"){
             const timezone = await FetchApi({apiName: "timezone_with_dst",userData:{latitude: parseFloat(input.lat),longitude:parseFloat(input.lon),date:date}});
             setinput(prev=> ({...prev,tzone: timezone.response.timezone }));
+            return {tzone: timezone.response.timezone };
         }
     }
-    const getdata = (datestring, res) => {
+
+
+    const getdata = useCallback(async (datestring, res)=>{
         setinput(prev => ({...prev, ...res }));
-        Timezone(res);
-    };
+       const tzoneval = await Timezone(res);
+        Apicall({...input,...res,...tzoneval});
+    },[]);
+
+
+    // const getdata = (datestring, res) => {
+    //     setinput(prev => ({...prev, ...res }));
+    //     Timezone(res);
+    // };
 
 
 return(

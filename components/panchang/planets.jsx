@@ -2,18 +2,7 @@ import {getDMS} from "../utils/gmsDegree";
 
 export default function Planets({data}){
 
-    const sign = {
-        "太陽":"A",
-        "月":"B",
-        "火星":"E",
-        "水星":"C",
-        "木星":"F",
-        "金星":"D",
-        "土星":"G",
-        "さそり座":"H",
-        "ネプチューン":"I",
-        "冥王星":"J",
-    }
+
 
     return(
         <div>
@@ -52,6 +41,20 @@ export default function Planets({data}){
 }
 
 
+export   const sign = {
+    "太陽":"A",
+    "月":"B",
+    "火星":"E",
+    "水星":"C",
+    "木星":"F",
+    "金星":"D",
+    "土星":"G",
+    "さそり座":"H",
+    "ネプチューン":"I",
+    "冥王星":"J",
+}
+
+
 export const zodiac ={
     "牡羊座":"a",
     "みずがめ座":"k",
@@ -67,4 +70,4 @@ export const zodiac ={
     "うお座":"l"
 }
 
-export const color = ["text-blue-500","text-red-500","text-yellow-500","text-purple-500","text-green-500","text-violet-500","text-cyan-500","text-pink-500","text-orange-500"]
+export const color = ["text-blue-500","text-red-500","text-yellow-500","text-purple-500","text-green-500","text-violet-500","text-cyan-500","text-pink-500","text-orange-500","text-fuchsia-500"]

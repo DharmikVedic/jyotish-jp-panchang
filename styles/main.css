@@ -23,7 +23,7 @@
 }
 .table th{
     padding: 7px 10px;
-    font-size: 18px;
+    font-size: 17px;
     color: #fff;
     border: 1px solid #d4d4d8;
     background-color: #3CB5EB;
@@ -77,4 +77,11 @@ th{
 }
 .timeHightlight{
     color:#f97316;
+}
+
+
+@media screen and (max-width: 760px) {
+    .table th {
+        font-size: 15px;
+    }
 }

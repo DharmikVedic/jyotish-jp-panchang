@@ -52,7 +52,7 @@ export default function Festival(){
     return(
         <>
             {loader ? <Loader/> :
-                <PanchangCard style="bg-sky-500/80" title="Upcoming Upavas and Festivals">
+                <PanchangCard link="/festival" style="bg-sky-500/80" title="Upcoming Upavas and Festivals">
                     {festival.length == 0 ?
                         <div className="flex justify-center pb-10 items-center h-full text-2xl">
                             <h3>

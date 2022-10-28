@@ -17,7 +17,7 @@ export default function DailyCharts(){
         planetColor:"#333",
         signColor:"#ea580c",
         lineColor:"#333",
-        chartType:chartType
+        chartType:chartType,
     }
 
     const handleChart=(val)=>{
@@ -37,7 +37,7 @@ export default function DailyCharts(){
                 planetColor:"#333",
                 signColor:"#ea580c",
                 lineColor:"#333",
-                chartType:charttype
+                chartType:charttype,
             }
             const Charts= await FetchAPI("horo_chart_image/D1", {...initialValue,...customChart});
             setData(prev=> ({...prev,['horo_chart_image/D1']:Charts}));
@@ -56,9 +56,8 @@ export default function DailyCharts(){
             alert(value.msg);
         }
     }
-
     return(
-        <PanchangCard link="/muhurat" style="bg-sky-500/80" title="Lagna Kundali">
+        <PanchangCard link="/planets" style="bg-sky-500/80" title="Lagna Kundali">
                 <div className="pt-2 pb-5 px-5 flex flex-col ">
                     <ChartButton activeChart={chartType} passChart={handleChart}/>
                     <CommonLoadrFunction passdata={handleData} apinames={['planets','horo_chart_image/D1']}
@@ -71,7 +70,7 @@ export default function DailyCharts(){
                             <div className="h-[320px] w-full">
                                 {loader ? <Loader/> :
                                     <div
-                                        className="text-4xl tracking-wider  "
+                                        className="w-[350px] h-[350px]"
                                         dangerouslySetInnerHTML={{__html: data['horo_chart_image/D1'].svg}}
                                     />
                                 }
