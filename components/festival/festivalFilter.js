@@ -100,7 +100,7 @@ export default function FestivalFormdata(props) {
                         <div className="rounded-md gap-3 self-end text-sm flex w-full ">
                             <button
                                 onClick={decrementDate}
-                                className="rounded text-white flex items-center py-2 px-1 justify-center  font-semibold bg-sky-500 w-full hover:bg-sky-600"
+                                className="rounded text-white flex items-center py-2 px-1 justify-center  font-semibold bg-[#FA7869] hover:bg-[#FA4848] w-full"
                             >
                                 <span className="mt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -112,13 +112,13 @@ export default function FestivalFormdata(props) {
                             </button>
                             <button
                                 onClick={()=> {setstate(new Date()); setDays(0)}}
-                                className=" text-white rounded py-2 px-5 font-semibold bg-sky-500 w-full hover:bg-sky-600"
+                                className=" text-white rounded py-2 px-5 font-semibold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
                                 Today
                             </button>
                             <button
                                 onClick={incrementDate}
-                                className="rounded text-white flex  justify-center items-center py-2 w-full px-5 font-semibold bg-sky-500 hover:bg-sky-600"
+                                className="rounded text-white flex  justify-center items-center py-2 w-full px-5 font-semibold bg-[#FA7869] hover:bg-[#FA4848]"
                             >
                                 Next Year
                                 <span className="mt-1">

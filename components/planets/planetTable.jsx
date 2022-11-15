@@ -7,28 +7,28 @@ export default function PlanetTable({data}){
             <table className="table">
                 <thead className="bg-[#D8894E]">
                 <tr className="text-white text-left">
-                    <th>
+                    <th className="th">
                         惑星
                     </th>
-                    <th>
+                    <th className="th">
                         逆行
                     </th>
-                    <th>
+                    <th className="th">
                         星座
                     </th>
-                    <th>
+                    <th className="th">
                         星座支配星
                     </th>
-                    <th>
+                    <th className="th">
                         度数
                     </th>
-                    <th>
+                    <th className="th">
                         ナクシャトラ
                     </th>
-                    <th>
+                    <th className="th">
                         ナクシャトラ支配星
                     </th>
-                    <th>
+                    <th className="th">
                         ハウス
                     </th>
                 </tr>

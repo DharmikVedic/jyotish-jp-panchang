@@ -7,6 +7,7 @@ import Festival from "../components/festivalApi";
 import DailyCharts from "../components/panchang/dailyChart";
 import Loader from "../components/utils/loader";
 import Link from "next/link";
+import PlanetaryPosition from "../components/planetary_position/planetaryTable";
 
 
 export default function Home() {
@@ -37,7 +38,7 @@ return()=>{mouted=false}
               <Loader/> :
               <div className="bg-zinc-100 min-h-screen pt-10 pb-20">
                   <div className='grid max-w-7xl mx-auto px-5 md:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-10'>
-                      <PanchangCard link="/panchang" style="bg-sky-500/80" title="Panchang for Today">
+                      <PanchangCard link="/panchang" style="bg-orange-500/70" title="Panchang for Today">
                           <div className="px-5 flex flex-col py-3">
                               <h6 className="font-semibold text-base md:text-[20px] mb-2 text-green-600">
                                   {data.day}, {DateString(day, month, year)}
@@ -68,7 +69,9 @@ return()=>{mouted=false}
                       </PanchangCard>
                       <DailyCharts />
                       <Festival/>
-                      <PanchangCard link="/muhurat" style="bg-sky-500/80" title="Hindu Panchang">
+                      {/* planetary events */}
+                      <PlanetaryPosition/>
+                      <PanchangCard link="/muhurat" style="bg-yellow-600/80" title="Hindu Panchang">
                           <div className="p-5">
                               <div className="flex gap-3">
                                   <img src="/panchang.png" className="w-[80px] h-[80px]"/>

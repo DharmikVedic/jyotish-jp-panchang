@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {FetchApi, FetchAPI} from "../../components/utils/fetchapi";
 import Formdata from "../../components/table/tableFilter";
 import Loader from "../../components/utils/loader";
@@ -33,7 +33,6 @@ export default function Chaughadiya(){
 
 
     const Apicall =async()=>{
-        setloader(true);
         const chaughadiya = await FetchAPI("advanced_panchang",input);
         setdata(chaughadiya);
         setloader(false);
@@ -48,11 +47,12 @@ export default function Chaughadiya(){
     }
 
 
-    const getdata = (datestring, res) => {
-        setdate(datestring);
+    const getdata = useCallback(async (datestring, res)=>{
+        setloader(true);
         setinput(prev => ({...prev, ...res }));
-        Timezone(res);
-    };
+        const tzoneval = await Timezone(res);
+        await Apicall({...input,...res,...tzoneval});
+    },[]);
 
     return(
         <>

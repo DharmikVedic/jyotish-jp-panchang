@@ -7,7 +7,7 @@ import GooglePlaceAutoComplete from "../../pages/test";
 export const month= ["January","February","March","April","May","June","July",
     "August","September","October","November","December"];
 
-export default function Formdata(props) {
+export default function FormMonthdata(props) {
     const [state, setstate] = useState(new Date());
     const defaultplace = {
         country: "Japan",
@@ -21,7 +21,6 @@ export default function Formdata(props) {
 
 
     const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
-    const [day, setDays] = React.useState(0);
 
     useEffect(() => {
         let mouted = true;
@@ -40,11 +39,9 @@ export default function Formdata(props) {
         return () => mouted = false;
     }, [state, city]);
 
-
-
     function getPreviousDay(date, operation) {
         const previous = new Date(date.getTime());
-        operation === "next" ? previous.setDate(date.getDate() + 1) : previous.setDate(date.getDate() - 1);
+        operation === "next" ? previous.setMonth(date.getMonth() + 1) : previous.setMonth(date.getMonth() - 1);
         // previous.setDate(date.getDate() - 1);
         setstate(previous);
         return previous;
@@ -68,7 +65,6 @@ export default function Formdata(props) {
             setcity({ lat: lat, lon: lon });
         }
     };
-
     return (
         <>
             {/* month list */}
@@ -83,11 +79,9 @@ export default function Formdata(props) {
                             <DynamicDatePicker
                                 selected={state}
                                 onChange={(date) => setstate(date)}
-                                dateFormat="MMMM d, yyyy"
-                                showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
-                                className="border border-b-[3px] w-[180px] border-zinc-300 px-3 py-2 focus:border-sky-500 outline-none"
+                                dateFormat="MM/yyyy"
+                                showMonthYearPicker
+                                className="border border-b-[3px] cursor-pointer w-[180px] border-zinc-300 px-3 py-2 focus:border-sky-500 outline-none"
                             />
                         </div>
                         <div className="flex items-center gap-x-1 w-full flex-grow">
@@ -108,19 +102,19 @@ export default function Formdata(props) {
 </svg>
 
                                 </span>
-                                Prev Day
+                                Prev Month
                             </button>
                             <button
                                 onClick={()=> {setstate(new Date());}}
                                 className=" text-white rounded py-2 px-5 font-bold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
-                                Today
+                                Current Month
                             </button>
                             <button
                                 onClick={incrementDate}
                                 className="rounded text-white flex font-bold justify-center items-center py-2 w-full px-5 font-semibold bg-[#FA7869] hover:bg-[#FA4848]"
                             >
-                                Next Day
+                                Next Month
                                 <span className="mt-1">
                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
   <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />

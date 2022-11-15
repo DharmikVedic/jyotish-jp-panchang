@@ -33,7 +33,7 @@ return()=> {mouted = false};
 
 
     const Apicall =async(input)=>{
-        setloader(true);
+        // setloader(true);
         const panchang = await FetchAPI("advanced_panchang",input);
         const tamil_panchang = await FetchAPI("tamil_panchang",input);
         setdata({panchang:panchang,tamil:tamil_panchang});
@@ -51,27 +51,23 @@ return()=> {mouted = false};
 
 
     const getdata = useCallback(async (datestring, res)=>{
+        setloader(true);
         setinput(prev => ({...prev, ...res }));
        const tzoneval = await Timezone(res);
-        Apicall({...input,...res,...tzoneval});
+       await Apicall({...input,...res,...tzoneval});
     },[]);
-
-
-    // const getdata = (datestring, res) => {
-    //     setinput(prev => ({...prev, ...res }));
-    //     Timezone(res);
-    // };
 
 
 return(
         <>
             <Formdata getinput={getdata}/>
-            {loader || data.panchang == "" ?
+            {loader ?
                 <div className="mt-[100px]">
                 <Loader/>
                 </div>
                 :
-                <div className="mt-[50px] mb-[100px] max-w-6xl mx-auto px-5 overflow-x-scroll">
+                <div className="bg-zinc-100 pb-[100px] pt-[50px]">
+                    <div className="  max-w-6xl mx-auto px-5 overflow-x-scroll">
                     <SunTable thead="日の出 and 月の出">
                         <tbody>
                         <tr>
@@ -379,6 +375,7 @@ return(
                         </tr>
                         </tbody>
                     </SunTable>
+                </div>
                 </div>
             }
             </>

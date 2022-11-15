@@ -1,10 +1,10 @@
+import PlanetaryMonthTable from "../../components/planetary_position/planetaryMonthTable";
 import React, {useCallback, useEffect, useState} from "react";
+import FormMonthdata from "../../components/table/tableFilterMonth";
 import {FetchApi, FetchAPI} from "../../components/utils/fetchapi";
-import Formdata from "../../components/table/tableFilter";
 import Loader from "../../components/utils/loader";
-import {HoraTable} from "../../components/panchang/chaughadiyatable";
 
-export default function Horaghadiya(){
+export default function PlanetaryEvents(){
     const dateobj = new Date();
     const defaultobject = {
         country: "japan",
@@ -17,67 +17,60 @@ export default function Horaghadiya(){
         tzone: 9,
         year: dateobj.getFullYear(),
     };
-    const [date,setdate]= useState('');
     const [loader,setloader] = useState(false);
     const [input, setinput] = useState(defaultobject);
-    const [data,setdata] = useState(null);
-
+    const [data,setdata] = useState({});
 
     useEffect(()=>{
         let mouted = true;
         if(mouted){
-            Apicall();
+            //Apicall(input);
         }
         return()=> {mouted = false};
-    },[input]);
-
-
-    const Apicall =async()=>{
-        const chaughadiya = await FetchAPI("hora_muhurta",input);
-        setdata(chaughadiya);
-        setloader(false);
-    }
-
-    const Timezone = async  (input) =>{
-        const date = input.month+"-"+input.day+"-"+input.year;
-        if(input.country !== "India"){
-            const timezone = await FetchApi({apiName: "timezone_with_dst",userData:{latitude: parseFloat(input.lat),longitude:parseFloat(input.lon),date:date}});
-            setinput(prev=> ({...prev,tzone: timezone.response.timezone }));
-        }
-    }
-
-    const getdata = useCallback(async (datestring, res)=>{
-        setloader(true);
-        setinput(prev => ({...prev, ...res }));
-        const tzoneval = await Timezone(res);
-        await Apicall({...input,...res,...tzoneval});
     },[]);
 
 
+    // const Apicall =async(input)=>{
+    //     setloader(true);
+    //     const panchang = await FetchAPI("advanced_panchang",input);
+    //     const tamil_panchang = await FetchAPI("tamil_panchang",input);
+    //     setdata({panchang:panchang,tamil:tamil_panchang});
+    //     setloader(false);
+    // }
+
+    const Timezone = async  (input) =>{
+        const date = input.month+"-"+input.day+"-"+input.year;
+        if(input.country !== "japan"){
+            const timezone = await FetchApi({apiName: "timezone_with_dst",userData:{latitude: parseFloat(input.lat),longitude:parseFloat(input.lon),date:date}});
+            setinput(prev=> ({...prev,tzone: timezone.response.timezone }));
+            return {tzone: timezone.response.timezone };
+        }
+    }
+
+
+    const getdata = useCallback(async (datestring, res)=>{
+         // setloader(true);
+        setinput(prev => ({...prev, ...res }));
+        const tzoneval = await Timezone(res);
+        // setloader(false)
+       // await Apicall({...input,...res,...tzoneval});
+    },[]);
+
+console.log(input)
 
     return(
         <>
-            <Formdata getinput={getdata}/>
-            {loader || !data ?
+            <FormMonthdata getinput={getdata}/>
+            {/* formdata */}
+            {loader ?
                 <div className="mt-[100px]">
                     <Loader/>
                 </div>
                 :
                 <div className="min-h-screen">
-                    <div className="bg-gradient-to-r from-sky-500 to-red-500 w-full py-5">
-                        <h1 className="text-2xl md:text-3xl text-white max-w-6xl mx-auto px-5 md:px-10 font-bold">
-                            ホーラー・ムフールタ ,{" "} {date}
-                        </h1>
-                    </div>
-
-                    <div className="pb-20 pt-10 md:py-20 px-5">
-                        <div className="grid md:grid-cols-2 grid-cols-1 max-w-6xl mx-auto gap-10">
-                            <HoraTable type="day" name="デイ・チョガディヤ" hora={data && data?.hora?.day}/>
-                            <HoraTable
-                                type="night"
-                                name="夜のチョガディヤ"
-                                hora={data && data?.hora?.night}
-                            />
+                    <div className="pt-[50px] pb-[100px]">
+                        <div className="max-w-4xl w-full mx-auto">
+                            <PlanetaryMonthTable/>
                         </div>
                     </div>
                 </div>

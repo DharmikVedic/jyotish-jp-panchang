@@ -3,7 +3,6 @@ import {getDMS} from "../utils/gmsDegree";
 export default function Planets({data}){
 
 
-
     return(
         <div>
         <table className="table">

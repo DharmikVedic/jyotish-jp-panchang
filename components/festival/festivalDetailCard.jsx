@@ -1,6 +1,6 @@
 export default function FestivalDetailCard(){
     return(
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 z-[2] before:z-[-1] before:absolute before:top-[150px] before:left-0 before:w-full md:before:h-[280px] before:rounded md:p-10 before:bg-sky-500">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 z-[0] before:z-[-1] before:absolute before:top-[150px] before:left-0 before:w-full md:before:h-[280px] before:rounded md:p-10 before:bg-sky-500">
             <div className="flex flex-col gap-4">
                 <h6 className="text-center font-semibold text-lg md:text-xl">
                     {/* place name */}
@@ -11,7 +11,7 @@ export default function FestivalDetailCard(){
                        <h6 className="font-semibold md:text-xl text-lg">
                        Pausha Putrada Ekadashi Vrat
                    </h6>
-                    <h2 className="md:text-[60px] font-bold">
+                    <h2 className="md:text-[60px] text-[60px] font-bold">
                         13th
                     </h2>
                     <h5 className="md:text-2xl text-xl ">
