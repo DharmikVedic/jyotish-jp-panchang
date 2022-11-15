@@ -17,7 +17,7 @@ export default function Chaughadiya(){
         tzone: 9,
         year: dateobj.getFullYear(),
     };
-    const [date,setdate]= useState('');
+    const [datestring,setdatestring]= useState("");
     const [loader,setloader] = useState(false);
     const [input, setinput] = useState(defaultobject);
     const [data,setdata] = useState(null);
@@ -49,6 +49,7 @@ export default function Chaughadiya(){
 
     const getdata = useCallback(async (datestring, res)=>{
         setloader(true);
+        setdatestring(datestring)
         setinput(prev => ({...prev, ...res }));
         const tzoneval = await Timezone(res);
         await Apicall({...input,...res,...tzoneval});
@@ -65,7 +66,7 @@ export default function Chaughadiya(){
                 <div className="min-h-screen">
                     <div className="bg-gradient-to-r from-sky-500 to-red-500 w-full py-5">
                         <h1 className="text-2xl md:text-3xl text-white max-w-6xl mx-auto px-5 md:px-10 font-bold">
-                            アビジット・ムフラト ,{" "} {date}
+                            アビジット・ムフラト ,{" "} {datestring}
                         </h1>
                     </div>
 
@@ -79,7 +80,7 @@ export default function Chaughadiya(){
     <span className="text-yellow-600">{formatAMPM(data?.abhijit_muhurta?.start)}</span>{" "} to   <span className="text-yellow-600">  {formatAMPM(data?.abhijit_muhurta?.end)}</span>
 </p>
                             <p className="md:text-lg">
-                                {date}
+                                {datestring}
                             </p>
                         </div>
                     </div>

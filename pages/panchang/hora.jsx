@@ -48,6 +48,7 @@ export default function Horaghadiya(){
 
     const getdata = useCallback(async (datestring, res)=>{
         setloader(true);
+        setdate(datestring)
         setinput(prev => ({...prev, ...res }));
         const tzoneval = await Timezone(res);
         await Apicall({...input,...res,...tzoneval});
