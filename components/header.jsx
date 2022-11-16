@@ -39,7 +39,7 @@ const [y,sety] = useState(false);
         <header className={`${y ? "sticky top-0 z-[2] duration-[200ms] ease-in-out" : ""} z-10 w-full bg-white shadow`}>
            <div className="max-w-6xl justify-between mx-auto md:items-center flex gap-x-10 gap-y-4 px-5 py-4">
                <Link href="/" passHref>
-                <img src="/imgs/logo.png" className="w-[200px] cursor-pointer" alt="jyotish jp"/>
+                <img src="/imgs/logo.png" className="h-[35px] md:h-[40px] cursor-pointer" alt="jyotish jp"/>
             </Link>
                <button onClick={handleMenu} className="md:hidden block text-zinc-600">
                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className={`${mobileMenu ? "rotate-90":""} w-5 h-5`}>

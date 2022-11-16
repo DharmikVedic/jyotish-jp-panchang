@@ -2,10 +2,10 @@ import {Heading} from "../commoText";
 import React from "react";
 import {useRouter} from "next/router";
 
-export default function PanchangCard({title,children,style,link}){
+export default function PanchangCard({title,children,style,link,hideborder}){
     const router = useRouter();
     return(
-        <div className="shadow-lg border border-zinc-300 pb-10 relative rounded-md">
+        <div className={`shadow-lg ${hideborder ? "" :"border border-zinc-300"}  pb-10 relative rounded-md`}>
           <Heading style={style}>
               {title}
           </Heading>

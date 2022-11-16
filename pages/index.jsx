@@ -72,21 +72,51 @@ return()=>{mouted=false}
                       {/* planetary events */}
                       <PlanetaryPosition/>
                       <PanchangCard link="/muhurat" style="bg-yellow-600/80" title="Hindu Panchang">
-                          <div className="p-5">
-                              <div className="flex gap-3">
-                                  <img src="/panchang.png" className="w-[80px] h-[80px]"/>
-                                  <p>
-                                      <Link href="/panchang">
-                                          <a className="hover:text-red-500">
-                                              Panchang
-                                          </a></Link>
-
-                                          , Bengali Panjika
-                                      Tamil Panchangam
-                                      Telugu Panchangam
-                                      Malayalam Panchangam
-                                  </p>
-                              </div>
+                          <div className="pb-5 flex flex-col divide-zinc-300 divide-y">
+                              <Link href="/panchang/abhijit-muhurat">
+                                  <a className="flex  px-5 py-4 gap-5 justify-between hover:bg-zinc-200 items-center">
+                                      <div className="flex gap-3 items-center">                                  <img src="/imgs/abhijit-muhrta.png" className="h-[30px]"/>
+                                  <h6 className="font-semibold">
+                                      Abhijit Muhurat
+                                  </h6>
+                                      </div>
+                                  <button>
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                                          <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+                                      </svg>
+                                  </button>
+                              </a>
+                              </Link>
+                              <Link href="/panchang/chaughadiya">
+                                  <a className="flex px-5 py-4 gap-5 justify-between hover:bg-zinc-200 items-center">
+                                      <div className="flex gap-3 items-center">
+                                          <img src="/imgs/chogadiya-muhrta.png" className="h-[30px]"/>
+                                      <h6 className="font-semibold">
+                                          Chogadiya Muhrta
+                                      </h6>
+                                      </div>
+                                      <button>
+                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+                                          </svg>
+                                      </button>
+                                  </a>
+                              </Link>
+                              <Link href="/panchang/hora">
+                                  <a className="flex px-5 py-4 gap-5 justify-between hover:bg-zinc-200 items-center">
+                                      <div className="flex gap-3 items-center">
+                                      <img src="/imgs/hora.png" className="h-[30px]"/>
+                                      <h6 className="font-semibold">
+                                          Hora Muhurat
+                                      </h6>
+                                      </div>
+                                      <button>
+                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+                                          </svg>
+                                      </button>
+                                  </a>
+                              </Link>
                           </div>
                       </PanchangCard>
                   </div>

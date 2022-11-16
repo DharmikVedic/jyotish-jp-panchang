@@ -1,8 +1,10 @@
 .table{
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
     border: 1px solid #d4d4d8;
 }
+
+
 select{
     outline: none;
     cursor: pointer;
@@ -29,18 +31,29 @@ select{
     outline: none;
 }
 
-.table tbody td{
+.table td{
     border: 1px solid #d4d4d8;
     padding: 6px 10px;
+    /*border-spacing: 0px;*/
+    /*border-collapse: collapse !important;*/
 }
 .table th:not(.th){
     padding: 7px 10px;
     font-size: 17px;
     color: #fff;
     border: 1px solid #d4d4d8;
-    background-image:linear-gradient(335deg, #fa4244 0%, #faa386 100%)
+    background-image:linear-gradient(335deg, #fa4244 0%, #faa386 100%);
     /*background-color: #e8dd8e;*/
 }
+
+.heading{
+    padding: 7px 10px;
+    font-size: 17px;
+    color: #fff;
+    border: 1px solid #d4d4d8;
+    background-image:linear-gradient(335deg, #fa4244 0%, #faa386 100%);
+}
+
 
 .table .th{
     padding: 7px 10px;

@@ -8,7 +8,10 @@ export const month= ["January","February","March","April","May","June","July",
     "August","September","October","November","December"];
 
 export default function FormMonthdata(props) {
-    const [state, setstate] = useState(new Date());
+    const currentDate =new Date();
+    const firstDayDate = currentDate.setDate(1);
+
+    const [state, setstate] = useState(new Date(firstDayDate));
     const defaultplace = {
         country: "Japan",
         id: "Tokyo,japan",
@@ -20,13 +23,13 @@ export default function FormMonthdata(props) {
     const [city, setcity] = useState(defaultplace);
 
 
-    const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
+     const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
 
     useEffect(() => {
         let mouted = true;
         const passData = ()=> {
             const time = {
-                day: state.getDate(),
+                date: state.getDate(),
                 year: state.getFullYear(),
                 month: state.getMonth() + 1,
             };
@@ -65,6 +68,7 @@ export default function FormMonthdata(props) {
             setcity({ lat: lat, lon: lon });
         }
     };
+
     return (
         <>
             {/* month list */}

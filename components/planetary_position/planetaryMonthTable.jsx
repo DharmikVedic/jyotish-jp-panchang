@@ -1,24 +1,40 @@
 import React from "react";
 import {TrEntry} from "./planetaryTable";
+import {icon} from "./utils";
 
-export default function PlanetaryMonthTable(){
+export default function PlanetaryMonthTable({ml,year,data}){
     return(
         <div>
             <table className="table">
                 <thead>
                 <tr>
-                    <th>
-                    November 2022 Planetary Events
+                    <th className="heading">
+                        {ml} {year} Planetary Events
                 </th>
                 </tr>
                 </thead>
                 <tbody>
-                {[...Array(10)].map((item,i)=>(
-                    <tr key={i} className={"grid grid-cols-1 w-full md:grid-cols-2 "}>
-                    <TrEntry/>
-                    <TrEntry/>
-                    </tr>
+                <tr className={"grid grid-cols-1 w-full md:grid-cols-2 "}>
+                {data.map((item,i)=>(
+                    <td className="px-3 py-2  flex gap-4 hover:bg-zinc-200/70 duration-[100ms] ease-in">
+                        <div className="w-[10%] m-auto  pr-2 text-center border-zinc-300 border-r">
+               <span className="font-zodiac text-[23px]">
+                   {icon[item.planet_id]}
+            </span>
+                        </div>
+                        <div className="w-[95%]">
+                            <p>
+            <span className="text-yellow-700">
+                {item.event_text}
+            </span>
+                            </p>
+                            <p className="text-zinc-600 text-sm">
+                                {item.event_start_date}
+                            </p>
+                        </div>
+                    </td>
                 ))}
+                </tr>
                 </tbody>
             </table>
         </div>
