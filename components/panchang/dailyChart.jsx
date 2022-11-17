@@ -1,18 +1,16 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {currentDateObj} from "../utils/currentDateObject";
 import ChartButton from "../chartui/chartsButton";
-import CommonLoadrFunction from "../utils/commonFetch";
 import {FetchAPI} from "../utils/fetchapi";
 import PanchangCard from "./dailyPanhang";
-import Loader from "../utils/loader";
-import Planets from "./planets";
 import {drawNorthChart} from "../chartui/chart";
 import {getPlanetArray, getSignArray, getSignPlanetArray} from "../chartui/utils";
 import {drawSouthChart} from "../chartui/southChart";
+import Loader from "../utils/loader";
+import Planets from "./planets";
 
-export default function DailyCharts(){
+export default function DailyCharts({horo,planets}){
     const [loader,setloader] = useState(false);
-    const ref = useRef();
     const [data,setData] = useState(null);
     const [eastchart,seteastchart] = useState(null);
     const [chartType,setChartType] = useState('north');
@@ -61,29 +59,36 @@ export default function DailyCharts(){
     }
 
 
-    const  handleData =(value)=>{
-        if(value.status){
-            setData(value.data);
-            setTimeout(()=> drawNorthChart(getPlanetArray(value.data['horo_chart/D1']), getSignArray(value.data['horo_chart/D1']), options,"#northChart"),500);
-        }
-        else{
-            alert(value.msg);
-        }
-    }
 
-    console.log(data);
+    useEffect(()=>{
+        if(horo) {
+            setData({'horo_chart/D1': horo, planets: planets})
+            setTimeout(() => drawNorthChart(getPlanetArray(horo), getSignArray(horo), options, "#northChart"), 500);
+        }
+       },[horo]);
+
+
+    // const  handleData =(value)=>{
+    //     if(value.status){
+    //         setData(value.data);
+    //         setTimeout(()=> drawNorthChart(getPlanetArray(value.data['horo_chart/D1']), getSignArray(value.data['horo_chart/D1']), options,"#northChart"),500);
+    //     }
+    //     else{
+    //         alert(value.msg);
+    //     }
+    // }
 
 
     return(
         <PanchangCard link="/planets" style="bg-sky-500/80" title="Lagna Kundali">
+            {data ?
                 <div className="pt-2 pb-5 px-5 flex flex-col ">
                     <ChartButton activeChart={chartType} passChart={handleChart}/>
-                    <CommonLoadrFunction passdata={handleData} apinames={['planets','horo_chart/D1']}
-                                         reqBody={{...initialValue, ...options}}>
+                    {/*<CommonLoadrFunction passdata={handleData} apinames={['planets','horo_chart/D1']}*/}
+                    {/*                     reqBody={{...initialValue, ...options}}>*/}
 
-
-                        {data ?
-                            <div className="flex flex-col gap-5">
+                    {data ?
+                        <div className="flex flex-col gap-5">
                             {/* chart */}
                             <div className="mt-2 flex justify-center  w-full">
                                 {loader ? <Loader/> :
@@ -94,22 +99,24 @@ export default function DailyCharts(){
                                             dangerouslySetInnerHTML={{__html: eastchart.svg}}
                                         />
                                         }
-                                            <div  className="w-[320px] h-[320px]" id="northChart">
-                                            </div>
+                                        <div className="w-[320px] h-[320px]" id="northChart">
+                                        </div>
 
                                     </>
                                 }
                             </div>
-                                {/* planets */}
-                                <div>
-                                    <Planets data={data?.planets.slice(0,5)}/>
-                                </div>
+                            {/* planets */}
+                            <div>
+                                <Planets data={data?.planets?.slice(0, 5)}/>
                             </div>
-                            :" "
-                        }
-
-                    </CommonLoadrFunction>
+                        </div>
+                        : " "
+                    }
+                    {/*</CommonLoadrFunction>*/}
                 </div>
+                :
+                <Loader/>
+            }
         </PanchangCard>
     )
 }

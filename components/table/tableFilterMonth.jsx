@@ -2,8 +2,8 @@ import React, {useEffect, useRef, useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import dynamic from "next/dynamic";
 const DynamicDatePicker = dynamic(()=> import("react-datepicker"));
-import Sample from "./asynctypehead";
 import GooglePlaceAutoComplete from "../../pages/test";
+import {FetchAPI} from "../utils/fetchapi";
 export const month= ["January","February","March","April","May","June","July",
     "August","September","October","November","December"];
 
@@ -61,11 +61,19 @@ export default function FormMonthdata(props) {
     }
 
 
-    const largeDevice = (input) => {
+    // calculate timezone
+    const Timezone = async  (lat,lng) =>{
+        const date = (state.getMonth() + 1) +"-"+state.getDate()+"-"+state.getFullYear();
+        const timezone = await FetchAPI("timezone_with_dst",{latitude: parseFloat(lat),longitude:parseFloat(lng),date:date});
+        return {timezone: timezone.timezone };
+    }
+
+    const largeDevice = async(input) => {
         if (input !== null) {
             const lat = parseFloat(input.lat);
             const lon = parseFloat(input.lng);
-            setcity({ lat: lat, lon: lon });
+            const timezone =  await Timezone(input.lat,input.lng);
+            setcity({ lat: lat, lon: lon,...timezone });
         }
     };
 
@@ -133,45 +141,4 @@ export default function FormMonthdata(props) {
             </div>
         </>
     );
-}
-
-function PopupCountry(props){
-
-    const ref = useRef(null);
-    const [city,setcity] = useState(null);
-    const handleClickOutside =(event) => {
-        if(ref.current && !ref.current.contains(event.target)){
-            props.passactive(true);
-        }
-    }
-
-    const passdata =(e) => {
-        setcity(e);
-    }
-    const handlesubmit =(e) =>{
-        props.submit(e);
-    }
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside, true);
-        return () => {
-            document.removeEventListener('click', handleClickOutside, true);
-        };
-    });
-
-
-    return(
-        <div className="fixed top-0 left-0 bottom-0 right-0 w-full h-full z-20 flex justify-center items-center">
-            <div className="absolute w-full h-full bg-gray-700 opacity-80"/>
-            <div ref={ref} onClick={(e)=> handleClickOutside(e)} className="max-h-3/4 max-w-xl mx-auto flex flex-col gap-5 bg-white rounded-md fixed  my-10 p-5">
-                <div className="flex justify-between border-b border-gray-200 py-1">
-                    <h1 className="capitalize text-2xl text-gray-700 sm:text-3xl">Select Panchang Place</h1>
-                    <button onClick={() => props.passactive(true)} className="w-8 h-8 rounded-full bg-gray-400 hover:bg-gray-600 flex items-center justify-center"><img src="/icons/close.png" width={14} height={14} alt="close"/></button>
-                </div>
-                <div className="flex flex-col gap-y-2 w-full flex-grow">
-                    <Sample passdata={passdata} selected={[props.defaultplace]} />
-                </div>
-                <button onClick={()=> props.handle(city)} className="bg-azure-500 text-white p-3 rounded-md">Submit</button>
-            </div>
-        </div>
-    )
 }

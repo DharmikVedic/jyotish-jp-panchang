@@ -1,99 +1,9 @@
 import PlanetaryMonthTable from "../../components/planetary_position/planetaryMonthTable";
 import React, {useCallback, useEffect, useState} from "react";
 import FormMonthdata from "../../components/table/tableFilterMonth";
-import {FetchApi, FetchAPI} from "../../components/utils/fetchapi";
+import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 
-const dataaa = [
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 5,
-        "planet_name": "Venus",
-        "event_text": "Venus enters in Vishakha.",
-        "event_start_date": "November 03, 2022, Thursday at 20:44",
-        "event_start_ms": 1667508287061
-    },
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 0,
-        "planet_name": "Sun",
-        "event_text": "Sun enters in Vishakha.",
-        "event_start_date": "November 06, 2022, Sunday at 20:26",
-        "event_start_ms": 1667766388019
-    },
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 3,
-        "planet_name": "Mercury",
-        "event_text": "Mercury enters in Vishakha.",
-        "event_start_date": "November 07, 2022, Monday at 15:17",
-        "event_start_ms": 1667834252229
-    },
-    {
-        "event_name": "SIGN_TRANSIT",
-        "planet_id": 5,
-        "planet_name": "Venus",
-        "event_text": "Venus enters in Scorpio.",
-        "event_start_date": "November 11, 2022, Friday at 20:09",
-        "event_start_ms": 1668197360489
-    },
-    {
-        "event_name": "SIGN_TRANSIT",
-        "planet_id": 3,
-        "planet_name": "Mercury",
-        "event_text": "Mercury enters in Scorpio.",
-        "event_start_date": "November 13, 2022, Sunday at 21:19",
-        "event_start_ms": 1668374376106
-    },
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 5,
-        "planet_name": "Venus",
-        "event_text": "Venus enters in Anuradha.",
-        "event_start_date": "November 14, 2022, Monday at 11:55",
-        "event_start_ms": 1668426932258
-    },
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 3,
-        "planet_name": "Mercury",
-        "event_text": "Mercury enters in Anuradha.",
-        "event_start_date": "November 16, 2022, Wednesday at 00:02",
-        "event_start_ms": 1668556950954
-    },
-    {
-        "event_name": "SIGN_TRANSIT",
-        "planet_id": 0,
-        "planet_name": "Sun",
-        "event_text": "Sun enters in Scorpio.",
-        "event_start_date": "November 16, 2022, Wednesday at 19:15",
-        "event_start_ms": 1668626103993
-    },
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 0,
-        "planet_name": "Sun",
-        "event_text": "Sun enters in Anuradha.",
-        "event_start_date": "November 20, 2022, Sunday at 02:34",
-        "event_start_ms": 1668911646167
-    },
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 3,
-        "planet_name": "Mercury",
-        "event_text": "Mercury enters in Jyeshtha.",
-        "event_start_date": "November 24, 2022, Thursday at 13:40",
-        "event_start_ms": 1669297210837
-    },
-    {
-        "event_name": "NAKSHATRA_TRANSIT",
-        "planet_id": 5,
-        "planet_name": "Venus",
-        "event_text": "Venus enters in Jyeshtha.",
-        "event_start_date": "November 25, 2022, Friday at 02:56",
-        "event_start_ms": 1669344994244
-    }
-]
 
 
 
@@ -132,21 +42,11 @@ export default function PlanetaryEvents(){
         setloader(false);
     }
 
-    const Timezone = async  (input) =>{
-        const date = input.month+"-"+input.date+"-"+input.year;
-        if(input.country !== "japan"){
-            const timezone = await FetchApi({apiName: "timezone_with_dst",userData:{latitude: parseFloat(input.lat),longitude:parseFloat(input.lon),date:date}});
-            setinput(prev=> ({...prev,timezone: timezone.response.timezone }));
-            return {timezone: timezone.response.timezone };
-        }
-    }
-
 
     const getdata = useCallback(async (datestring, res)=>{
         setloader(true);
         setinput(prev => ({...prev, ...res }));
-        const tzoneval = await Timezone(res);
-        await Apicall({...input,...res,...tzoneval});
+        await Apicall({...input,...res});
     },[]);
 
 

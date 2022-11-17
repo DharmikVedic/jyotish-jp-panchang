@@ -1,13 +1,14 @@
-import PanchangCard, {Text} from "../components/panchang/dailyPanhang";
+import PanchangCard from "../components/panchang/dailyPanhang";
 import {FetchAPI} from "../components/utils/fetchapi";
-import React, {useEffect, useState} from "react";
-import {DateString, formatAMPM} from "../components/json/country";
+import React, {useCallback, useEffect, useState} from "react";
 import {currentDateObj} from "../components/utils/currentDateObject";
 import Festival from "../components/festivalApi";
 import DailyCharts from "../components/panchang/dailyChart";
 import Loader from "../components/utils/loader";
 import Link from "next/link";
 import PlanetaryPosition from "../components/planetary_position/planetaryTable";
+import Formdata from "../components/table/tableFilter";
+import HomePanchang from "../components/panchang/homePanchang";
 
 
 export default function Home() {
@@ -18,56 +19,46 @@ export default function Home() {
     useEffect(()=>{
 let mouted = true;
 if(mouted){
-    APICall();
+    APICall(initialValue);
 }
 return()=>{mouted=false}
     },[]);
 
-
-    const APICall =async()=>{
+    const APICall =async(initialval)=>{
         setloader(true);
-        const res = await FetchAPI("advanced_panchang",initialValue);
-        setData(res);
+        let d ={};
+        let apiname = ["advanced_panchang","planets","horo_chart/D1"];
+        const multiple_api_call = await Promise.all(apiname.map(async (name,i) => {
+            return await FetchAPI(name, initialval)
+        }));
+        for (let i = 0; i < multiple_api_call.length; i++) {
+            // if(multiple_api_call[i].status){
+                d[apiname[i]] = multiple_api_call[i]
+            // }
+        }
+        setData(d);
         setloader(false)
     }
 
-    // const value= use(FetchAPI());
+
+    //
+    const getdata = useCallback(async (datestring, res)=>{
+         await APICall({...initialValue,...res});
+    },[]);
+
+
   return (
       <>
-          {loader || data == "" ?
-              <Loader/> :
+          <Formdata getinput={getdata}/>
               <div className="bg-zinc-100 min-h-screen pt-10 pb-20">
                   <div className='grid max-w-7xl mx-auto px-5 md:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-10'>
                       <PanchangCard link="/panchang" style="bg-orange-500/70" title="Panchang for Today">
-                          <div className="px-5 flex flex-col py-3">
-                              <h6 className="font-semibold text-base md:text-[20px] mb-2 text-green-600">
-                                  {data.day}, {DateString(day, month, year)}
-                              </h6>
-                              <Text text="日の出"
-                                    value={`<span class='text-yellow-600'>${formatAMPM(data.sunrise)}</span>`}/>
-                              <Text text="日の入り"
-                                    value={`<span class='text-yellow-600'>${formatAMPM(data.sunset)}</span>`}/>
-                              <Text text="ティティ"
-                                    value={`${data.tithi.details.tithi_name} <span class='text-zinc-600'>upto</span> <span class='text-yellow-600'>${formatAMPM(`${data.tithi.end_time.hour}:${data.tithi.end_time.minute}`)}</span>`}/>
-                              <Text text="ナクシャトラ"
-                                    value={`${data.nakshatra.details.nak_name} <span class='text-zinc-600'>upto</span> <span class='text-yellow-600'>${formatAMPM(`${data.nakshatra.end_time.hour}:${data.nakshatra.end_time.minute}`)}</span>`}/>
-                              <Text text="ヨーガ"
-                                    value={`${data.yog.details.yog_name} <span class='text-zinc-600'>upto</span> <span class='text-yellow-600'>${formatAMPM(`${data.yog.end_time.hour}:${data.yog.end_time.minute}`)}</span>`}/>
-                              <Text text="カラナ"
-                                    value={`${data.karan.details.karan_name} <span class='text-zinc-600'>upto</span> <span class='text-yellow-600'>${formatAMPM(`${data.karan.end_time.hour}:${data.karan.end_time.minute}`)}</span>`}/>
-                              {/*<Text text="Karana" value=""/>*/}
-                              <Text text="パクシャ" value={data.paksha}/>
-                              <Text text="Weekday" value={data.day}/>
-                              <Text text="アマーンタ" value={data.hindu_maah.amanta}/>
-                              <Text text="プールニマーンタ" value={data.hindu_maah.purnimanta}/>
-                              <Text text="Moonsign" value={data.moon_sign}/>
-                              <Text text="Sunsign" value={data.sun_sign}/>
-                              <Text text="シャカ・サンヴァト" value={data.shaka_samvat_name}/>
-                              <Text text="ヴィクラマ・サンヴァト" value={data.vkram_samvat_name}/>
-                              {/*<Text text="Gujarati Samavat" value=""/>*/}
-                          </div>
+                          {loader || data == "" ?
+                              <Loader/> :
+                               <HomePanchang data={data['advanced_panchang']} day={day} month={month} year={year}/>
+                          }
                       </PanchangCard>
-                      <DailyCharts />
+                      <DailyCharts horo={data['horo_chart/D1']} planets={data['planets']}/>
                       <Festival/>
                       {/* planetary events */}
                       <PlanetaryPosition/>
@@ -121,7 +112,6 @@ return()=>{mouted=false}
                       </PanchangCard>
                   </div>
               </div>
-          }
           </>
   )
 }

@@ -40,21 +40,11 @@ return()=> {mouted = false};
         setloader(false);
     }
 
-    const Timezone = async  (input) =>{
-        const date = input.month+"-"+input.day+"-"+input.year;
-        if(input.country !== "japan"){
-            const timezone = await FetchApi({apiName: "timezone_with_dst",userData:{latitude: parseFloat(input.lat),longitude:parseFloat(input.lon),date:date}});
-            setinput(prev=> ({...prev,tzone: timezone.response.timezone }));
-            return {tzone: timezone.response.timezone };
-        }
-    }
-
 
     const getdata = useCallback(async (datestring, res)=>{
         setloader(true);
         setinput(prev => ({...prev, ...res }));
-       const tzoneval = await Timezone(res);
-       await Apicall({...input,...res,...tzoneval});
+       await Apicall({...input,...res});
     },[]);
 
 

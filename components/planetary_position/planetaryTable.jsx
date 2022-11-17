@@ -8,7 +8,7 @@ export default function PlanetaryPosition(){
     const dateobj = new Date();
     const defaultobject = {
         country: "japan",
-        date: 1,
+        date: dateobj.getDate(),
         hour: dateobj.getHours(),
         lat: 35.6761919,
         lon: 139.6503106,

@@ -6,6 +6,18 @@ class MyDocument extends Document {
         return (
             <Html class="scroll-smooth">
                 <Head>
+                    <meta
+                        name="description"
+                        content=""
+                    />
+                    <meta
+                        name="keywords"
+                        content=""
+                    />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                    <title>
+                        Hindu Panchang | Jyotish JP
+                    </title>
                     <Script strategy="beforeInteractive" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoNbkWHS1EaPzZ_3gClPD7VihjX1j7EUk&libraries=places"></Script>
                     <link rel="shortcut icon" href="/favicon.ico" />
                     <meta name="theme-color" content="#ffffff" />

@@ -16,7 +16,7 @@ export default function Festival(){
     useEffect(()=>{
         let mouted = true;
         if(mouted) {
-            APICall(5);
+            //APICall(20);
         }
         return()=> {mouted=false};
     },[]);
@@ -60,7 +60,7 @@ export default function Festival(){
                             </h3>
                         </div>
                         :
-                        <div className="px-5 py-2">
+                        <div className="px-5 py-2 max-h-[600px] overflow-y-hidden">
                             {festival.map((item, j) => (
                                     <div key={j}>
                                         {item.festivals.map((val, i) => (
