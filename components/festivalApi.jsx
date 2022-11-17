@@ -16,7 +16,7 @@ export default function Festival(){
     useEffect(()=>{
         let mouted = true;
         if(mouted) {
-            //APICall(20);
+            APICall(20);
         }
         return()=> {mouted=false};
     },[]);
