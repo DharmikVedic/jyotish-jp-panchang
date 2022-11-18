@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import dynamic from "next/dynamic";
 const DynamicDatePicker = dynamic(()=> import("react-datepicker"));
@@ -22,23 +22,19 @@ export default function Formdata(props) {
 
     const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
 
-    useEffect(() => {
-        let mouted = true;
+
+    const passdata = useCallback(()=>{
         const passData = ()=> {
             const time = {
-                day: state.getDate(),
+                date: state.getDate(),
                 year: state.getFullYear(),
                 month: state.getMonth() + 1,
             };
             let res = Object.assign({}, time, city);
-            props.getinput(datestring, res,time);
+            props.getinput(datestring, res,state);
         }
-        if(mouted){
-            passData();
-        }
-        return () => mouted = false;
-    }, [state, city]);
-
+        passData();
+    },[state,city])
 
 
     function getPreviousDay(date, operation) {
@@ -46,17 +42,20 @@ export default function Formdata(props) {
         operation === "next" ? previous.setDate(date.getDate() + 1) : previous.setDate(date.getDate() - 1);
         // previous.setDate(date.getDate() - 1);
         setstate(previous);
+        passdata();
         return previous;
     }
 
 
     const incrementDate = () => {
         getPreviousDay(state, "next");
+        passdata();
     }
 
 
     const decrementDate = () => {
         getPreviousDay(state, "prev");
+        passdata();
     }
 
 
@@ -73,8 +72,17 @@ export default function Formdata(props) {
             const lon = parseFloat(input.lng);
              const timezone =  await Timezone(input.lat,input.lng);
             setcity({ lat: lat, lon: lon,...timezone });
+            passdata();
         }
     };
+
+
+    const handleDate = (date)=>{
+        setstate(date);
+        passdata();
+    }
+
+
 
 
 
@@ -91,7 +99,7 @@ export default function Formdata(props) {
                             </span>
                             <DynamicDatePicker
                                 selected={state}
-                                onChange={(date) => setstate(date)}
+                                onChange={(date) => handleDate(date)}
                                 dateFormat="MMMM d, yyyy"
                                 showMonthDropdown
                                 showYearDropdown

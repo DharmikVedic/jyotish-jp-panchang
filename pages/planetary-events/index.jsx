@@ -1,10 +1,8 @@
 import PlanetaryMonthTable from "../../components/planetary_position/planetaryMonthTable";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback,useState} from "react";
 import FormMonthdata from "../../components/table/tableFilterMonth";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
-import {currentDateObj} from "../../components/utils/currentDateObject";
-import {getMultipleDate} from "../../components/utils/dateDifference";
 
 
 
@@ -51,6 +49,9 @@ export default function PlanetaryEvents({events}){
         await Apicall({...input,...res});
     },[]);
 
+
+
+    // console.log(data);
 
     return(
         <>
