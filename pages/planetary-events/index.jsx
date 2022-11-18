@@ -3,6 +3,7 @@ import React, {useCallback,useState} from "react";
 import FormMonthdata from "../../components/table/tableFilterMonth";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
+import Sample from "../sample";
 
 
 
@@ -62,11 +63,17 @@ export default function PlanetaryEvents({events}){
                     <Loader/>
                 </div>
                 :
-                <div className="min-h-screen">
+                <div className="min-h-screen bg-zinc-50">
                     <div className="pt-[50px] px-5 pb-[100px]">
-                        <div className="max-w-2xl w-full mx-auto">
+                        <div className="max-w-3xl w-full mx-auto">
                             {data &&
+                                <>
                             <PlanetaryMonthTable year={input.year} ml={mL[input.month - 1]} data={data}/>
+                           <div>
+                               <Sample text="Transit To Sign" />
+                               <Sample text="Transit To Nakshatra" />
+                           </div>
+                            </>
                             }
                             </div>
                     </div>
