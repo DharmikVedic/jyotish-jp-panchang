@@ -1,54 +1,16 @@
 import PanchangCard from "../panchang/dailyPanhang";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {icon} from "./utils";
-import {FetchAPI} from "../utils/fetchapi";
-import Loader from "../utils/loader";
 
-export default function PlanetaryPosition(){
-    const dateobj = new Date();
-    const defaultobject = {
-        country: "japan",
-        date: dateobj.getDate(),
-        hour: dateobj.getHours(),
-        lat: 35.6761919,
-        lon: 139.6503106,
-        min: dateobj.getMinutes(),
-        month: dateobj.getMonth()+1,
-        timezone: 9,
-        year: dateobj.getFullYear(),
-    };
-    const [loader,setloader] = useState(true);
-    const [input, setinput] = useState(defaultobject);
-    const [data,setdata] = useState(null);
-
-
-
-    useEffect(()=>{
-        let mouted = true;
-        if(mouted){
-            Apicall(input);
-        }
-        return()=> {mouted = false};
-    },[]);
-
-
-    const Apicall =async(input)=>{
-        const events = await FetchAPI("vedic_planetary_events",input);
-        setdata(events);
-        setloader(false);
-    }
-
-
+export default function PlanetaryPosition({events}){
     return(
         <>
             <PanchangCard  link="/planetary-events" style="bg-sky-500/80" title="Upcoming Planetary Events">
-                {loader ? <div className="mt-[40px]"><Loader/></div> :
                     <div className="divide-y divide-zinc-300">
-                        {data.slice(0,5).map((item, i) => (
+                        {events.slice(0,5).map((item, i) => (
                                 <TrEntry key={i} data={item}/>
                         ))}
                     </div>
-                }
             </PanchangCard>
             </>
     )

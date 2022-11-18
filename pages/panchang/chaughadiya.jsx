@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {FetchApi, FetchAPI} from "../../components/utils/fetchapi";
+import {FetchAPI} from "../../components/utils/fetchapi";
 import Formdata from "../../components/table/tableFilter";
 import Loader from "../../components/utils/loader";
 import ChaugadiyaTable from "../../components/panchang/chaughadiyatable";
@@ -38,21 +38,11 @@ export default function Chaughadiya(){
         setloader(false);
     }
 
-    const Timezone = async  (input) =>{
-        const date = input.month+"-"+input.day+"-"+input.year;
-        if(input.country !== "India"){
-            const timezone = await FetchApi({apiName: "timezone_with_dst",userData:{latitude: parseFloat(input.lat),longitude:parseFloat(input.lon),date:date}});
-            setinput(prev=> ({...prev,tzone: timezone.response.timezone }));
-        }
-    }
-
-
     const getdata = useCallback(async (datestring, res)=>{
         setloader(true);
         setdate(datestring)
         setinput(prev => ({...prev, ...res }));
-        const tzoneval = await Timezone(res);
-        await Apicall({...input,...res,...tzoneval});
+        await Apicall({...input,...res});
     },[]);
 
 

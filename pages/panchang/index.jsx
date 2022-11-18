@@ -1,7 +1,7 @@
 import {SunTable} from "../../components/table/suntable";
 import React, {useCallback, useEffect, useState} from "react";
 import {formatAMPM} from "../../components/json/country";
-import {FetchAPI, FetchApi} from "../../components/utils/fetchapi";
+import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import Formdata from "../../components/table/tableFilter";
 import {zodiac} from "../../components/panchang/planets";

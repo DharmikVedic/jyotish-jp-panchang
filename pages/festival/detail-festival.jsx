@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {FetchApi, FetchAPI} from "../../components/utils/fetchapi";
+import { FetchAPI} from "../../components/utils/fetchapi";
 import FestivalFormdata from "../../components/festival/festivalFilter";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard, {Detail} from "../../components/festival/festivalDetailCard";
@@ -42,19 +42,10 @@ export default function FestivalDetail(){
         setloader(false);
     }
 
-    const Timezone = async  (input) =>{
-        const date = input.month+"-"+input.day+"-"+input.year;
-        if(input.country !== "japan"){
-            const timezone = await FetchApi({apiName: "timezone_with_dst",userData:{latitude: parseFloat(input.lat),longitude:parseFloat(input.lon),date:date}});
-            setinput(prev=> ({...prev,tzone: timezone.response.timezone }));
-            return {tzone: timezone.response.timezone };
-        }
-    }
 
     const getdata = useCallback(async (datestring, res)=>{
         setinput(prev => ({...prev, ...res }));
         setyear(datestring)
-        const tzoneval = await Timezone(res);
         //Apicall({...input,...res,...tzoneval});
     },[]);
 

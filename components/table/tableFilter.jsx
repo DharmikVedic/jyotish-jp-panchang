@@ -31,7 +31,7 @@ export default function Formdata(props) {
                 month: state.getMonth() + 1,
             };
             let res = Object.assign({}, time, city);
-            props.getinput(datestring, res,state);
+            props.getinput(datestring, res,time);
         }
         if(mouted){
             passData();

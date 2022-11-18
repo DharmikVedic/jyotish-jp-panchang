@@ -9,20 +9,26 @@ import Link from "next/link";
 import PlanetaryPosition from "../components/planetary_position/planetaryTable";
 import Formdata from "../components/table/tableFilter";
 import HomePanchang from "../components/panchang/homePanchang";
+import {getMultipleDate} from "../components/utils/dateDifference";
 
 
-export default function Home() {
+export default function Home({panchang,festival,events}) {
     const {day,month,year,initialValue} = currentDateObj();
     const [loader,setloader]=useState(false);
-    const [data,setData] = useState("");
+    const [currentDate,setCurrentDate] = useState({day:day,month:month,year:year});
+    const [data,setData] = useState(panchang);
 
-    useEffect(()=>{
-let mouted = true;
-if(mouted){
-    APICall(initialValue);
-}
-return()=>{mouted=false}
-    },[]);
+//     useEffect(()=>{
+// let mouted = true;
+// if(mouted){
+//     //APICall(initialValue);
+// }
+// return()=>{mouted=false}
+//     },[]);
+
+
+
+
 
     const APICall =async(initialval)=>{
         setloader(true);
@@ -42,10 +48,10 @@ return()=>{mouted=false}
 
 
     //
-    const getdata = useCallback(async (datestring, res)=>{
+    const getdata = useCallback(async (datestring, res,state)=>{
+        setCurrentDate({day:state.day,month:state.month,year:state.year})
          await APICall({...initialValue,...res});
     },[]);
-
 
   return (
       <>
@@ -55,13 +61,13 @@ return()=>{mouted=false}
                       <PanchangCard link="/panchang" style="bg-orange-500/70" title="Panchang for Today">
                           {loader || data == "" ?
                               <Loader/> :
-                               <HomePanchang data={data['advanced_panchang']} day={day} month={month} year={year}/>
+                               <HomePanchang data={data['advanced_panchang']} day={currentDate.day} month={currentDate.month} year={currentDate.year}/>
                           }
                       </PanchangCard>
                       <DailyCharts horo={data['horo_chart/D1']} planets={data['planets']}/>
-                      <Festival/>
+                      <Festival data={festival}/>
                       {/* planetary events */}
-                      <PlanetaryPosition/>
+                      <PlanetaryPosition events={events}/>
                       <PanchangCard link="/muhurat" style="bg-yellow-600/80" title="Hindu Panchang">
                           <div className="pb-5 flex flex-col divide-zinc-300 divide-y">
                               <Link href="/panchang/abhijit-muhurat">
@@ -115,6 +121,83 @@ return()=>{mouted=false}
           </>
   )
 }
+
+
+export async function getStaticProps(context) {
+    const {initialValue} = currentDateObj();
+
+    const dateobj = new Date();
+    const defaultobject = {
+        country: "japan",
+        date: dateobj.getDate(),
+        hour: dateobj.getHours(),
+        lat: 35.6761919,
+        lon: 139.6503106,
+        min: dateobj.getMinutes(),
+        month: dateobj.getMonth()+1,
+        timezone: 9,
+        year: dateobj.getFullYear(),
+    };
+
+    // today panchang and planets data
+    const APICall =async(initialval)=>{
+        try {
+            let d = {};
+            let apiname = ["advanced_panchang", "planets", "horo_chart/D1"];
+            const multiple_api_call = await Promise.all(apiname.map(async (name, i) => {
+                return await FetchAPI(name, initialval)
+            }));
+            for (let i = 0; i < multiple_api_call.length; i++) {
+                d[apiname[i]] = multiple_api_call[i]
+            }
+            return d;
+        }
+        catch(err){
+            return {status:false,msg:err.message};
+        }
+    }
+
+    // 20 days festival call
+    const FestivalAPICall =async(val)=>{
+        try {
+            let festival = [];
+            const initialData = getMultipleDate(val-1);
+            const multiple_api_call = await Promise.all([...Array(val)].map(async (_,j) => {
+                return await FetchAPI("panchang_festival", initialData[j])
+            }));
+            for (let i = 0; i < multiple_api_call.length; i++) {
+                if(multiple_api_call[i].status){
+                    festival.push({festivals:multiple_api_call[i]?.festivals,date:initialData[i]});
+                }
+            }
+            return festival;
+        }
+        catch(err){
+            return {status:false,msg:err.message};
+        }
+    }
+
+
+    // planetary events api call
+    const PlnetaryEventsApicall =async(input)=>{
+        const events = await FetchAPI("vedic_planetary_events",input);
+       return events;
+    }
+
+
+
+    const data = await APICall(initialValue);
+    const getfestival =await FestivalAPICall(20);
+    const getPlanetaryEvents = await PlnetaryEventsApicall(defaultobject);
+    return {
+        props: {
+            panchang:data,
+            festival:getfestival,
+            events:getPlanetaryEvents
+        },
+    }
+}
+
 
 
 

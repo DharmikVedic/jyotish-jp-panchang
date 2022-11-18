@@ -3,11 +3,13 @@ import React, {useCallback, useEffect, useState} from "react";
 import FormMonthdata from "../../components/table/tableFilterMonth";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
+import {currentDateObj} from "../../components/utils/currentDateObject";
+import {getMultipleDate} from "../../components/utils/dateDifference";
 
 
 
 
-export default function PlanetaryEvents(){
+export default function PlanetaryEvents({events}){
     const dateobj = new Date();
     const defaultobject = {
         country: "japan",
@@ -22,18 +24,18 @@ export default function PlanetaryEvents(){
     };
     const [loader,setloader] = useState(false);
     const [input, setinput] = useState(defaultobject);
-    const [data,setdata] = useState(null);
+    const [data,setdata] = useState(events);
 
 
     var mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    useEffect(()=>{
-        let mouted = true;
-        if(mouted){
-            Apicall(input);
-        }
-        return()=> {mouted = false};
-    },[]);
+    // useEffect(()=>{
+    //     let mouted = true;
+    //     if(mouted){
+    //         Apicall(input);
+    //     }
+    //     return()=> {mouted = false};
+    // },[]);
 
 
     const Apicall =async(input)=>{
@@ -71,4 +73,33 @@ export default function PlanetaryEvents(){
             }
         </>
     )
+}
+
+
+export async function getStaticProps(context) {
+    const dateobj = new Date();
+    const defaultobject = {
+        country: "japan",
+        date: dateobj.getDate(),
+        hour: dateobj.getHours(),
+        lat: 35.6761919,
+        lon: 139.6503106,
+        min: dateobj.getMinutes(),
+        month: dateobj.getMonth()+1,
+        timezone: 9,
+        year: dateobj.getFullYear(),
+    };
+
+    // planetary events api call
+    const PlnetaryEventsApicall =async(input)=>{
+        const events = await FetchAPI("vedic_planetary_events",input);
+        return events;
+    }
+
+    const getPlanetaryEvents = await PlnetaryEventsApicall(defaultobject);
+    return {
+        props: {
+            events:getPlanetaryEvents
+        },
+    }
 }
