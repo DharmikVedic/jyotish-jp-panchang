@@ -3,8 +3,6 @@ import {mL} from "../../pages/festival";
 import {Encode} from "../utils/decode";
 
 export default function FeativalYearCard({year,monthName,festival}){
-    console.log(year)
-
     return(
         <div   className="flex flex-col  bg-white">
             <h6 className="text-white bg-[#FD766B] font-bold text-lg text-center py-2 md:text-xl">

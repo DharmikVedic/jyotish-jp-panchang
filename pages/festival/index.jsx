@@ -12,7 +12,6 @@ export default function Festival({festival}){
         timezone: 9,
         year: dateobj.getFullYear(),
     };
-    const [input,setinput] = useState();
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState(festival);
     const [year,setyear] = useState(defaultobject);
