@@ -17,7 +17,7 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
                     <div className="flex bg-zinc-50 border-2 md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
                         <div>
 
-                        <p className="text-yellow-600 font-semibold">
+                        <p className="text-yellow-600  md:text-lg font-semibold">
                             {name} Punya Kala - {punya.start_time} to {punya.end_time}
                         </p>
                         {/*    <p className="text-base text-zinc-500">*/}
@@ -25,7 +25,7 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
                         {/*</p>*/}
                         </div>
                         <div>
-                            <p className="text-yellow-600 font-semibold">
+                            <p className="text-yellow-600 md:text-lg font-semibold">
                                 {name} Maha Punya Kala -  {mahapunya.start_time} to {mahapunya.end_time}
                             </p>
                             {/*<p className="text-base text-zinc-500">*/}
@@ -33,7 +33,7 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
                             {/*</p>*/}
                         </div>
                     </div>
-            <p className="md:text-lg">
+            <p className="">
                 {name} Moment - {moment}
             </p>
 
@@ -59,7 +59,7 @@ export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_d
                 <div className="flex bg-zinc-50 border-2 md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
                     <div>
 
-                        <p className="text-yellow-600 font-semibold">
+                        <p className="text-yellow-600 md:text-lg font-semibold">
                             {name} {muhurattext ? muhurattext : "Puja Muhurat"} - {muhurtastart} to {muhurtend}
                         </p>
                         {/*<p className="text-base text-zinc-500">*/}
@@ -67,7 +67,7 @@ export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_d
                         {/*</p>*/}
                     </div>
                 </div>
-                <p className="md:text-lg">
+                <p >
                     {tithiname} Tithi Begins - <span className="text-yellow-600">{tithistart}</span>
                     <br/>
                     {tithiname} Tithi Ends - <span className="text-yellow-600">{tithiend}</span>
@@ -86,7 +86,7 @@ export function MuhutatDate({festival_date,name,tithi}){
             <h6 className="text-center md:text-lg">
                 {name} <span className="text-red-600 font-semibold">on {convert_Date_to_redable(festival_date)}</span>
             </h6>
-            <p className="md:text-lg">
+            <p className="">
                 {tithiid[tithi['tithi_id']]} Begins - <span className="text-yellow-600">{tithi.tithi_start_time}</span>
                 <br/>
                 {tithiid[tithi['tithi_id']]} Ends - <span className="text-yellow-600">{tithi.tithi_end_time}</span>

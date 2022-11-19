@@ -39,15 +39,15 @@ export  default function DhanuSankranti(){
 
     return(
         <>
-            {loader ?
+            {loader || data=="" ?
                 <div className="mt-[100px]">
                     <Loader/>
                 </div>
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Dhanu Sankranti "  date={"2022-11-19"}/>
-                        {/*<SankrantiDetail festival_date="2022-11-19" moment={data.sankranti_moment}  punya={data.punya_kal} mahapunya={data.maha_punya_kal} name="Dhanu Sankranti "/>*/}
+                        <FestivalDetailCard festival_name="Dhanu Sankranti "  date={input?.festival_date}/>
+                        <SankrantiDetail festival_date={input?.festival_date} moment={data?.sankranti_moment}  punya={data?.punya_kal} mahapunya={data?.maha_punya_kal} name="Dhanu Sankranti "/>
                     </div>
                 </div>
             }
