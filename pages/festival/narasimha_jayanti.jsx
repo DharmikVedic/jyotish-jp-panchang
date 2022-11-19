@@ -74,10 +74,10 @@ export  default function NarasimaJayanti(){
 
                                 </div>
                             </div>
-                            <p className="md:text-lg">
-                                Chaturdashi Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
+                            <p>
+                                Chaturdashi Tithi Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
                                 <br/>
-                                Chaturdashi Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
+                                Chaturdashi Tithi Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
                             </p>
                         </div>
 
