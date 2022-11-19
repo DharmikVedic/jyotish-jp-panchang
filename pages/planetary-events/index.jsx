@@ -66,8 +66,8 @@ export default function PlanetaryEvents({events}){
                             {data &&
                                 <>
                             <PlanetaryMonthTable year={input.year} ml={mL[input.month - 1]} data={data}/>
-                           <div>
-                               <Sample text="Transit To Sign" />
+                                    <div className="w-full">
+                               <Sample signpage={true} text="Transit To Sign" />
                                <Sample text="Transit To Nakshatra" />
                            </div>
                             </>

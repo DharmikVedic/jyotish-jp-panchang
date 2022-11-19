@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import dynamic from "next/dynamic";
 const DynamicDatePicker = dynamic(()=> import("react-datepicker"));
@@ -18,6 +18,7 @@ export default function FormYeardata(props) {
         lat: 35.6761919,
         lon: 139.6503106,
         name: "Tokyo,japan",
+        timezone:9
     };
 
     const [city, setcity] = useState(defaultplace);
@@ -25,38 +26,39 @@ export default function FormYeardata(props) {
 
     const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
 
-    useEffect(() => {
-        let mouted = true;
+    const passdata = useCallback((date,latlon)=>{
         const passData = ()=> {
             const time = {
-                date: state.getDate(),
-                year: state.getFullYear(),
-                month: state.getMonth() + 1,
+                date: date.getDate(),
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
             };
-            let res = Object.assign({}, time, city);
-            props.getinput(datestring, res,state);
+            let res = Object.assign({}, time,city, latlon);
+            props.getinput(datestring, res,state)
         }
-        if(mouted){
-            passData();
-        }
-        return () => mouted = false;
-    }, [state, city]);
+        passData()
+    },[state,city])
+
+
 
     function getPreviousDay(date, operation) {
         const previous = new Date(date.getTime());
-        operation === "next" ? previous.setFullYear(date.getFullYear() + 1) : previous.setFullYear(date.getFullYear() - 1);
-        setstate(previous);
+        let newDate = operation === "next" ? previous.setFullYear(date.getFullYear() + 1) : previous.setFullYear(date.getFullYear() - 1);
+        // previous.setDate(date.getDate() - 1);
+        setstate(new Date(newDate));
         return previous;
     }
 
 
     const incrementDate = () => {
-        getPreviousDay(state, "next");
+        const newdate =  getPreviousDay(state, "next");
+        passdata(newdate,city);
     }
 
 
     const decrementDate = () => {
-        getPreviousDay(state, "prev");
+        const newdate = getPreviousDay(state, "prev");
+        passdata(newdate,city);
     }
 
 
@@ -67,15 +69,21 @@ export default function FormYeardata(props) {
         return {timezone: timezone.timezone };
     }
 
-
     const largeDevice = async(input) => {
         if (input !== null) {
             const lat = parseFloat(input.lat);
             const lon = parseFloat(input.lng);
             const timezone =  await Timezone(input.lat,input.lng);
             setcity({ lat: lat, lon: lon,...timezone });
+            passdata(state,{ lat: lat, lon: lon,...timezone });
         }
     };
+
+
+    const handleDate = (date)=>{
+        setstate(date);
+        passdata(date,city);
+    }
 
     return (
         <>
@@ -90,7 +98,7 @@ export default function FormYeardata(props) {
                             </span>
                             <DynamicDatePicker
                                 selected={state}
-                                onChange={(date) => setstate(date)}
+                                onChange={(date) => handleDate(date)}
                                 dateFormat="MM/yyyy"
                                 showMonthYearPicker
                                 className="border border-b-[3px] cursor-pointer w-[180px] border-zinc-300 px-3 py-2 focus:border-sky-500 outline-none"
@@ -117,7 +125,7 @@ export default function FormYeardata(props) {
                                 Prev Year
                             </button>
                             <button
-                                onClick={()=> {setstate(new Date());}}
+                                onClick={()=> handleDate(new Date())}
                                 className=" text-white rounded py-2 px-5 font-bold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
                                 Current Year

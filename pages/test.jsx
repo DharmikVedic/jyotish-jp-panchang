@@ -27,7 +27,7 @@ export default function GooglePlaceAutoComplete({passLatLong,defaultPlace}) {
                 onSelect={handleSelect}
             >
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div className="w-full relative">
+                    <div className="w-full z-50 relative">
                         <input className="border focus:border-sky-500  outline-none px-5 w-full h-[40px] border-zinc-300 text-base " {...getInputProps({ placeholder: "Type address" })} />
 
                         <div className="border w-full absolute top-[100%] z-[2] max-h-[500px] overflow-y-scroll border-zinc-300">

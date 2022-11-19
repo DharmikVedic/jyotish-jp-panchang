@@ -1,49 +1,59 @@
-export default function EventsCards(){
+import {useRouter} from "next/router";
+
+export default function EventsCards({signpage}){
 const signs = [
     {
         name: "Surya(Sun)",
         sign:"A",
-        link: "/",
+        link: "sun",
 
     },
     {
         name: "Mangal(Mars)",
         sign:"E",
-        link: "/",
+        link: "mars",
     },
     {
         name: "Budha(Mercury)",
         sign:"C",
-        link: "/",
+        link: "mercury",
     },
     {
         name: "Guru(Jupiter)",
         sign:"F",
-        link: "/",
+        link: "jupiter",
     },
     {
         name: "Shukra(Venus)",
         sign:"D",
-        link: "/",
+        link: "venus",
     },
     {
         name: "Shani(Saturn)",
         sign:"G",
-        link: "/",
+        link: "saturn",
     },
     {
         name: "Rahu",
         sign:"L",
-        link: "/",
+        link: "rahu",
     },
 ]
-
-
+const router = useRouter();
+const handleLink = (planet)=>{
+    const event_name = signpage ?  "sign" :  "nakshatra";
+    const signs = planet;
+    const query  = {
+        pathname: `/planetary-events/${event_name}`,
+        query: { planet: signs },
+    }
+    router.push(query);
+}
 
     return(
-        <div className="grid sm:grid-cols-3 grid-cols-2 md:grid-cols-4 gap-5">
+        <div className="grid w-full sm:grid-cols-3 grid-cols-2 md:grid-cols-4 gap-5">
             {signs.map((item,i)=>(
-                <div key={i} className="border border-zinc-200 hover:shadow cursor-pointer bg-white hover:bg-zinc-100 justify-center items-center flex flex-col rounded pb-5 pt-2 px-5">
+                <div onClick={()=>handleLink(item.link)} key={i} className="border border-zinc-200 hover:shadow cursor-pointer bg-white hover:bg-zinc-100 justify-center items-center flex flex-col rounded pb-5 pt-2 px-5">
             <span className="font-zodiac text-[40px] ">
                 {item.sign}
             </span>

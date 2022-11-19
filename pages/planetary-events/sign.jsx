@@ -4,6 +4,7 @@ import {FetchAPI} from "../../components/utils/fetchapi";
 import FormYeardata from "../../components/planetary_position/planetaryYearFilter";
 import Loader from "../../components/utils/loader";
 import PlanetaryEventsYearlyCard from "../../components/planetary_position/planetaryEventYearlyCard";
+import Sample from "../sample";
 
 
 export default function Sign(){
@@ -42,18 +43,15 @@ export default function Sign(){
 
     const getdata = useCallback(async (datestring, res)=>{
         //setinput(prev => ({...prev, ...res }));
-        setinput(res);
-        console.log(res);
-        // await Apicall({...res,planet:planetname});
-    },[]);
-
-
-    console.log(data)
+        const param = new URLSearchParams(window.location.search);
+        const d = param.get('planet')
+       await Apicall({...res,planet:d});
+    },[planetname]);
 
 
     return(
         <>
-            {/*<FormYeardata getinput={getdata}/>*/}
+            <FormYeardata getinput={getdata}/>
             {/* formdata */}
             {loader  ?
                 <div className="mt-[100px]">
@@ -61,15 +59,34 @@ export default function Sign(){
                 </div>
                 :
                 <div className="min-h-screen bg-zinc-100">
-                    <div className="pt-[50px] px-5 pb-[100px]">
+                    <div className="pt-[50px] flex flex-col items-center gap-10 px-5 pb-[100px]">
+                        <h1 className="md:text-3xl text-zinc-800 capitalize text-2xl font-bold">
+                            {planetname} ({signSecondName[planetname]}) Sign Transits
+                        </h1>
                         <div className="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-5 w-full mx-auto">
                             {data?.transits.map((item,i)=>(
                                 <PlanetaryEventsYearlyCard sign={true} index={i} data={item} key={i}/>
                             ))}
+                        </div>
+                        <div className="w-full">
+                            <Sample signpage={true} text="Transit To Sign" />
+                            <Sample text="Transit To Nakshatra" />
                         </div>
                     </div>
                 </div>
             }
         </>
     )
+}
+
+export const signSecondName = {
+    "sun":"surya",
+    "moon":"chandra",
+    "mars":"mangal",
+    "mercury":"Budha",
+    "jupiter":"guru",
+    "venus":"shukra",
+    "saturn":"shani",
+    "rahu":"rahu",
+
 }

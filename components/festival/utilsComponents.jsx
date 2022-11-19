@@ -20,17 +20,17 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
                         <p className="text-yellow-600 font-semibold">
                             {name} Punya Kala - {punya.start_time} to {punya.end_time}
                         </p>
-                            <p className="text-base text-zinc-500">
-                            Duration - 08 Hours 42 Mins
-                        </p>
+                        {/*    <p className="text-base text-zinc-500">*/}
+                        {/*    Duration - 08 Hours 42 Mins*/}
+                        {/*</p>*/}
                         </div>
                         <div>
                             <p className="text-yellow-600 font-semibold">
                                 {name} Maha Punya Kala -  {mahapunya.start_time} to {mahapunya.end_time}
                             </p>
-                            <p className="text-base text-zinc-500">
-                                Duration - 08 Hours 42 Mins
-                            </p>
+                            {/*<p className="text-base text-zinc-500">*/}
+                            {/*    Duration - 08 Hours 42 Mins*/}
+                            {/*</p>*/}
                         </div>
                     </div>
             <p className="md:text-lg">
@@ -43,7 +43,7 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
 }
 
 
-export function MuhuratDetail({hightlight,name,muhurta,festival_date,tithi,muhurattext}) {
+export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_date,tithistart,tithiend,tithiname,muhurattext}) {
 
 
     return(
@@ -60,17 +60,17 @@ export function MuhuratDetail({hightlight,name,muhurta,festival_date,tithi,muhur
                     <div>
 
                         <p className="text-yellow-600 font-semibold">
-                            {name} {muhurattext ? muhurattext : "Puja Muhurat"} - {muhurta.muhurta_start_time} to {muhurta.muhurta_end_time}
+                            {name} {muhurattext ? muhurattext : "Puja Muhurat"} - {muhurtastart} to {muhurtend}
                         </p>
-                        <p className="text-base text-zinc-500">
-                            Duration - 08 Hours 42 Mins
-                        </p>
+                        {/*<p className="text-base text-zinc-500">*/}
+                        {/*    Duration - 08 Hours 42 Mins*/}
+                        {/*</p>*/}
                     </div>
                 </div>
                 <p className="md:text-lg">
-                    {tithiid[tithi['tithi_id']]} Begins - <span className="text-yellow-600">{tithi.tithi_start_time}</span>
+                    {tithiname} Tithi Begins - <span className="text-yellow-600">{tithistart}</span>
                     <br/>
-                    {tithiid[tithi['tithi_id']]} Ends - <span className="text-yellow-600">{tithi.tithi_end_time}</span>
+                    {tithiname} Tithi Ends - <span className="text-yellow-600">{tithiend}</span>
                 </p>
             </div>
         </>
@@ -114,9 +114,9 @@ export function MuhuratArrayDetail({hightlight,name,muhurta,festival_date,tithi,
                             <p className="text-yellow-600 font-semibold">
                                 {muhurattext[i]} - {item.muhurta_start_time} to {item.muhurta_end_time}
                             </p>
-                            <p className="text-base text-zinc-500">
-                                Duration - 08 Hours 42 Mins
-                            </p>
+                            {/*<p className="text-base text-zinc-500">*/}
+                            {/*    Duration - 08 Hours 42 Mins*/}
+                            {/*</p>*/}
                         </div>
                     </div>
                 ))}
