@@ -4,24 +4,31 @@ import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FeativalYearCard from "../../components/festival/festivalCard";
 
-export default function Festival(){
+export default function Festival({festival}){
     const dateobj = new Date();
+    const defaultobject = {
+        lat: 35.6761919,
+        lon: 139.6503106,
+        timezone: 9,
+        year: dateobj.getFullYear(),
+    };
+    const [input,setinput] = useState();
     const [loader,setloader] = useState(false);
-    const [data,setdata] = useState([]);
-    const [year,setyear] = useState(dateobj.getFullYear());
+    const [data,setdata] = useState(festival);
+    const [year,setyear] = useState(defaultobject);
 
-    useEffect(()=>{
-        let mouted = true;
-        if(mouted) {
-          Apicall(year);
-        }
-        return()=> {mouted = false};
-    },[]);
+    // useEffect(()=>{
+    //     let mouted = true;
+    //     if(mouted) {
+    //       //Apicall(year);
+    //     }
+    //     return()=> {mouted = false};
+    // },[]);
 
 
-    const Apicall =async(year)=>{
+    const Apicall =async(passyear)=>{
         setloader(true);
-        const yearlyFestival = await FetchAPI("yearly_festivals",{year:year});
+        const yearlyFestival = await FetchAPI("yearly_festivals",{year:passyear});
         if(yearlyFestival.status) {
             let arr = [];
             const monthFilter = [...Array(12)].map((item, i) => {
@@ -40,7 +47,7 @@ export default function Festival(){
 
     const getdata = useCallback(async (datestring, res)=>{
         //setinput(prev => ({...prev, ...res }));
-        setyear(res.year)
+        setyear(res)
         await Apicall(res.year);
     },[]);
 
@@ -68,6 +75,39 @@ export default function Festival(){
         </div>
     )
 }
+
+
+export async function getStaticProps(context) {
+    const dateobj = new Date();
+    const year = dateobj.getFullYear();
+
+    // Festival at build time
+    const Apicall =async(year)=>{
+        const yearlyFestival = await FetchAPI("yearly_festivals",{year:year});
+        if(yearlyFestival.status) {
+            let arr = [];
+            const monthFilter = [...Array(12)].map((item, i) => {
+                let obj = {};
+                let filterArr = yearlyFestival.festivals.filter(val => val.month == i + 1);
+                obj[i + 1] = filterArr
+                arr.push(filterArr);
+            });
+            return arr;
+
+        }
+    }
+
+    const getFestival = await Apicall(year);
+    return {
+        props: {
+            festival:getFestival
+        },
+    }
+}
+
+
+
+
 
 export const weekDay =['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 export const hindiWeekDay = ['रबिवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार']

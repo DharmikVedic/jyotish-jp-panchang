@@ -1,8 +1,9 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback,useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import dynamic from "next/dynamic";
 const DynamicDatePicker = dynamic(()=> import("react-datepicker"));
 import GooglePlaceAutoComplete from "../../pages/test";
+import {FetchAPI} from "../utils/fetchapi";
 
 
 export default function FestivalFormdata(props) {
@@ -13,52 +14,67 @@ export default function FestivalFormdata(props) {
         lat: 35.6761919,
         lon: 139.6503106,
         name: "Tokyo,japan",
+        timezone:9
     };
-
     const [city, setcity] = useState(defaultplace);
-
     const datestring = state.getFullYear();
-    const [day, setDays] = React.useState(0);
 
-    useEffect(() => {
-        let mouted = true;
+    const passdata = useCallback((date,latlon)=>{
         const passData = ()=> {
             const time = {
-                day: state.getDate(),
-                year: state.getFullYear(),
-                month: state.getMonth() + 1,
+                date: date.getDate(),
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
             };
-            let res = Object.assign({}, time, city);
-            props.getinput(datestring, res,state);
+            let res = Object.assign({}, time, latlon,city);
+            props.getinput(datestring, res,state)
         }
-        if(mouted){
-            passData();
-        }
-        return () => mouted = false;
-    }, [state, city,day]);
+        passData()
+    },[state,city])
 
-    const incrementDate = React.useCallback(() => {
-        setDays((prevState) => prevState + 1);
-        setstate(
-            (prevState) => new Date(new Date().setFullYear(new Date().getFullYear() + (day+1)))
-        );
-    }, [day]);
+    function getPreviousDay(date, operation) {
+        const previous = new Date(date.getTime());
+        let newDate = operation === "next" ? previous.setFullYear(date.getFullYear() + 1) : previous.setFullYear(date.getFullYear() - 1);
+        // previous.setDate(date.getDate() - 1);
+        setstate(new Date(newDate));
+        return previous;
+    }
 
-    const decrementDate = React.useCallback(() => {
-        setDays((prevState) => prevState - 1);
-        setstate(
-            (prevState) => new Date(new Date().setFullYear(new Date().getFullYear() - (day-1)))
-        );
-    }, [day]);
 
-    const largeDevice = (input) => {
+    const incrementDate = () => {
+        const newdate =  getPreviousDay(state, "next");
+        passdata(newdate,city);
+    }
+
+
+    const decrementDate = () => {
+        const newdate = getPreviousDay(state, "prev");
+        passdata(newdate,city);
+    }
+
+
+    // calculate timezone
+    const Timezone = async  (lat,lng) =>{
+        const date = (state.getMonth() + 1) +"-"+state.getDate()+"-"+state.getFullYear();
+        const timezone = await FetchAPI("timezone_with_dst",{latitude: parseFloat(lat),longitude:parseFloat(lng),date:date});
+        return {timezone: timezone.timezone };
+    }
+
+    const largeDevice = async(input) => {
         if (input !== null) {
             const lat = parseFloat(input.lat);
             const lon = parseFloat(input.lng);
-            setcity({ lat: lat, lon: lon });
+            const timezone =  await Timezone(input.lat,input.lng);
+            setcity({ lat: lat, lon: lon,...timezone });
+            passdata(state,{ lat: lat, lon: lon,...timezone });
         }
     };
 
+
+    const handleDate = (date)=>{
+        setstate(date);
+        passdata(date,city);
+    }
 
     return (
         <>
@@ -80,7 +96,7 @@ export default function FestivalFormdata(props) {
 
                             <DynamicDatePicker
                                 selected={state}
-                                onChange={(date) => setstate(date)}
+                                onChange={(date) => handleDate(date)}
                                 showYearPicker
                                 dateFormat="yyyy"
                                 yearItemNumber={9}
@@ -102,7 +118,7 @@ export default function FestivalFormdata(props) {
                                 Prev Year
                             </button>
                             <button
-                                onClick={()=> {setstate(new Date()); setDays(0)}}
+                                onClick={()=> handleDate(new Date())}
                                 className=" text-white rounded py-2 px-5 font-semibold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
                                 Today

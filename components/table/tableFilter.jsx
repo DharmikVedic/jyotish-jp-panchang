@@ -22,15 +22,14 @@ export default function Formdata(props) {
 
     const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
 
-
-    const passdata = useCallback(()=>{
+    const passdata = useCallback((date,latlon)=>{
         const passData = ()=> {
             const time = {
-                date: state.getDate(),
-                year: state.getFullYear(),
-                month: state.getMonth() + 1,
+                day: date.getDate(),
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
             };
-            let res = Object.assign({}, time, city);
+            let res = Object.assign({}, time, latlon);
             props.getinput(datestring, res,state);
         }
         passData();
@@ -39,23 +38,22 @@ export default function Formdata(props) {
 
     function getPreviousDay(date, operation) {
         const previous = new Date(date.getTime());
-        operation === "next" ? previous.setDate(date.getDate() + 1) : previous.setDate(date.getDate() - 1);
+        let newdate = operation === "next" ? previous.setDate(date.getDate() + 1) : previous.setDate(date.getDate() - 1);
         // previous.setDate(date.getDate() - 1);
-        setstate(previous);
-        passdata();
+        setstate(new Date(newdate));
         return previous;
     }
 
 
     const incrementDate = () => {
-        getPreviousDay(state, "next");
-        passdata();
+       const newdate =  getPreviousDay(state, "next");
+        passdata(newdate,city);
     }
 
 
     const decrementDate = () => {
-        getPreviousDay(state, "prev");
-        passdata();
+        const newdate = getPreviousDay(state, "prev");
+        passdata(newdate,city);
     }
 
 
@@ -72,17 +70,15 @@ export default function Formdata(props) {
             const lon = parseFloat(input.lng);
              const timezone =  await Timezone(input.lat,input.lng);
             setcity({ lat: lat, lon: lon,...timezone });
-            passdata();
+            passdata(state,{ lat: lat, lon: lon,...timezone });
         }
     };
 
 
     const handleDate = (date)=>{
         setstate(date);
-        passdata();
+        passdata(date,city);
     }
-
-
 
 
 
@@ -128,7 +124,7 @@ export default function Formdata(props) {
                                 Prev Day
                             </button>
                             <button
-                                onClick={()=> {setstate(new Date());}}
+                                onClick={()=> handleDate(new Date())}
                                 className=" text-white rounded py-2 px-5 font-bold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
                                 Today

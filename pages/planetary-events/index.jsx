@@ -51,9 +51,6 @@ export default function PlanetaryEvents({events}){
     },[]);
 
 
-
-    // console.log(data);
-
     return(
         <>
             <FormMonthdata getinput={getdata}/>
@@ -88,7 +85,7 @@ export async function getStaticProps(context) {
     const dateobj = new Date();
     const defaultobject = {
         country: "japan",
-        date: dateobj.getDate(),
+        date: 1,
         hour: dateobj.getHours(),
         lat: 35.6761919,
         lon: 139.6503106,
