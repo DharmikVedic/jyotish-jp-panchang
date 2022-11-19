@@ -1,11 +1,7 @@
 export default function FestivalDetailCard(){
     return(
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 z-[0] before:z-[-1] before:absolute before:top-[150px] before:left-0 before:w-full md:before:h-[280px] before:rounded md:p-10 before:bg-sky-500">
+        <div className="relative grid grid-cols-1  gap-10 z-[0] before:z-[-1] before:absolute before:top-[150px] before:left-0 before:w-full md:before:h-[220px] before:rounded md:p-10 before:bg-sky-500">
             <div className="flex flex-col gap-4">
-                <h6 className="text-center font-semibold text-lg md:text-xl">
-                    {/* place name */}
-                    Vranov nad Topl'ou, Slovakia
-                </h6>
                 <div className="border-4 flex flex-col gap-5 justify-between pt-5 border-white text-white text-center bg-[#FD766B] w-full h-[300px]">
                    <div className="h-full flex flex-col gap-2 justify-center">
                        <h6 className="font-semibold md:text-xl text-lg">
@@ -23,15 +19,15 @@ export default function FestivalDetailCard(){
 </h3>
                 </div>
             </div>
-            <div className="flex flex-col gap-4">
-                <h6 className="text-center font-semibold text-lg md:text-xl">
-                    {/* place name */}
-                    Pausha Putrada Ekadashi Vrat
-                </h6>
-                <div className="border-4 border-white p-2 bg-white w-full h-[300px]">
-<img src="/imgs/abhijit-muhrta.png" className="w-full h-full"/>
-                </div>
-            </div>
+{/*            <div className="flex flex-col gap-4">*/}
+{/*                <h6 className="text-center font-semibold text-lg md:text-xl">*/}
+{/*                    /!* place name *!/*/}
+{/*                    Pausha Putrada Paush_putrada_ekadashi Vrat*/}
+{/*                </h6>*/}
+{/*                <div className="border-4 border-white p-2 bg-white w-full h-[300px]">*/}
+{/*<img src="/imgs/abhijit-muhrta.png" className="w-full h-full"/>*/}
+{/*                </div>*/}
+{/*            </div>*/}
         </div>
     )
 }

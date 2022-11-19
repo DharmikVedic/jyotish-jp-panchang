@@ -59,7 +59,7 @@ export default function FestivalDetail(){
                 </div>
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
-                    <div className="max-w-[750px] mx-auto flex flex-col gap-14">
+                    <div className="max-w-[750px]  mx-auto flex flex-col gap-14">
                         <FestivalDetailCard/>
                         <Detail/>
                     </div>
