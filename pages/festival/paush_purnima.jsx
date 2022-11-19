@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FetchAPI } from "../../components/utils/fetchapi";
@@ -70,3 +71,14 @@ export default function PaushPurnima() {
     </>
   );
 }
+=======
+import React from "react";
+
+export default function Paush_Purnima(){
+    return(
+        <div>
+
+        </div>
+    )
+}
+>>>>>>> origin/new-branch

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from "react";
 import { FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
@@ -48,5 +49,14 @@ export default function PaushEkadashi(){
                 </div>
             }
         </>
+=======
+import React from "react";
+
+export default function Paush_putrada_ekadashi(){
+    return(
+        <div>
+
+        </div>
+>>>>>>> origin/new-branch
     )
 }

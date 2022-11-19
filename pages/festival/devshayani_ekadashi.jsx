@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from "react";
 import { FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
@@ -49,5 +50,12 @@ export default function DevshayaniEkadashi(){
                 </div>
             }
         </>
+=======
+export  default function AhoiAshtami(){
+    return(
+        <div>
+
+        </div>
+>>>>>>> origin/new-branch
     )
 }

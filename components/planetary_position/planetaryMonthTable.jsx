@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 
 export default function PlanetaryMonthTable({ml,year,data}){
    const router = useRouter();
+<<<<<<< HEAD
 
 
     const sign = {
@@ -42,6 +43,8 @@ export default function PlanetaryMonthTable({ml,year,data}){
 
 
 
+=======
+>>>>>>> origin/new-branch
     return(
         <div>
             <table className="table">
@@ -55,7 +58,11 @@ export default function PlanetaryMonthTable({ml,year,data}){
                 <tbody>
                 <tr className={"grid grid-cols-1 w-full md:grid-cols-2 "}>
                 {data.map((item,i)=>(
+<<<<<<< HEAD
                     <td key={i} onClick={()=> handleLink(item)} className="px-3 cursor-pointer py-2  flex gap-4 hover:bg-zinc-200/70 duration-[100ms] ease-in">
+=======
+                    <td key={i} onClick={()=> router.push("/planetary-events/details")} className="px-3 cursor-pointer py-2  flex gap-4 hover:bg-zinc-200/70 duration-[100ms] ease-in">
+>>>>>>> origin/new-branch
                         <div className="w-[10%] m-auto  pr-2 text-center border-zinc-300 border-r">
                <span className="font-zodiac text-[23px]">
                    {icon[item.planet_id]}

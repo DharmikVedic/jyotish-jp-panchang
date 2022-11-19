@@ -49,8 +49,12 @@ export default function Home({panchang,festival,events}) {
 
     //
     const getdata = useCallback(async (datestring, res,state)=>{
+<<<<<<< HEAD
         console.log(res)
         setCurrentDate({day:res.day,month:res.month,year:res.year})
+=======
+        setCurrentDate({day:state.day,month:state.month,year:state.year})
+>>>>>>> origin/new-branch
          await APICall({...initialValue,...res});
     },[]);
 

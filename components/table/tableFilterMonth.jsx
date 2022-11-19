@@ -26,6 +26,7 @@ export default function FormMonthdata(props) {
      const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
 
 
+<<<<<<< HEAD
       const passdata = useCallback((date,latlon)=>{
           const passData = ()=> {
               const time = {
@@ -34,6 +35,16 @@ export default function FormMonthdata(props) {
                   month: date.getMonth() + 1,
               };
               let res = Object.assign({}, time, latlon);
+=======
+      const passdata = useCallback(()=>{
+          const passData = ()=> {
+              const time = {
+                  date: state.getDate(),
+                  year: state.getFullYear(),
+                  month: state.getMonth() + 1,
+              };
+              let res = Object.assign({}, time, city);
+>>>>>>> origin/new-branch
               props.getinput(datestring, res,state);
           }
           passData();
@@ -41,24 +52,60 @@ export default function FormMonthdata(props) {
 
 
 
+<<<<<<< HEAD
     function getPreviousDay(date, operation) {
         const previous = new Date(date.getTime());
         let newdate = operation === "next" ? previous.setMonth(date.getMonth() + 1) : previous.setMonth(date.getMonth() - 1);
         // previous.setDate(date.getDate() - 1);
         setstate(new Date(newdate));
+=======
+    // useEffect(() => {
+    //     let mouted = true;
+    //     const passData = ()=> {
+    //         const time = {
+    //             date: state.getDate(),
+    //             year: state.getFullYear(),
+    //             month: state.getMonth() + 1,
+    //         };
+    //         let res = Object.assign({}, time, city);
+    //         //props.getinput(datestring, res,state);
+    //     }
+    //     if(mouted){
+    //         passData();
+    //     }
+    //     return () => mouted = false;
+    // }, [state, city]);
+
+    function getPreviousDay(date, operation) {
+        const previous = new Date(date.getTime());
+        operation === "next" ? previous.setMonth(date.getMonth() + 1) : previous.setMonth(date.getMonth() - 1);
+        // previous.setDate(date.getDate() - 1);
+        setstate(previous);
+        passdata();
+>>>>>>> origin/new-branch
         return previous;
     }
 
 
     const incrementDate = () => {
+<<<<<<< HEAD
         const newdate =  getPreviousDay(state, "next");
         passdata(newdate,city);
+=======
+        getPreviousDay(state, "next");
+        passdata()
+>>>>>>> origin/new-branch
     }
 
 
     const decrementDate = () => {
+<<<<<<< HEAD
         const newdate = getPreviousDay(state, "prev");
         passdata(newdate,city);
+=======
+        getPreviousDay(state, "prev");
+        passdata()
+>>>>>>> origin/new-branch
     }
 
 
@@ -75,14 +122,22 @@ export default function FormMonthdata(props) {
             const lon = parseFloat(input.lng);
             const timezone =  await Timezone(input.lat,input.lng);
             setcity({ lat: lat, lon: lon,...timezone });
+<<<<<<< HEAD
             passdata(state,{ lat: lat, lon: lon,...timezone });
+=======
+            passdata();
+>>>>>>> origin/new-branch
         }
     };
 
 
       const handleDate = (date)=>{
           setstate(date);
+<<<<<<< HEAD
           passdata(date,city);
+=======
+          passdata();
+>>>>>>> origin/new-branch
       }
 
     return (
@@ -125,7 +180,11 @@ export default function FormMonthdata(props) {
                                 Prev Month
                             </button>
                             <button
+<<<<<<< HEAD
                                 onClick={()=> handleDate(new Date())}
+=======
+                                onClick={()=> {setstate(new Date());}}
+>>>>>>> origin/new-branch
                                 className=" text-white rounded py-2 px-5 font-bold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
                                 Current Month

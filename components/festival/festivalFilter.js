@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import React, {useCallback,useState} from "react";
+=======
+import React, {useEffect, useRef, useState} from "react";
+>>>>>>> origin/new-branch
 import "react-datepicker/dist/react-datepicker.css";
 import dynamic from "next/dynamic";
 const DynamicDatePicker = dynamic(()=> import("react-datepicker"));
 import GooglePlaceAutoComplete from "../../pages/test";
+<<<<<<< HEAD
 import {FetchAPI} from "../utils/fetchapi";
+=======
+>>>>>>> origin/new-branch
 
 
 export default function FestivalFormdata(props) {
@@ -14,6 +21,7 @@ export default function FestivalFormdata(props) {
         lat: 35.6761919,
         lon: 139.6503106,
         name: "Tokyo,japan",
+<<<<<<< HEAD
         timezone:9
     };
     const [city, setcity] = useState(defaultplace);
@@ -67,15 +75,63 @@ export default function FestivalFormdata(props) {
             const timezone =  await Timezone(input.lat,input.lng);
             setcity({ lat: lat, lon: lon,...timezone });
             passdata(state,{ lat: lat, lon: lon,...timezone });
+=======
+    };
+
+    const [city, setcity] = useState(defaultplace);
+
+    const datestring = state.getFullYear();
+    const [day, setDays] = React.useState(0);
+
+    useEffect(() => {
+        let mouted = true;
+        const passData = ()=> {
+            const time = {
+                day: state.getDate(),
+                year: state.getFullYear(),
+                month: state.getMonth() + 1,
+            };
+            let res = Object.assign({}, time, city);
+            props.getinput(datestring, res,state);
+        }
+        if(mouted){
+            passData();
+        }
+        return () => mouted = false;
+    }, [state, city,day]);
+
+    const incrementDate = React.useCallback(() => {
+        setDays((prevState) => prevState + 1);
+        setstate(
+            (prevState) => new Date(new Date().setFullYear(new Date().getFullYear() + (day+1)))
+        );
+    }, [day]);
+
+    const decrementDate = React.useCallback(() => {
+        setDays((prevState) => prevState - 1);
+        setstate(
+            (prevState) => new Date(new Date().setFullYear(new Date().getFullYear() - (day-1)))
+        );
+    }, [day]);
+
+    const largeDevice = (input) => {
+        if (input !== null) {
+            const lat = parseFloat(input.lat);
+            const lon = parseFloat(input.lng);
+            setcity({ lat: lat, lon: lon });
+>>>>>>> origin/new-branch
         }
     };
 
 
+<<<<<<< HEAD
     const handleDate = (date)=>{
         setstate(date);
         passdata(date,city);
     }
 
+=======
+>>>>>>> origin/new-branch
     return (
         <>
             {/* month list */}
@@ -96,12 +152,28 @@ export default function FestivalFormdata(props) {
 
                             <DynamicDatePicker
                                 selected={state}
+<<<<<<< HEAD
                                 onChange={(date) => handleDate(date)}
+=======
+                                onChange={(date) => setstate(date)}
+>>>>>>> origin/new-branch
                                 showYearPicker
                                 dateFormat="yyyy"
                                 yearItemNumber={9}
                                 className="border border-b-[3px] w-[180px] border-zinc-300 px-3 py-2 focus:border-sky-500 outline-none"
                             />
+<<<<<<< HEAD
+=======
+                            {/*<DynamicDatePicker*/}
+                            {/*    selected={state}*/}
+                            {/*    onChange={(date) => setstate(date)}*/}
+                            {/*    dateFormat="MMMM d, yyyy"*/}
+                            {/*    showMonthDropdown*/}
+                            {/*    showYearDropdown*/}
+                            {/*    dropdownMode="select"*/}
+                            {/*    className="border border-b-[3px] w-[180px] border-zinc-300 px-3 py-2 focus:border-sky-500 outline-none"*/}
+                            {/*/>*/}
+>>>>>>> origin/new-branch
                         </div>
 
                         <div className="rounded-md gap-3 self-end text-sm flex w-full ">
@@ -118,7 +190,11 @@ export default function FestivalFormdata(props) {
                                 Prev Year
                             </button>
                             <button
+<<<<<<< HEAD
                                 onClick={()=> handleDate(new Date())}
+=======
+                                onClick={()=> {setstate(new Date()); setDays(0)}}
+>>>>>>> origin/new-branch
                                 className=" text-white rounded py-2 px-5 font-semibold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
                                 Today

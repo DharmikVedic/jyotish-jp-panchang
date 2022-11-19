@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {FetchAPI} from "../../components/utils/fetchapi";
@@ -65,5 +66,12 @@ export  default function MeshaSankranti(){
                 </div>
             }
         </>
+=======
+export  default function AhoiAshtami(){
+    return(
+        <div>
+
+        </div>
+>>>>>>> origin/new-branch
     )
 }

@@ -1,11 +1,15 @@
 import Header from "./header";
 import Footer from "./footer";
 import React from "react";
+<<<<<<< HEAD
 import Head from "next/head";
+=======
+>>>>>>> origin/new-branch
 
 export default function Layout({children}){
     return(
         <>
+<<<<<<< HEAD
             <Head>
                 <meta
                     name="description"
@@ -20,6 +24,8 @@ export default function Layout({children}){
                     Hindu Panchang | Jyotish JP
                 </title>
             </Head>
+=======
+>>>>>>> origin/new-branch
             <Header/>
             <div className="min-h-screen overflow-x-hidden">
                 {children}

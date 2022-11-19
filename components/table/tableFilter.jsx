@@ -22,6 +22,7 @@ export default function Formdata(props) {
 
     const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
 
+<<<<<<< HEAD
     const passdata = useCallback((date,latlon)=>{
         const passData = ()=> {
             const time = {
@@ -30,6 +31,17 @@ export default function Formdata(props) {
                 month: date.getMonth() + 1,
             };
             let res = Object.assign({}, time, latlon);
+=======
+
+    const passdata = useCallback(()=>{
+        const passData = ()=> {
+            const time = {
+                date: state.getDate(),
+                year: state.getFullYear(),
+                month: state.getMonth() + 1,
+            };
+            let res = Object.assign({}, time, city);
+>>>>>>> origin/new-branch
             props.getinput(datestring, res,state);
         }
         passData();
@@ -38,22 +50,39 @@ export default function Formdata(props) {
 
     function getPreviousDay(date, operation) {
         const previous = new Date(date.getTime());
+<<<<<<< HEAD
         let newdate = operation === "next" ? previous.setDate(date.getDate() + 1) : previous.setDate(date.getDate() - 1);
         // previous.setDate(date.getDate() - 1);
         setstate(new Date(newdate));
+=======
+        operation === "next" ? previous.setDate(date.getDate() + 1) : previous.setDate(date.getDate() - 1);
+        // previous.setDate(date.getDate() - 1);
+        setstate(previous);
+        passdata();
+>>>>>>> origin/new-branch
         return previous;
     }
 
 
     const incrementDate = () => {
+<<<<<<< HEAD
        const newdate =  getPreviousDay(state, "next");
         passdata(newdate,city);
+=======
+        getPreviousDay(state, "next");
+        passdata();
+>>>>>>> origin/new-branch
     }
 
 
     const decrementDate = () => {
+<<<<<<< HEAD
         const newdate = getPreviousDay(state, "prev");
         passdata(newdate,city);
+=======
+        getPreviousDay(state, "prev");
+        passdata();
+>>>>>>> origin/new-branch
     }
 
 
@@ -70,18 +99,31 @@ export default function Formdata(props) {
             const lon = parseFloat(input.lng);
              const timezone =  await Timezone(input.lat,input.lng);
             setcity({ lat: lat, lon: lon,...timezone });
+<<<<<<< HEAD
             passdata(state,{ lat: lat, lon: lon,...timezone });
+=======
+            passdata();
+>>>>>>> origin/new-branch
         }
     };
 
 
     const handleDate = (date)=>{
         setstate(date);
+<<<<<<< HEAD
         passdata(date,city);
+=======
+        passdata();
+>>>>>>> origin/new-branch
     }
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/new-branch
     return (
         <>
             {/* month list */}
@@ -124,7 +166,11 @@ export default function Formdata(props) {
                                 Prev Day
                             </button>
                             <button
+<<<<<<< HEAD
                                 onClick={()=> handleDate(new Date())}
+=======
+                                onClick={()=> {setstate(new Date());}}
+>>>>>>> origin/new-branch
                                 className=" text-white rounded py-2 px-5 font-bold bg-[#FA7869] hover:bg-[#FA4848] w-full "
                             >
                                 Today
