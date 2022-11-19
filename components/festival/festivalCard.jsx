@@ -30,7 +30,7 @@ function FestivalCard({data}){
                     {data.festival}
                 </h6>
                 <p>
-                    {mL[data.month-1]}, {data.date} {data.year} , {daysInWeek[date.getDay()]}
+                    {mL[data.month-1]} {data.date}, {data.year} , {daysInWeek[date.getDay()]}
                 </p>
             </div>
         </div>

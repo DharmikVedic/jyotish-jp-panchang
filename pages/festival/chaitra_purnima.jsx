@@ -5,7 +5,7 @@ import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {MuhutatDate} from "../../components/festival/utilsComponents";
 
-export  default function GaneshVisarjan(){
+export  default function ChaitraPurnima(){
     const commonObj = {
         festival_date:"2022-11-19",
         tithi : {
@@ -56,8 +56,8 @@ export  default function GaneshVisarjan(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Ganesh Visarjan"  date={data.festival_date}/>
-                        <MuhutatDate festival_date={data.festival_date}  tithi={data.tithi} name="Ganesh Visarjan"/>
+                        <FestivalDetailCard festival_name="Chaitra Purnima"  date={data.festival_date}/>
+                        <MuhutatDate festival_date={data.festival_date}  tithi={data.tithi} name="Chaitra Purnima "/>
                     </div>
                 </div>
             }
