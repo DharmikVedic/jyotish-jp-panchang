@@ -86,15 +86,6 @@ export default function FestivalFormdata(props) {
                                 yearItemNumber={9}
                                 className="border border-b-[3px] w-[180px] border-zinc-300 px-3 py-2 focus:border-sky-500 outline-none"
                             />
-                            {/*<DynamicDatePicker*/}
-                            {/*    selected={state}*/}
-                            {/*    onChange={(date) => setstate(date)}*/}
-                            {/*    dateFormat="MMMM d, yyyy"*/}
-                            {/*    showMonthDropdown*/}
-                            {/*    showYearDropdown*/}
-                            {/*    dropdownMode="select"*/}
-                            {/*    className="border border-b-[3px] w-[180px] border-zinc-300 px-3 py-2 focus:border-sky-500 outline-none"*/}
-                            {/*/>*/}
                         </div>
 
                         <div className="rounded-md gap-3 self-end text-sm flex w-full ">
