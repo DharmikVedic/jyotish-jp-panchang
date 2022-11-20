@@ -3,7 +3,7 @@ import Day from "../utils/dayConvert";
 import {convert_Date_to_redable} from "./festivalCard";
 
 export default function FestivalDetailCard({festival_name,date}){
-    const ConvertDate = new Date(date);
+    const ConvertDate = new Date(date.replace(/-/g, "/"));
     const weekday = weekDay[ConvertDate.getDay()];
     const hindiWeekDayName = hindiWeekDay[ConvertDate.getDay()];
     const month  = mL[ConvertDate.getMonth()];
@@ -79,7 +79,10 @@ export function DetailPanchami({
 
 export  function Detail({name,muhurat,tithistart,tithiend,harivarsra,festival_date}){
     return(
-        <div className="bg-white flex flex-col gap-8 p-5 md:p-10">
+        <div className="relative border-2  border-sky-500 bg-white flex flex-col gap-8 pt-10 pb-5 px-5 md:p-10">
+            <div className="absolute text-white px-5 py-2 p-[5px] font-bold top-[-15px] left-[20px] bg-sky-600">
+                {name}
+            </div>
             <h6 className="text-center md:text-xl  text-lg">
                 {name} <span className="text-red-600 font-semibold">on {convert_Date_to_redable(festival_date)}</span>
             </h6>

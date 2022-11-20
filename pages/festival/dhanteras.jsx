@@ -4,7 +4,6 @@ import {Decode} from "../../components/utils/decode";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import {MuhuratDetail} from "../../components/festival/utilsComponents";
 import {convert_Date_to_redable} from "../../components/festival/festivalCard";
 
 export  default function AhoiAshtami(){

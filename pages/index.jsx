@@ -15,8 +15,9 @@ import {getMultipleDate} from "../components/utils/dateDifference";
 export default function Home({panchang,festival,events}) {
     const {day,month,year,initialValue} = currentDateObj();
     const [loader,setloader]=useState(false);
+    const [festivaldata,setfestivaldata] = useState([]);
     const [currentDate,setCurrentDate] = useState({day:day,month:month,year:year});
-    const [data,setData] = useState(panchang);
+    const [data,setData] = useState("");
 
 //     useEffect(()=>{
 // let mouted = true;
@@ -26,8 +27,10 @@ export default function Home({panchang,festival,events}) {
 // return()=>{mouted=false}
 //     },[]);
 
-
-
+    useEffect(()=>{
+        setData(panchang);
+        setfestivaldata(festival)
+    },[])
 
 
     const APICall =async(initialval)=>{
@@ -49,12 +52,14 @@ export default function Home({panchang,festival,events}) {
 
     //
     const getdata = useCallback(async (datestring, res,state)=>{
-        console.log(res)
         setCurrentDate({day:res.day,month:res.month,year:res.year})
          await APICall({...initialValue,...res});
     },[]);
 
-  return (
+
+
+
+    return (
       <>
           <Formdata getinput={getdata}/>
               <div className="bg-zinc-100 min-h-screen pt-10 pb-20">
@@ -66,7 +71,7 @@ export default function Home({panchang,festival,events}) {
                           }
                       </PanchangCard>
                       <DailyCharts horo={data['horo_chart/D1']} planets={data['planets']}/>
-                      <Festival data={festival}/>
+                      <Festival data={festivaldata}/>
                       {/* planetary events */}
                       <PlanetaryPosition events={events}/>
                       <PanchangCard link="/muhurat" style="bg-yellow-600/80" title="Hindu Panchang">

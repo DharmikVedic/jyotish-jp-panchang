@@ -5,7 +5,7 @@ import PanchangCard, { Text2} from "./panchang/dailyPanhang";
 import Loader from "./utils/loader";
 
 export default function Festival({data}){
-    const [festival,setfestival] = useState(data);
+    // const [festival,setfestival] = useState(data);
     // const [loader,setloader]  = useState(false);
 
     // const handleLoader =(val)=>{
@@ -44,14 +44,14 @@ export default function Festival({data}){
     //
     const getFestivalDay =(dateObject)=>{
         const today = new Date();
-        const pastdate = convertDayMonthYearDate(dateObject)
+        const pastdate = convertDayMonthYearDate(dateObject);
         return dateDifference(today,pastdate);
     }
 
     return(
         <>
                 <PanchangCard link="/festival" style="bg-sky-500/80" title="Upcoming Upavas and Festivals">
-                    {festival.length == 0 ?
+                    {data.length == 0 ?
                         <div className="flex justify-center pb-10 items-center h-full text-2xl">
                             <h3>
                                 No festival found
@@ -59,7 +59,7 @@ export default function Festival({data}){
                         </div>
                         :
                         <div className="px-5 py-2 max-h-[600px] overflow-y-hidden">
-                            {festival.map((item, j) => (
+                            {data.map((item, j) => (
                                     <div key={j}>
                                         {item.festivals.map((val, i) => (
                                             <Text2 key={i} text={val} value={getFestivalDay(item.date)}/>

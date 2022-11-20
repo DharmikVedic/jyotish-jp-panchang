@@ -60,7 +60,7 @@ function FestivalCard({data,input}){
 
 
 export function convert_Date_to_redable(data){
-    let date = new Date(data)
+    let date = new Date(data.replace(/-/g, "/"))
     let daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return mL[date.getMonth()] + ", " +date.getDate() + " " +date.getFullYear()+", "+daysInWeek[date.getDay()];
 }

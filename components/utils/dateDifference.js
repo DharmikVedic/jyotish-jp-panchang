@@ -19,7 +19,7 @@ export function getMultipleDate(numberDates){
 
 
 export function convertDayMonthYearDate(object){
-    return new Date(`${object.year}  ${object.month} ${object.day}`);
+    return new Date(`${object.year}-${object.month}-${object.day}`.replace(/-/g, "/"));
 }
 
 
