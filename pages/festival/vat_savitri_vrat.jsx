@@ -43,7 +43,7 @@ export default function Savitri() {
 
     return (
         <>
-            {loader ? (
+            {loader ||input==""? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>
