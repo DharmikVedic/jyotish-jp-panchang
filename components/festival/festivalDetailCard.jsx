@@ -33,6 +33,49 @@ export default function FestivalDetailCard({festival_name,date}){
         </div>
     )
 }
+export function DetailPanchami({
+                                   name,
+                                   muhurat,
+                                   tithistart,
+                                   tithiend,
+                                   duration,
+                                   festival_date,
+                               }) {
+    return (
+        <div className="bg-white flex flex-col gap-8 p-5 md:p-10">
+            <h6 className="text-center md:text-xl  text-lg">
+                {name}{" "}
+                <span className="text-red-600 font-semibold">
+          on {convert_Date_to_redable(festival_date)}
+        </span>
+            </h6>
+            {muhurat.map((item, i) => (
+                <div
+                    key={i}
+                    className="bg-gradient-to-tl from-red-400 via-orange-400 to-sky-400 p-[3px] rounded"
+                >
+                    <div className="flex md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
+                        <p>
+                            Vasant Panchami Muhurat -{" "}
+                            <span className="text-yellow-600">{item.start_time}</span> to{" "}
+                            <span className="text-yellow-600">{item.end_time}</span>
+                        </p>
+                        <p className="md:text-lg">
+                            Duration - <span className="text-yellow-600">{duration}</span>
+                        </p>
+                    </div>
+                </div>
+            ))}
+            <p className="md:text-lg">
+                Panchami Tithi Begins -{" "}
+                <span className="text-yellow-600">{tithistart}</span>
+                <br />
+                Panchami Tithi Ends -{" "}
+                <span className="text-yellow-600">{tithiend}</span>
+            </p>
+        </div>
+    );
+}
 
 export  function Detail({name,muhurat,tithistart,tithiend,harivarsra,festival_date}){
     return(

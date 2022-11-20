@@ -1,7 +1,15 @@
 import {convert_Date_to_redable} from "./festivalCard";
 export const tithiid = {
-    11:"Ashtami Tithi"
-}
+    8: "Ashtami Tithi",
+    11: "Ekadashi Tithi",
+    9: "Navami Tithi",
+    14: "Chaturdashi Tithi",
+    30: "Purnima Tithi",
+    0: "Amavasya Tithi",
+    3: "Tritiya Tithi",
+    6: "Shashti Tithi",
+    31: "Pratipada Tithi",
+};
 
 export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
     return(
@@ -41,7 +49,6 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
     </>
 )
 }
-
 
 export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_date,tithistart,tithiend,tithiname,muhurattext}) {
 
