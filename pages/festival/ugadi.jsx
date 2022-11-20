@@ -18,9 +18,7 @@ export default function Ugadi() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
-                console.log(decode);
                 const parse = JSON.parse(decode);
-                console.log(parse);
                 setinput(parse);
                 Apicall(parse);
             }
