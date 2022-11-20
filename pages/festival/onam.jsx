@@ -18,9 +18,7 @@ export default function Onam() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
-                console.log(decode);
                 const parse = JSON.parse(decode);
-                console.log(parse);
                 setinput(parse);
                 Apicall(parse);
             }
@@ -29,12 +27,11 @@ export default function Onam() {
         return () => {
             mouted = false;
         };
-    }, []);
+    }, [query]);
 
     const Apicall = async (input) => {
         setloader(true);
         const panchang = await FetchAPI("festival_muhurta", input);
-        console.log(panchang);
         setTithi({
             tithi_id: 0,
             tithi_start_time: panchang.tithi_start,
@@ -46,7 +43,7 @@ export default function Onam() {
 
     return (
         <>
-            {loader ? (
+            {loader ||input==""? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>

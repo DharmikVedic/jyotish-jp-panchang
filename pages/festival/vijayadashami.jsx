@@ -3,7 +3,6 @@ import {useRouter} from "next/router";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import {MuhuratArrayDetail} from "../../components/festival/utilsComponents";
 import {Decode} from "../../components/utils/decode";
 import {convert_Date_to_redable} from "../../components/festival/festivalCard";
 
@@ -35,8 +34,6 @@ export  default function VijayaDashami(){
         setdata(d);
         setloader(false);
     }
-
-    console.log(data)
 
     return(
         <>

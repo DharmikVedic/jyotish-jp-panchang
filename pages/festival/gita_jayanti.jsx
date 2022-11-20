@@ -27,7 +27,7 @@ export default function GitaJayanti() {
         return () => {
             mouted = false;
         };
-    }, []);
+    }, [query]);
 
     const Apicall = async (input) => {
         setloader(true);
@@ -43,7 +43,7 @@ export default function GitaJayanti() {
 
     return (
         <>
-            {loader ? (
+            {loader ||input==""? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>

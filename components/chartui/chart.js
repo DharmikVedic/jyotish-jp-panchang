@@ -71,7 +71,6 @@ export function drawNorthChart(planetArr, signArr, configuration, chartId)
         x = window.innerWidth || document.documentElement.clientWidth || svg.clientWidth;
         y = window.innerHeight|| document.documentElement.clientHeight|| svg.clientHeight;
         //svg.attr("width", x).attr("height", y);
-        console.log("w/h", x, y);
         calculateDimensions(x-100);
         redrawChart(mChartWidth, mChartHeight);
     }

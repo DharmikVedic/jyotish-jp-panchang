@@ -18,9 +18,7 @@ export default function HanumanJayanti() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
-                console.log(decode);
                 const parse = JSON.parse(decode);
-                console.log(parse);
                 setinput(parse);
                 Apicall(parse);
             }
@@ -29,7 +27,7 @@ export default function HanumanJayanti() {
         return () => {
             mouted = false;
         };
-    }, []);
+    }, [query]);
 
     const Apicall = async (input) => {
         setloader(true);
@@ -45,7 +43,7 @@ export default function HanumanJayanti() {
 
     return (
         <>
-            {loader ? (
+            {loader||input=="" ? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>

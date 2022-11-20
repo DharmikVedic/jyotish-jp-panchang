@@ -9,6 +9,7 @@ export const tithiid = {
     3: "Tritiya Tithi",
     6: "Shashti Tithi",
     31: "Pratipada Tithi",
+    10:"Dwitiya Tithi"
 };
 
 export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {

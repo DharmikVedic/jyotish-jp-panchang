@@ -34,7 +34,6 @@ export  default function RakshaBandhan(){
         setdata(d);
         setloader(false);
     }
-console.log(data);
     return(
         <>
             {loader ?

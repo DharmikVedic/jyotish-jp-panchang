@@ -31,7 +31,6 @@ export  default function AhoiAshtami(){
         setdata(d);
         setloader(false);
     }
-    console.log(data)
 
 
     return(

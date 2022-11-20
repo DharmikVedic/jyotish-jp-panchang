@@ -33,12 +33,17 @@ function FestivalCard({data,input}){
             latitude:input.lat,
             longitude:input.lon
         }
+        const hideLink = ["HOLI","CHHOTI_HOLI","DHANU_SANKRANTI","RAKSHA_BANDHAN","CHAITRA_NAVRATRI","CHANDRA_GRAHAN","VISHWAKARMA_PUJA","HOLIKA_DAHAN","DIWALI","LAKSHMI_PUJA","NAVRATRI_BEGINS","SARASWATI_AVAHAN","SARASWATI_PUJA","VARALAKSHAMI_VRAT"];
 
-        const encode = Encode(JSON.stringify(obj));
-        router.push({pathname:`/festival/${url}`,query:{
-            q:encode
-            }})
-
+        if(hideLink.includes(data.festival_key)){
+            return;
+        }
+        else{
+            const encode = Encode(JSON.stringify(obj));
+            router.push({pathname:`/festival/${url}`,query:{
+                    q:encode
+                }})
+        }
     }
 
 
@@ -65,6 +70,11 @@ export function convert_Date_to_redable(data){
     return mL[date.getMonth()] + ", " +date.getDate() + " " +date.getFullYear()+", "+daysInWeek[date.getDay()];
 }
 
+
+
+function HideClick(array){
+    const arr = ["HOLI","CHHOTI_HOLI","DHANU_SANKRANTI","RAKSHA_BANDHAN","CHAITRA_NAVRATRI","CHANDRA_GRAHAN","VISHWAKARMA_PUJA"];
+}
 
 
 

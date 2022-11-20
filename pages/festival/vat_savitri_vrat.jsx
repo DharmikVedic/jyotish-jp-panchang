@@ -18,9 +18,7 @@ export default function Savitri() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
-                console.log(decode);
                 const parse = JSON.parse(decode);
-                console.log(parse);
                 setinput(parse);
                 Apicall(parse);
             }
@@ -29,7 +27,7 @@ export default function Savitri() {
         return () => {
             mouted = false;
         };
-    }, []);
+    }, [query]);
 
     const Apicall = async (input) => {
         setloader(true);

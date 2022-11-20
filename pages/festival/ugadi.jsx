@@ -29,7 +29,7 @@ export default function Ugadi() {
         return () => {
             mouted = false;
         };
-    }, []);
+    }, [query]);
 
     const Apicall = async (input) => {
         setloader(true);
@@ -45,7 +45,7 @@ export default function Ugadi() {
 
     return (
         <>
-            {loader ? (
+            {loader || input=="" ? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>

@@ -44,7 +44,6 @@ export default function DailyCharts({horo,planets}){
                 seteastchart(Charts);
             }
             else if(charttype =="south"){
-                console.log(data['horo_chart/D1'][0]['sign']);
                 setTimeout(()=>drawSouthChart(getSignPlanetArray(data['horo_chart/D1']),data['horo_chart/D1'][0]['sign'], options,'#northChart'),500);
             }
             else{

@@ -4,7 +4,6 @@ import { FetchAPI } from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {
-    MuhuratDetail,
     MuhutatDate,
 } from "../../components/festival/utilsComponents";
 import { Decode } from "../../components/utils/decode";
@@ -21,9 +20,7 @@ export default function PaushPurnima() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
-                console.log(decode);
                 const parse = JSON.parse(decode);
-                console.log(parse);
                 setinput(parse);
                 Apicall(parse);
             }
@@ -32,7 +29,7 @@ export default function PaushPurnima() {
         return () => {
             mouted = false;
         };
-    }, []);
+    }, [query]);
 
     const Apicall = async (input) => {
         setloader(true);
@@ -48,7 +45,7 @@ export default function PaushPurnima() {
 
     return (
         <>
-            {loader ? (
+            {loader ||input ==""? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>

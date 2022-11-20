@@ -32,7 +32,6 @@ export  default function AhoiAshtami(){
         setloader(false);
     }
 
-console.log(data)
     return(
         <div>
 

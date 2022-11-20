@@ -21,7 +21,6 @@ export default function VasantPanchami() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
-                console.log(decode);
                 const parse = JSON.parse(decode);
 
                 setinput(parse);
@@ -32,12 +31,11 @@ export default function VasantPanchami() {
         return () => {
             mouted = false;
         };
-    }, []);
+    }, [query]);
 
     const Apicall = async (input) => {
         setloader(true);
         const panchang = await FetchAPI("festival_muhurta", input);
-        console.log(panchang);
         setArr([
             {
                 start_time: panchang.vasant_panchami_muhurta.start_time,
@@ -52,7 +50,7 @@ export default function VasantPanchami() {
 
     return (
         <>
-            {loader ? (
+            {loader || input=="" ? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>
