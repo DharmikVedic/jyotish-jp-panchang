@@ -122,7 +122,7 @@ export default function Footer(){
 </div>
             <div className="flex max-w-6xl mx-auto mt-10 text-xs justify-between items-center text-zinc-400 px-5">
                 <p>
-                    Copyright (©) 2007-2021
+                    Copyright (©) 2007-2022
                 </p>
                 <p>
                     SitaRama Co., Ltd. All right reserved

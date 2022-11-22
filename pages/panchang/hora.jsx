@@ -63,10 +63,10 @@ export default function Horaghadiya(){
 
                     <div className="pb-20 pt-10 md:py-20 px-5">
                         <div className="grid md:grid-cols-2 grid-cols-1 max-w-6xl mx-auto gap-10">
-                            <HoraTable type="day" name="デイ・チョガディヤ" hora={data && data?.hora?.day}/>
+                            <HoraTable type="day" name="日中のホーラー" hora={data && data?.hora?.day}/>
                             <HoraTable
                                 type="night"
-                                name="夜のチョガディヤ"
+                                name="夜間のホーラー"
                                 hora={data && data?.hora?.night}
                             />
                         </div>

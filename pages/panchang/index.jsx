@@ -58,7 +58,7 @@ return(
                 :
                 <div className="bg-zinc-100 pb-[100px] pt-[50px]">
                     <div className="  max-w-6xl mx-auto px-5 overflow-x-scroll">
-                    <SunTable thead="日の出 and 月の出">
+                    <SunTable thead="日の出 と 月の出">
                         <tbody>
                         <tr>
                             <td className="w-[20%] text-right">
@@ -111,16 +111,16 @@ return(
                                 <span>ティティ</span>
                             </td>
                             <td className="w-[20%] ">
-                                {data.panchang.tithi.details.tithi_name} upto <span
-                                className='text-yellow-600'>{formatAMPM(`${data.panchang.tithi.end_time.hour}:${data.panchang.tithi.end_time.minute}`)}</span>
+                                {data.panchang.tithi.details.tithi_name} <span
+                                className='text-yellow-600'>{formatAMPM(`${data.panchang.tithi.end_time.hour}:${data.panchang.tithi.end_time.minute}`)}まで</span>
                             </td>
                             <td className="w-[30%] text-right">
                                 <span>ナクシャトラ
 </span>
                             </td>
                             <td className="w-[30%]">
-                                {data.panchang.nakshatra.details.nak_name} upto <span
-                                className='text-yellow-600'>{formatAMPM(`${data.panchang.nakshatra.end_time.hour}:${data.panchang.nakshatra.end_time.minute}`)}</span>
+                                {data.panchang.nakshatra.details.nak_name} <span
+                                className='text-yellow-600'>{formatAMPM(`${data.panchang.nakshatra.end_time.hour}:${data.panchang.nakshatra.end_time.minute}`)}まで</span>
                             </td>
                         </tr>
                         <tr>
@@ -129,21 +129,21 @@ return(
 </span>
                             </td>
                             <td className="w-[30%] ">
-                                {data.panchang.yog.details.yog_name} upto <span
-                                className='text-yellow-600'>{formatAMPM(`${data.panchang.yog.end_time.hour}:${data.panchang.yog.end_time.minute}`)}</span>
+                                {data.panchang.yog.details.yog_name} <span
+                                className='text-yellow-600'>{formatAMPM(`${data.panchang.yog.end_time.hour}:${data.panchang.yog.end_time.minute}`)}まで</span>
                             </td>
                             <td className="w-[20%] text-right">
                                 <span>カラナ
 </span>
                             </td>
                             <td className="w-[30%]">
-                                {data.panchang.karan.details.karan_name} upto <span
-                                className='text-yellow-600'>{formatAMPM(`${data.panchang.karan.end_time.hour}:${data.panchang.karan.end_time.minute}`)}</span>
+                                {data.panchang.karan.details.karan_name} <span
+                                className='text-yellow-600'>{formatAMPM(`${data.panchang.karan.end_time.hour}:${data.panchang.karan.end_time.minute}`)}まで</span>
                             </td>
                         </tr>
                         <tr>
                             <td className="w-[20%] text-right">
-                                <span>Weekday</span>
+                                <span>曜日</span>
                             </td>
                             <td className="w-[20%] ">
                                 {data.panchang.day}
@@ -169,7 +169,7 @@ return(
                         </tr>
                         </tbody>
                     </SunTable>
-                    <SunTable thead="Auspicious Timings">
+                    <SunTable thead="吉兆な時間帯">
                         <tbody>
                         <tr>
                             <td className="w-[20%] text-right">
@@ -177,57 +177,60 @@ return(
                             </td>
                             <td className="w-[20%] ">
                                 <span
-                                    className='text-yellow-600'>{formatAMPM(data.tamil.abhijit_muhurta.start)}</span> to{" "}
+                                    className='text-yellow-600'>{formatAMPM(data.tamil.abhijit_muhurta.start)}</span> 〜{" "}
                                 <span className='text-yellow-600'>{formatAMPM(data.tamil.abhijit_muhurta.end)}</span>
                             </td>
                             <td className="w-[30%] text-right">
-                                Amrit Kalam
+                                アムリタ・カーラ
                             </td>
                             <td className="w-[30%]">
-                                <span className='text-yellow-600'>{formatAMPM(data.tamil.amrit_kaal[0].start)}</span> to{" "}
+                                <span className='text-yellow-600'>{formatAMPM(data.tamil.amrit_kaal[0].start)}</span> 〜{" "}
                                 <span className='text-yellow-600'>{formatAMPM(data.tamil.amrit_kaal[0].end)}</span>
                             </td>
                         </tr>
                         </tbody>
                     </SunTable>
-                    <SunTable thead="Inauspicious Timings">
+                    <SunTable thead="凶の時間帯">
                         <tbody>
                         <tr>
-                            <td className="w-[20%] text-right">ラーフ・カーラ
+                            <td className="w-[20%] text-right">
+                                ラーフ・カーラ
                             </td>
                             <td className="w-[20%] ">
-                                <span className='text-yellow-600'>{formatAMPM(data.tamil.rahu_kaal.start)}</span> to{" "}
+                                <span className='text-yellow-600'>{formatAMPM(data.tamil.rahu_kaal.start)}</span> 〜{" "}
                                 <span className='text-yellow-600'>{formatAMPM(data.tamil.rahu_kaal.end)}</span>
                             </td>
                             <td className="w-[30%] text-right">
                                 ヤマガンダ・カーラ
                             </td>
                             <td className="w-[30%]">
-                                <span className='text-yellow-600'>{formatAMPM(data.tamil.yamghant_kaal.start)}</span> to{" "}
+                                <span className='text-yellow-600'>{formatAMPM(data.tamil.yamghant_kaal.start)}</span> 〜{" "}
                                 <span className='text-yellow-600'>{formatAMPM(data.tamil.yamghant_kaal.end)}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td className="w-[20%] text-right">グリカ・カーラ
+                            <td className="w-[20%] text-right">
+                                グリカ・カーラ
                             </td>
                             <td className="w-[20%] ">
-                                <span className='text-yellow-600'>{formatAMPM(data.tamil.gulik_kaal.start)}</span> to{" "}
+                                <span className='text-yellow-600'>{formatAMPM(data.tamil.gulik_kaal.start)}</span> 〜{" "}
                                 <span className='text-yellow-600'>{formatAMPM(data.tamil.gulik_kaal.end)}</span>
                             </td>
                             <td className="w-[30%] text-right">
-                                Dur Muhurtam
+                                ドゥル・ムフールタ
                             </td>
                             <td className="w-[30%]">
                                 <span
-                                    className='text-yellow-600'>{formatAMPM(data.tamil.dur_muhurtha[0].start_time)}</span> to{" "}
+                                    className='text-yellow-600'>{formatAMPM(data.tamil.dur_muhurtha[0].start_time)}</span> 〜{" "}
                                 <span className='text-yellow-600'>{formatAMPM(data.tamil.dur_muhurtha[0].end_time)}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td className="w-[20%] text-right">Varjyam
+                            <td className="w-[20%] text-right">
+                                ヴァルジャ
                             </td>
                             <td className="w-[20%] ">
-                                <span className='text-yellow-600'>{formatAMPM(data.tamil.varjyam[0].start)}</span> to{" "}
+                                <span className='text-yellow-600'>{formatAMPM(data.tamil.varjyam[0].start)}</span> 〜{" "}
                                 <span className='text-yellow-600'>{formatAMPM(data.tamil.varjyam[0].end)}</span>
                             </td>
                             <td className="w-[30%]">
@@ -246,15 +249,15 @@ return(
                         </tr>
                         </tbody>
                     </SunTable>
-                    <SunTable thead="Anandadi and tamil Yoga">
+                    <SunTable thead="アーナンダディ・ヨーガとタミル・ヨーガ">
                         <tbody>
                         <tr>
                             <td className="w-[20%] text-right">
-                                <span>Anandadi Yoga</span>
+                                <span>アーナンダディ・ヨーガ</span>
                             </td>
                             <td className="w-[20%] ">
-                                {data.tamil.anandadi_yog[0].yog_name} upto <span
-                                className='text-yellow-600'>{formatAMPM(data.tamil.anandadi_yog[0].end_time)}</span>
+                                {data.tamil.anandadi_yog[0].yog_name} <span
+                                className='text-yellow-600'>{formatAMPM(data.tamil.anandadi_yog[0].end_time)}まで</span>
                             </td>
                             <td className="w-[30%]">
                             </td>
@@ -274,17 +277,17 @@ return(
                         </tr>
                         </tbody>
                     </SunTable>
-                    <SunTable thead="Nivas and Shool">
+                    <SunTable thead="ニヴァーサとシューラ">
                         <tbody>
                         <tr>
                             <td className="w-[20%] text-right">
-                                <span>Disha Shool</span>
+                                <span>ディシャー・シューラ</span>
                             </td>
                             <td className="w-[20%] ">
                                 {data.panchang.disha_shool}
                             </td>
                             <td className="w-[30%] text-right">
-                                Nakshatra Shool
+                                ナクシャトラ・シューラ
                             </td>
                             <td className="w-[30%]">
                                 {data.panchang.nak_shool.direction}
@@ -292,7 +295,7 @@ return(
                         </tr>
                         <tr>
                             <td className="w-[20%] text-right">
-                                Moon Nivash
+                                ムーン・ニヴァーサ
                             </td>
                             <td className="w-[30%] ">
                                 {data.panchang.moon_nivas}
@@ -304,7 +307,7 @@ return(
                         </tr>
                         </tbody>
                     </SunTable>
-                    <SunTable thead="Lunar Month and Samvat">
+                    <SunTable thead="太陰月とサンヴァト">
                         <tbody>
                         <tr>
                             <td className="w-[20%] text-right">
@@ -322,17 +325,18 @@ return(
                         </tr>
                         </tbody>
                     </SunTable>
-                    <SunTable thead="Rashi and Nakshatra">
+                    <SunTable thead="ラーシとナクシャトラ">
                         <tbody>
                         <tr>
                             <td className="w-[20%] text-right">
-                                <span>
-                                    月の星座
-
-</span>
+                                月の星座
                             </td>
                             <td className="w-[20%] ">
-                                {data.panchang.moon_sign}
+                            <div className="flex gap-3 items-center">
+                                    <span
+                                        className={`text-[20px] font-zodiac text-violet-500`}>{zodiac[data.panchang.moon_sign]}</span>
+                                    <span>{data.panchang.moon_sign}</span>
+                                </div>
                             </td>
                             <td className="w-[30%] text-right">
                                 太陽の星座
@@ -347,7 +351,7 @@ return(
                         </tr>
                         </tbody>
                     </SunTable>
-                    <SunTable thead="Ritu and Ayana">
+                    <SunTable thead="リトゥとアヤナ">
                         <tbody>
                         <tr>
                             <td className="w-[20%] text-right">

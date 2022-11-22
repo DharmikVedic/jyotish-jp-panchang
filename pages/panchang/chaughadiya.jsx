@@ -65,10 +65,10 @@ export default function Chaughadiya(){
 
                     <div className="pb-20 pt-10 md:py-20 px-5">
                         <div className="grid md:grid-cols-2 grid-cols-1 max-w-6xl mx-auto gap-10">
-                            <ChaugadiyaTable type="day" name="デイ・チョガディヤ" chaughadiya={data && data?.chaughadiya?.day}/>
+                            <ChaugadiyaTable type="day" name="日中のチャウガディヤー" chaughadiya={data && data?.chaughadiya?.day}/>
                             <ChaugadiyaTable
                                 type="night"
-                                name="夜のチョガディヤ"
+                                name="夜間のチャウガディヤー"
                                 chaughadiya={data && data?.chaughadiya?.night}
                             />
                         </div>
@@ -76,18 +76,18 @@ export default function Chaughadiya(){
                             <p className="flex gap-2  text-lg md:text-xl">
                                 <span className="w-[30px] h-[30px] bg-red-500">
                             </span>
-                                不吉なチャガディヤ
+                                凶のチャウガディヤー
                             </p>
                             <p className="flex gap-2  text-lg md:text-xl">
                                 <span className="w-[30px] h-[30px] bg-green-400">
                             </span>
-                                縁起の良いチャガディヤ
+                                大吉のチャウガディヤー
 
                             </p>
                             <p className="flex gap-2  text-lg md:text-xl">
                                 <span className="w-[30px] h-[30px] bg-sky-400">
                             </span>
-                                良いチョガディヤ
+                                吉のチャウガディヤー
                             </p>
                         </div>
                     </div>

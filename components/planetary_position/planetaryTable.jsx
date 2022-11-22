@@ -5,7 +5,7 @@ import {icon} from "./utils";
 export default function PlanetaryPosition({events}){
     return(
         <>
-            <PanchangCard  link="/planetary-events" style="bg-sky-500/80" title="Upcoming Planetary Events">
+            <PanchangCard  link="/planetary-events" style="bg-sky-500/80" title="今後の惑星イベント">
                     <div className="divide-y divide-zinc-300">
                         {events.slice(0,5).map((item, i) => (
                                 <TrEntry key={i} data={item}/>

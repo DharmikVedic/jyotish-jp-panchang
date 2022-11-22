@@ -8,7 +8,9 @@ const [y,sety] = useState(false);
     const links = [
         {name:"ホーム",link:"/"},
         {name:"パンチャーンガ",link:"/panchang"},
-        {name:"惑星の出来事",link:"/planetary-events"},
+        {name:"チャート",link:"/planets"},
+        {name:"トランジット",link:"/planetary-events"},
+        {name:"フェスティバル",link:"/festival"},
         {name:"ムフールタ",link:"/muhurat"},
     ]
 

@@ -12,7 +12,7 @@ export default function PanchangCard({title,children,style,link,hideborder}){
                    {children}
             {link &&
             <button onClick={() => router.push(link ? link : "/")}
-                    className="text-sky-500 bottom-0 absolute  flex py-2 text-lg justify-end hover:underline border-t w-full border-zinc-300 px-5 items-center ">
+                    className="text-sky-500 bg-zinc-100 rounded-b-md bottom-0 absolute  flex py-2 text-lg justify-end hover:underline border-t w-full border-zinc-300 px-5 items-center ">
                 More
                 <span className="mt-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">

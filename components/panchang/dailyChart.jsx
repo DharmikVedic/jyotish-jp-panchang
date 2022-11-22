@@ -79,7 +79,7 @@ export default function DailyCharts({horo,planets}){
 
 
     return(
-        <PanchangCard link="/planets" style="bg-sky-500/80" title="Lagna Kundali">
+        <PanchangCard link="/planets" style="bg-sky-500/80" title="ラグナ・クンダリー">
             {data ?
                 <div className="pt-2 pb-5 px-5 flex flex-col ">
                     <ChartButton activeChart={chartType} passChart={handleChart}/>

@@ -64,7 +64,7 @@ export default function Home({panchang,festival,events}) {
           <Formdata getinput={getdata}/>
               <div className="bg-zinc-100 min-h-screen pt-10 pb-20">
                   <div className='grid max-w-7xl mx-auto px-5 md:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-10'>
-                      <PanchangCard link="/panchang" style="bg-orange-500/70" title="Panchang for Today">
+                      <PanchangCard link="/panchang" style="bg-orange-500/70" title="今日のパンチャーンガ">
                           {loader || data == "" ?
                               <Loader/> :
                                <HomePanchang data={data['advanced_panchang']} day={currentDate.day} month={currentDate.month} year={currentDate.year}/>
@@ -80,7 +80,7 @@ export default function Home({panchang,festival,events}) {
                                   <a className="flex  px-5 py-4 gap-5 justify-between hover:bg-zinc-200 items-center">
                                       <div className="flex gap-3 items-center">                                  <img src="/imgs/abhijit-muhrta.png" className="h-[30px]"/>
                                   <h6 className="font-semibold">
-                                      Abhijit Muhurat
+                                      アビジタ・ムフールタ
                                   </h6>
                                       </div>
                                   <button>
@@ -95,7 +95,7 @@ export default function Home({panchang,festival,events}) {
                                       <div className="flex gap-3 items-center">
                                           <img src="/imgs/chogadiya-muhrta.png" className="h-[30px]"/>
                                       <h6 className="font-semibold">
-                                          Chogadiya Muhrta
+                                          チャウガディヤー・ムフールタ
                                       </h6>
                                       </div>
                                       <button>
@@ -110,7 +110,7 @@ export default function Home({panchang,festival,events}) {
                                       <div className="flex gap-3 items-center">
                                       <img src="/imgs/hora.png" className="h-[30px]"/>
                                       <h6 className="font-semibold">
-                                          Hora Muhurat
+                                          ホーラー・ムフールタ
                                       </h6>
                                       </div>
                                       <button>

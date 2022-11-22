@@ -50,7 +50,7 @@ export default function Festival({data}){
 
     return(
         <>
-                <PanchangCard link="/festival" style="bg-sky-500/80" title="Upcoming Upavas and Festivals">
+                <PanchangCard link="/festival" style="bg-sky-500/80" title="今後のウパヴァーサと祭日">
                     {data.length == 0 ?
                         <div className="flex justify-center pb-10 items-center h-full text-2xl">
                             <h3>
@@ -58,7 +58,7 @@ export default function Festival({data}){
                             </h3>
                         </div>
                         :
-                        <div className="px-5 py-2 max-h-[600px] overflow-y-hidden">
+                        <div className="px-5 py-2 max-h-[600px] overflow-y-scroll">
                             {data.map((item, j) => (
                                     <div key={j}>
                                         {item.festivals.map((val, i) => (
