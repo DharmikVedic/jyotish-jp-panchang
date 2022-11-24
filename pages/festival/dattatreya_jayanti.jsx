@@ -33,7 +33,7 @@ export default function DattatreyaJayanti() {
         setloader(true);
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
-            tithi_id: 8,
+            tithi_id: 30,
             tithi_start_time: panchang.tithi_start,
             tithi_end_time: panchang.tithi_end,
         });

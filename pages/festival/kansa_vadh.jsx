@@ -33,7 +33,7 @@ export default function KansaVadh() {
         setloader(true);
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
-            tithi_id: 11,
+            tithi_id: 10,
             tithi_start_time: panchang.tithi_start,
             tithi_end_time: panchang.tithi_end,
         });
