@@ -31,7 +31,8 @@ function FestivalCard({data,input}){
             timezone:input.timezone,
             festival_name:data.festival_key,
             latitude:input.lat,
-            longitude:input.lon
+            longitude:input.lon,
+            japanese:data.japanese
         }
         const hideLink = ["HOLI","CHHOTI_HOLI","DHANU_SANKRANTI","RAKSHA_BANDHAN","CHAITRA_NAVRATRI","CHANDRA_GRAHAN","VISHWAKARMA_PUJA","HOLIKA_DAHAN","DIWALI","LAKSHMI_PUJA","NAVRATRI_BEGINS","SARASWATI_AVAHAN","SARASWATI_PUJA","VARALAKSHAMI_VRAT","BHAIYA_DOOJ","HANUMAN_JAYANTI"];
 
@@ -52,8 +53,8 @@ function FestivalCard({data,input}){
         <div onClick={hanleClick} className="flex gap-3 items-center hover:bg-zinc-100 cursor-pointer">
             <img src="/panchang.png" className="w-[100px] px-5 py-2 bg-red-100" />
             <div className="flex flex-col  ">
-                <h6 className="text-red-700 font-semibold md:text-lg">
-                    {data.festival}
+                <h6 className="text-red-700 font-semibold md:text-[17px]">
+                    {data?.japanese ? data?.japanese : data.festival}
                 </h6>
                 <p>
                     {mL[data.month-1]} {data.date}, {data.year} , {daysInWeek[date.getDay()]}

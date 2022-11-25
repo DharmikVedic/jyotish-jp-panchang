@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {Decode} from "../../components/utils/decode";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {MuhuratDetail} from "../../components/festival/utilsComponents";
+import FestivalFormdata from "../../components/festival/festivalFilter";
 
 export  default function Ganesh(){
     const [loader,setloader] = useState(false);
@@ -34,17 +35,18 @@ export  default function Ganesh(){
         setdata(d);
         setloader(false);
     }
-    //
-    // {
-    //     "muhurta_start_time": "10:23 on 31 Aug 2022",
-    //     "muhurta_end_time": "12:59 on 31 Aug 2022",
-    //     "tithi_start": "19:03 on 30 Aug 2022",
-    //     "tithi_end": "18:53 on 31 Aug 2022",
-    //     "festival_name": "GANESH_CHATURTHI"
-    // }
+    const getdata = useCallback(async (datestring, res)=>{
+        const windowquery = new URLSearchParams(window.location.search);
+        const decode = Decode(windowquery.get('q'));
+        const parse = JSON.parse(decode);
+        setinput(prev=> ({...prev,...parse,...res}))
+        await Apicall({...parse,...res,festival_date:""});
+    },[]);
 
     return(
         <>
+            <FestivalFormdata getinput={getdata} />
+
             {loader || data ==""?
                 <div className="mt-[100px]">
                     <Loader/>
@@ -52,8 +54,8 @@ export  default function Ganesh(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Ganesh Chaturthi"  date={input.festival_date}/>
-                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="Chaturthi" muhurtend={data?.muhurta_end_time} festival_date={input?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Ganesh Chaturthi"/>
+                        <FestivalDetailCard festival_name="Ganesh Chaturthi"  date={data?.festival_date}/>
+                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="Chaturthi" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Ganesh Chaturthi"/>
                     </div>
                 </div>
             }

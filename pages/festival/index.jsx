@@ -79,10 +79,14 @@ export default function Festival({festival}){
 export async function getStaticProps(context) {
     const dateobj = new Date();
     const year = dateobj.getFullYear();
+    const requestdata = {
+        year:year,
+        timezone:9
+    }
 
     // Festival at build time
     const Apicall =async(year)=>{
-        const yearlyFestival = await FetchAPI("yearly_festivals",{year:year});
+        const yearlyFestival = await FetchAPI("yearly_festivals",requestdata);
         if(yearlyFestival.status) {
             let arr = [];
             const monthFilter = [...Array(12)].map((item, i) => {

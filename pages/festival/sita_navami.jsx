@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {MuhuratDetail} from "../../components/festival/utilsComponents";
 import {Decode} from "../../components/utils/decode";
+import FestivalFormdata from "../../components/festival/festivalFilter";
 
 export  default function SitaNavami(){
     const [loader,setloader] = useState(false);
@@ -35,8 +36,19 @@ export  default function SitaNavami(){
         setloader(false);
     }
 
+    const getdata = useCallback(async (datestring, res)=>{
+        const windowquery = new URLSearchParams(window.location.search);
+        const decode = Decode(windowquery.get('q'));
+        const parse = JSON.parse(decode);
+        setinput(prev=> ({...prev,...parse,...res}))
+        await Apicall({...parse,...res,festival_date:""});
+    },[]);
+
+
     return(
         <>
+            <FestivalFormdata getinput={getdata} />
+
             {loader ||data ==""?
                 <div className="mt-[100px]">
                     <Loader/>
@@ -44,8 +56,8 @@ export  default function SitaNavami(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Sita Navami"  date={input.festival_date}/>
-                        <MuhuratDetail muhurattext="Madhyahna Muhurat" hightlight="Muhurat" muhurtastart={data?.muhurta_start_time} tithiname="Navami" muhurtend={data?.muhurta_end_time} festival_date={input?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Sita Navami"/>
+                        <FestivalDetailCard festival_name="Sita Navami"  date={data?.festival_date}/>
+                        <MuhuratDetail muhurattext="Madhyahna Muhurat" hightlight="Muhurat" muhurtastart={data?.muhurta_start_time} tithiname="Navami" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Sita Navami"/>
                     </div>
                 </div>
             }

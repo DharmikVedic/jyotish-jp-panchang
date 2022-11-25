@@ -11,8 +11,8 @@ export default function FestivalFormdata(props) {
     const defaultplace = {
         country: "Japan",
         id: "Tokyo,japan",
-        lat: 35.6761919,
-        lon: 139.6503106,
+        latitude: 35.6761919,
+        longitude: 139.6503106,
         name: "Tokyo,japan",
         timezone:9
     };
@@ -26,7 +26,7 @@ export default function FestivalFormdata(props) {
                 year: date.getFullYear(),
                 month: date.getMonth() + 1,
             };
-            let res = Object.assign({}, time, latlon,city);
+            let res = Object.assign({}, time,city,latlon);
             props.getinput(datestring, res,state)
         }
         passData()
@@ -65,8 +65,8 @@ export default function FestivalFormdata(props) {
             const lat = parseFloat(input.lat);
             const lon = parseFloat(input.lng);
             const timezone =  await Timezone(input.lat,input.lng);
-            setcity({ lat: lat, lon: lon,...timezone });
-            passdata(state,{ lat: lat, lon: lon,...timezone });
+            setcity({ latitude: lat, longitude: lon,...timezone });
+            passdata(state,{ latitude: lat, longitude: lon,...timezone });
         }
     };
 
