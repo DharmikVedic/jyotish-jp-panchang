@@ -4,14 +4,14 @@ import {FetchAPI} from "../utils/fetchapi";
 
 
 
-export default function CommonChart({userdata,chartId,style}){
+export default function CommonChart({userdata,chartId,style,handleCallback}){
    const [data,setdata] = useState({svg:null});
    const [charttype,setcharttype] =  useState(chartId);
    const [loader,setloader] = useState(false);
 
     useEffect(()=> {
         Apicall(userdata);
-    },[]);
+    },[handleCallback]);
 
        const Apicall =async(data)=> {
            try {
