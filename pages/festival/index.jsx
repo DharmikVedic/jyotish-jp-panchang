@@ -3,26 +3,27 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FeativalYearCard from "../../components/festival/festivalCard";
+import usePlace from "../../components/context/usePlace";
 
 export default function Festival({festival}){
     const dateobj = new Date();
+    const {place} = usePlace();
+
     const defaultobject = {
-        lat: 35.6761919,
-        lon: 139.6503106,
-        timezone: 9,
+        ...place,
         year: dateobj.getFullYear(),
     };
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState(festival);
     const [year,setyear] = useState(defaultobject);
 
-    // useEffect(()=>{
-    //     let mouted = true;
-    //     if(mouted) {
-    //       //Apicall(year);
-    //     }
-    //     return()=> {mouted = false};
-    // },[]);
+    useEffect(()=>{
+        let mouted = true;
+        if(mouted && place) {
+          setyear(prev => ({...prev,...place}));
+        }
+        return()=> {mouted = false};
+    },[place]);
 
 
     const Apicall =async(passyear)=>{
@@ -49,7 +50,6 @@ export default function Festival({festival}){
         setyear(res)
         await Apicall(res.year);
     },[]);
-
 
 
     return(

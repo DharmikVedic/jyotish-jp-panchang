@@ -1,20 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng
 } from "react-places-autocomplete";
 
 export default function GooglePlaceAutoComplete({passLatLong,defaultPlace}) {
-    const [address, setAddress] = React.useState(defaultPlace);
+    const [address, setAddress] = React.useState("");
     const [coordinates, setCoordinates] = React.useState({
         lat: null,
         lng: null
     });
 
+    useEffect(()=>{
+        if(defaultPlace) {
+            setAddress(defaultPlace)
+        }
+    },[defaultPlace])
+
+
+
     const handleSelect = async value => {
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
-        passLatLong(latLng)
+        passLatLong({name:results[0].formatted_address,...latLng})
         setAddress(value);
         setCoordinates(latLng);
     };

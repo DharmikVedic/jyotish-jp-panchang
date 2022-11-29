@@ -1,22 +1,26 @@
-import React, {useCallback,useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import dynamic from "next/dynamic";
 const DynamicDatePicker = dynamic(()=> import("react-datepicker"));
 import GooglePlaceAutoComplete from "../../pages/test";
 import {FetchAPI} from "../utils/fetchapi";
+import usePlace from "../context/usePlace";
 
 
 export default function FestivalFormdata(props) {
     const [state, setstate] = useState(new Date());
-    const defaultplace = {
-        country: "Japan",
-        id: "Tokyo,japan",
-        latitude: 35.6761919,
-        longitude: 139.6503106,
-        name: "Tokyo,japan",
-        timezone:9
-    };
-    const [city, setcity] = useState(defaultplace);
+
+    const {place,ChangePlace} = usePlace();
+    const [city, setcity] = useState(place);
+
+    useEffect(()=>{
+        if(place){
+            setcity({...place,latitude: place.lat, longitude: place.lon});
+        }
+    },[place]);
+
+
+
     const datestring = state.getFullYear();
 
     const passdata = useCallback((date,latlon)=>{
@@ -57,7 +61,7 @@ export default function FestivalFormdata(props) {
     const Timezone = async  (lat,lng) =>{
         const date = (state.getMonth() + 1) +"-"+state.getDate()+"-"+state.getFullYear();
         const timezone = await FetchAPI("timezone_with_dst",{latitude: parseFloat(lat),longitude:parseFloat(lng),date:date});
-        return {timezone: timezone.timezone };
+        return {timezone:timezone.timezone, tzone: timezone.timezone };
     }
 
     const largeDevice = async(input) => {
@@ -66,6 +70,7 @@ export default function FestivalFormdata(props) {
             const lon = parseFloat(input.lng);
             const timezone =  await Timezone(input.lat,input.lng);
             setcity({ latitude: lat, longitude: lon,...timezone });
+            ChangePlace({lat: lat, lon: lon,name:input.name,...timezone});
             passdata(state,{ latitude: lat, longitude: lon,...timezone });
         }
     };
@@ -87,7 +92,7 @@ export default function FestivalFormdata(props) {
 <span>
     <img src="/icons/place.png" className="w-[25px]"/>
 </span>
-                            <GooglePlaceAutoComplete defaultPlace="Tokyo, Japan" passLatLong={largeDevice}/>
+                            <GooglePlaceAutoComplete defaultPlace={city?.name} passLatLong={largeDevice}/>
                         </div>
                         <div className="flex items-center gap-x-1  w-full md:max-w-max ">
                             <span>

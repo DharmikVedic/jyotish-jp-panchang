@@ -5,14 +5,16 @@ import FormYeardata from "../../components/planetary_position/planetaryYearFilte
 import Loader from "../../components/utils/loader";
 import PlanetaryEventsYearlyCard from "../../components/planetary_position/planetaryEventYearlyCard";
 import Sample from "../sample";
+import usePlace from "../../components/context/usePlace";
 
 
 export default function Sign(){
     const dateobj = new Date();
+    const {place} = usePlace();
+
     const defaultobject = {
-        country: "japan",
-        timezone: 9,
         year: dateobj.getFullYear(),
+        ...place
     };
     const [planetname,setplanet] = useState("");
     const [loader,setloader] = useState(false);
@@ -24,15 +26,15 @@ export default function Sign(){
 
     useEffect(()=>{
         let mouted = true;
-        if(mouted) {
+        if(mouted && place) {
             if (query.planet) {
                 setplanet(query.planet);
-                Apicall({...input,planet:query.planet});
+                Apicall({...input,...place,planet:query.planet});
             }
             //router.push("/festival");
         }
         return()=> {mouted = false};
-    },[query.planet]);
+    },[query.planet,place]);
 
     const Apicall =async(input)=>{
         setloader(true);

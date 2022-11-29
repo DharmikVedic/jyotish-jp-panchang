@@ -1,26 +1,28 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import dynamic from "next/dynamic";
 const DynamicDatePicker = dynamic(()=> import("react-datepicker"));
 import GooglePlaceAutoComplete from "../../pages/test";
 import {FetchAPI} from "../utils/fetchapi";
+import usePlace from "../context/usePlace";
 export const month= ["January","February","March","April","May","June","July",
     "August","September","October","November","December"];
 
 export default function FormMonthdata(props) {
     const currentDate =new Date();
     const firstDayDate = currentDate.setDate(1);
-
+    const {place,ChangePlace} = usePlace();
     const [state, setstate] = useState(new Date(firstDayDate));
-    const defaultplace = {
-        country: "Japan",
-        id: "Tokyo,japan",
-        lat: 35.6761919,
-        lon: 139.6503106,
-        name: "Tokyo,japan",
-    };
+    const [city, setcity] = useState(place);
 
-    const [city, setcity] = useState(defaultplace);
+
+// get cookie session for place
+    useEffect(()=>{
+        if(place){
+            setcity(place);
+        }
+    },[place]);
+
 
 
      const datestring = month[state.getMonth()] +" "  +state.getDate() + " , " + state.getFullYear();
@@ -66,7 +68,7 @@ export default function FormMonthdata(props) {
     const Timezone = async  (lat,lng) =>{
         const date = (state.getMonth() + 1) +"-"+state.getDate()+"-"+state.getFullYear();
         const timezone = await FetchAPI("timezone_with_dst",{latitude: parseFloat(lat),longitude:parseFloat(lng),date:date});
-        return {timezone: timezone.timezone };
+        return {tzone:timezone.timezone, timezone: timezone.timezone };
     }
 
     const largeDevice = async(input) => {
@@ -74,7 +76,8 @@ export default function FormMonthdata(props) {
             const lat = parseFloat(input.lat);
             const lon = parseFloat(input.lng);
             const timezone =  await Timezone(input.lat,input.lng);
-            setcity({ lat: lat, lon: lon,...timezone });
+            setcity({ lat: lat, lon: lon,name:input.name,...timezone });
+            ChangePlace({lat: lat, lon: lon,name:input.name,...timezone});
             passdata(state,{ lat: lat, lon: lon,...timezone });
         }
     };
@@ -108,7 +111,7 @@ export default function FormMonthdata(props) {
 <span>
     <img src="/icons/place.png" className="w-[25px]"/>
 </span>
-                            <GooglePlaceAutoComplete defaultPlace="Tokyo, Japan" passLatLong={largeDevice}/>
+                            <GooglePlaceAutoComplete defaultPlace={city?.name} passLatLong={largeDevice}/>
                         </div>
 
                         <div className="rounded-md gap-3 self-end text-sm flex w-full ">

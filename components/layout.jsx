@@ -2,6 +2,7 @@ import Header from "./header";
 import Footer from "./footer";
 import React from "react";
 import Head from "next/head";
+import PlaceContextProvider from "./context/placeContext";
 
 export default function Layout({children}){
     return(
@@ -20,11 +21,13 @@ export default function Layout({children}){
                     Hindu Panchang | Jyotish JP
                 </title>
             </Head>
-            <Header/>
+            <PlaceContextProvider>
+                <Header/>
             <div className="min-h-screen overflow-x-hidden">
                 {children}
             </div>
             <Footer/>
+            </PlaceContextProvider>
             </>
     )
 }

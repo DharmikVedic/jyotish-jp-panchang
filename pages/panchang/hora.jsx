@@ -3,36 +3,34 @@ import { FetchAPI} from "../../components/utils/fetchapi";
 import Formdata from "../../components/table/tableFilter";
 import Loader from "../../components/utils/loader";
 import {HoraTable} from "../../components/panchang/chaughadiyatable";
+import usePlace from "../../components/context/usePlace";
 
 export default function Horaghadiya(){
     const dateobj = new Date();
+    const {place} = usePlace();
     const defaultobject = {
-        country: "japan",
         day: dateobj.getDate(),
         hour: dateobj.getHours(),
-        lat: 35.6761919,
-        lon: 139.6503106,
         min: dateobj.getMinutes(),
         month: dateobj.getMonth()+1,
-        tzone: 9,
         year: dateobj.getFullYear(),
+        ...place
     };
     const [date,setdate]= useState('');
     const [loader,setloader] = useState(false);
     const [input, setinput] = useState(defaultobject);
     const [data,setdata] = useState(null);
 
-
     useEffect(()=>{
         let mouted = true;
-        if(mouted){
-            Apicall();
+        if(mouted && place){
+            Apicall({...input,...place});
         }
         return()=> {mouted = false};
-    },[input]);
+    },[place]);
 
 
-    const Apicall =async()=>{
+    const Apicall =async(input)=>{
         const chaughadiya = await FetchAPI("hora_muhurta",input);
         setdata(chaughadiya);
         setloader(false);

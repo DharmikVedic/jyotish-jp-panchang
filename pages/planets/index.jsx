@@ -4,19 +4,19 @@ import CommonChart from "../../components/planets/charts";
 import PlanetTable from "../../components/planets/planetTable";
 import Loader from "../../components/utils/loader";
 import Formdata from "../../components/table/tableFilter";
+import usePlace from "../../components/context/usePlace";
 
 export default function PLanets(){
     const dateobj = new Date();
+    const {place} = usePlace();
+
     const defaultobject = {
-        country: "japan",
         day: dateobj.getDate(),
         hour: dateobj.getHours(),
-        lat: 35.6761919,
-        lon: 139.6503106,
         min: dateobj.getMinutes(),
         month: dateobj.getMonth()+1,
-        tzone: 9,
         year: dateobj.getFullYear(),
+        ...place
     };
     const [loader,setloader] = useState(true);
     const [input, setinput] = useState(defaultobject);
@@ -24,11 +24,12 @@ export default function PLanets(){
 
     useEffect(()=>{
         let mouted = true;
-        if(mouted){
-            Apicall(input);
+        if(mouted && place){
+            Apicall({...input,...place});
+        setinput(prev=> ({...prev,...place}));
         }
         return()=> {mouted = false};
-    },[]);
+    },[place]);
 
 
     const Apicall =async(input)=>{

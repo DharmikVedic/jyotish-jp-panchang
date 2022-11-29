@@ -1,40 +1,36 @@
 import PlanetaryMonthTable from "../../components/planetary_position/planetaryMonthTable";
-import React, {useCallback,useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import FormMonthdata from "../../components/table/tableFilterMonth";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import Sample from "../sample";
-
-
-
+import usePlace from "../../components/context/usePlace";
 
 export default function PlanetaryEvents({events}){
     const dateobj = new Date();
+    const {place} = usePlace();
     const defaultobject = {
-        country: "japan",
         date: 1,
         hour: dateobj.getHours(),
-        lat: 35.6761919,
-        lon: 139.6503106,
         min: dateobj.getMinutes(),
         month: dateobj.getMonth()+1,
-        timezone: 9,
         year: dateobj.getFullYear(),
+        ...place
     };
     const [loader,setloader] = useState(false);
     const [input, setinput] = useState(defaultobject);
     const [data,setdata] = useState(events);
 
+    useEffect(()=>{
+        let mouted = true;
+        if(mouted && place){
+            setinput(prev=> ({...prev,...place}));
+        }
+        return()=> {mouted = false};
+    },[place]);
+
 
     var mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    // useEffect(()=>{
-    //     let mouted = true;
-    //     if(mouted){
-    //         Apicall(input);
-    //     }
-    //     return()=> {mouted = false};
-    // },[]);
 
 
     const Apicall =async(input)=>{

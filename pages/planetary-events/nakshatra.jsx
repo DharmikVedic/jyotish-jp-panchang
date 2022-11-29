@@ -6,13 +6,17 @@ import Loader from "../../components/utils/loader";
 import PlanetaryEventsYearlyCard from "../../components/planetary_position/planetaryEventYearlyCard";
 import {signSecondName} from "./sign";
 import Sample from "../sample";
+import usePlace from "../../components/context/usePlace";
 
 
 
 export default function Nakshatra(){
 const dateobj = new Date();
+    const {place} = usePlace();
+
+
     const defaultobject = {
-        timezone: 9,
+...place,
         year: dateobj.getFullYear(),
     };
     const [planetname,setplanet] = useState("");
@@ -25,15 +29,15 @@ const dateobj = new Date();
 
     useEffect(()=>{
         let mouted = true;
-        if(mouted) {
+        if(mouted && place) {
             if (query.planet) {
                 setplanet(query.planet);
-                Apicall({...input,planet:query.planet});
+                Apicall({...input,...place,planet:query.planet});
             }
             //router.push("/festival");
         }
         return()=> {mouted = false};
-    },[query.planet]);
+    },[query.planet,place]);
 
     const Apicall =async(input)=>{
         setloader(true);

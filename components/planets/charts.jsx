@@ -10,8 +10,12 @@ export default function CommonChart({userdata,chartId,style,handleCallback}){
    const [loader,setloader] = useState(false);
 
     useEffect(()=> {
-        Apicall(userdata);
-    },[handleCallback]);
+        let mouted = true;
+        if(mouted && userdata){
+            Apicall(userdata);
+        }
+       return()=> {mouted = false}
+    },[handleCallback,userdata]);
 
        const Apicall =async(data)=> {
            try {

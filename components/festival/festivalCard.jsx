@@ -3,6 +3,7 @@ import {mL} from "../../pages/festival";
 import {Encode} from "../utils/decode";
 
 export default function FeativalYearCard({year,monthName,festival}){
+
     return(
         <div   className="flex flex-col  bg-white">
             <h6 className="text-white bg-[#FD766B] font-bold text-lg text-center py-2 md:text-xl">
@@ -23,7 +24,6 @@ function FestivalCard({data,input}){
     let date = new Date(data.year,data.month,data.date)
     let daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const url = data.festival_key.toLowerCase();
-
 
     const hanleClick = ()=>{
         const obj = {
