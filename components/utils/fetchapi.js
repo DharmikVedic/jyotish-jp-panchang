@@ -6,7 +6,7 @@ export async function FetchAPI(apiname, reqdata,passloader) {
                 "Content-Type": "application/json",
                 "Accept-Language": "jp",
                 Authorization:
-                    "Basic " + "NjIwNDU3OjJiYTdhNTRlNDJmMzlmYTZhMDU2MDJkOTYyZmM5ZWRi",
+                    "Basic " + "NjAxMjgwOjAwMTJiMzVkOWVhMzlmNjgyYWMyNGI0ZmE3MjdmMTMx",
             },
             body: JSON.stringify(reqdata),
         });
