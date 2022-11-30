@@ -55,9 +55,9 @@ export default function PLanets(){
                     <div className="w-full bg-zinc-100 min-h-screen pt-10 pb-20">
                         <div
                             className="max-w-[800px]  mx-auto w-full px-5 md:flex-row flex-col flex md:gap-14 gap-5 justify-between items-center">
-                            <CommonChart style="items-center md:items-start" handleCallback={true} userdata={input}
+                            <CommonChart id="northchart" style="items-center md:items-start" handleCallback={true} userdata={input}
                                          chartId="D1"/>
-                            <CommonChart style="items-center md:items-end" userdata={input} handleCallback={true}
+                            <CommonChart id="northchart2" style="items-center md:items-end" userdata={input} handleCallback={true}
                                          chartId="D7"/>
                         </div>
                         <div className="mt-10 overflow-x-scroll max-w-[1200px] mx-auto px-5">
