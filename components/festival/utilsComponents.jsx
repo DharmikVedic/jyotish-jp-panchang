@@ -1,11 +1,16 @@
 import {convert_Date_to_redable} from "./festivalCard";
 export const tithiid = {
+    13:"Trayodashi Tithi",
+    4:"Chaturthi Tithi",
+    7:"Saptami Tithi",
     8: "Ashtami Tithi",
     12:"Dwadashi Tithi",
+    5:"Panchami Tithi",
     11: "Ekadashi Tithi",
     9: "Navami Tithi",
     14: "Chaturdashi Tithi",
     30: "Purnima Tithi",
+    32:"Pournami Tithi",
     0: "Amavasya Tithi",
     3: "Tritiya Tithi",
     6: "Shashti Tithi",
@@ -25,25 +30,27 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
                 {name} <span className="text-red-600 font-semibold">on {convert_Date_to_redable(festival_date)}</span>
             </h6>
             {/* punya kaal */}
-                    <div className="flex bg-zinc-50 border-2 md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
-                        <div>
+            {punya &&
+            <div className="flex bg-zinc-50 border-2 md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
+                <div>
 
-                        <p className="text-yellow-600  md:text-lg font-semibold">
-                            {name} Punya Kala - {punya.start_time} to {punya.end_time}
-                        </p>
-                        {/*    <p className="text-base text-zinc-500">*/}
-                        {/*    Duration - 08 Hours 42 Mins*/}
-                        {/*</p>*/}
-                        </div>
-                        <div>
-                            <p className="text-yellow-600 md:text-lg font-semibold">
-                                {name} Maha Punya Kala -  {mahapunya.start_time} to {mahapunya.end_time}
-                            </p>
-                            {/*<p className="text-base text-zinc-500">*/}
-                            {/*    Duration - 08 Hours 42 Mins*/}
-                            {/*</p>*/}
-                        </div>
-                    </div>
+                    <p className="text-yellow-600  md:text-lg font-semibold">
+                        {name} Punya Kala - {punya.start_time} to {punya.end_time}
+                    </p>
+                    {/*    <p className="text-base text-zinc-500">*/}
+                    {/*    Duration - 08 Hours 42 Mins*/}
+                    {/*</p>*/}
+                </div>
+                <div>
+                    <p className="text-yellow-600 md:text-lg font-semibold">
+                        {name} Maha Punya Kala - {mahapunya.start_time} to {mahapunya.end_time}
+                    </p>
+                    {/*<p className="text-base text-zinc-500">*/}
+                    {/*    Duration - 08 Hours 42 Mins*/}
+                    {/*</p>*/}
+                </div>
+            </div>
+            }
             <p className="">
                 {name} Moment - {moment}
             </p>
@@ -53,7 +60,7 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
 )
 }
 
-export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_date,tithistart,tithiend,tithiname,muhurattext}) {
+export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_date,tithistart,tithiend,tithiname,muhurattext,nakshatra,nakshatra_start,nakshatra_end}) {
 
 
     return(
@@ -77,17 +84,26 @@ export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_d
                         {/*</p>*/}
                     </div>
                 </div>
-                <p >
-                    {tithiname} Tithi Begins - <span className="text-yellow-600">{tithistart}</span>
+                {nakshatra &&
+                <p>
+                    {nakshatra} Nakshatra Begins - <span className="text-yellow-600">{nakshatra_start}</span>
                     <br/>
-                    {tithiname} Tithi Ends - <span className="text-yellow-600">{tithiend}</span>
+                    {nakshatra} Nakshatra Ends - <span className="text-yellow-600">{nakshatra_end}</span>
                 </p>
+                }
+                {tithiname &&
+                <p>
+                    {tithiname} Tithi Begins - <span className="text-yellow-600">{tithiend}</span>
+                    <br/>
+                    {tithiname} Tithi Ends - <span className="text-yellow-600">{tithistart}</span>
+                </p>
+                }
             </div>
         </>
     )
 }
 
-export function MuhutatDate({festival_date,name,tithi}){
+export function MuhutatDate({festival_date,name,tithi,children,nakshatra}){
     return(
         <div className="relative border-2  border-sky-500 bg-white flex flex-col gap-8 pt-10 pb-5 px-5 md:p-10">
             <div className="absolute text-white px-5 py-2 p-[5px] font-bold top-[-15px] left-[20px] bg-sky-600">
@@ -96,11 +112,21 @@ export function MuhutatDate({festival_date,name,tithi}){
             <h6 className="text-center md:text-lg">
                 {name} <span className="text-red-600 font-semibold">on {convert_Date_to_redable(festival_date)}</span>
             </h6>
+            {children}
+            {tithi &&
             <p className="">
                 {tithiid[tithi['tithi_id']]} Begins - <span className="text-yellow-600">{tithi.tithi_start_time}</span>
                 <br/>
                 {tithiid[tithi['tithi_id']]} Ends - <span className="text-yellow-600">{tithi.tithi_end_time}</span>
             </p>
+            }
+            {nakshatra &&
+            <p className="">
+                {nakshatra?.name} Nakshathram Begins - <span className="text-yellow-600">{nakshatra.nakshatra_start_time}</span>
+                <br/>nakshatra
+                {nakshatra?.name} Nakshathram Ends - <span className="text-yellow-600">{nakshatra.nakshatra_end_time}</span>
+            </p>
+            }
         </div>
     )
 }

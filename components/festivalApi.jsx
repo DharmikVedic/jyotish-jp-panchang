@@ -59,14 +59,9 @@ export default function Festival({data}){
                         </div>
                         :
                         <div className="px-5 py-2 max-h-[600px] overflow-y-scroll">
-                            {data.map((item, j) => (
-                                    <div key={j}>
-                                        {item.festivals.map((val, i) => (
-                                            <Text2 key={i} text={val} value={getFestivalDay(item.date)}/>
+                            {data?.festivals.map((item, i) => (
+                                            <Text2 key={i} text={item.japanese} data={item} value={getFestivalDay({year:item.year,month:item.month,day:item.date})}/>
                                         ))}
-                                    </div>
-                                )
-                            )}
                         </div>
                     }
                 </PanchangCard>

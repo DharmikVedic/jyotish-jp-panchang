@@ -2,8 +2,6 @@ import React, {useCallback, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
-import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import {MuhuratArrayDetail} from "../../components/festival/utilsComponents";
 import {Decode} from "../../components/utils/decode";
 import FestivalFormdata from "../../components/festival/festivalFilter";
 

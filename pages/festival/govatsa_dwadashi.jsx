@@ -56,7 +56,7 @@ export  default function GovatsaDwadashi(){
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard festival_name="Govatsa Dwadashi"  date={data?.festival_date}/>
-                        <MuhuratDetail hightlight="Puja Timing" muhurtastart={data?.muhurta_start_time} tithiname="Pratipada" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Govatsa Dwadashi"/>
+                        <MuhuratDetail hightlight="Puja Timing" muhurattext="Muhurat" muhurtastart={data?.muhurta_start_time} tithiname="Dwadashi" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Govatsa Dwadashi"/>
                     </div>
                 </div>
             }

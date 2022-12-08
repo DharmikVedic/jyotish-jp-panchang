@@ -34,6 +34,7 @@ export default function Ugadi() {
         setloader(true);
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
+            ...panchang,
             tithi_id: 31,
             tithi_start_time: panchang.tithi_start,
             tithi_end_time: panchang.tithi_end,

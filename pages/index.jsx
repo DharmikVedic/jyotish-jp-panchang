@@ -19,14 +19,6 @@ export default function Home({panchang,festival,events}) {
     const [currentDate,setCurrentDate] = useState({day:day,month:month,year:year});
     const [data,setData] = useState("");
 
-//     useEffect(()=>{
-// let mouted = true;
-// if(mouted){
-//     //APICall(initialValue);
-// }
-// return()=>{mouted=false}
-//     },[]);
-
     useEffect(()=>{
         setData(panchang);
         setfestivaldata(festival)
@@ -55,8 +47,6 @@ export default function Home({panchang,festival,events}) {
         setCurrentDate({day:res.day,month:res.month,year:res.year})
          await APICall({...initialValue,...res});
     },[]);
-
-
 
 
     return (
@@ -163,25 +153,44 @@ export async function getStaticProps(context) {
         }
     }
 
-    // 20 days festival call
-    const FestivalAPICall =async(val)=>{
-        try {
-            let festival = [];
-            const initialData = getMultipleDate(val-1);
-            const multiple_api_call = await Promise.all([...Array(val)].map(async (_,j) => {
-                return await FetchAPI("panchang_festival", initialData[j])
-            }));
-            for (let i = 0; i < multiple_api_call.length; i++) {
-                if(multiple_api_call[i].status){
-                    festival.push({festivals:multiple_api_call[i]?.festivals,date:initialData[i]});
-                }
-            }
-            return festival;
+
+    // get 15 festivals
+    const get15FestivalName = async()=>{
+
+        const initialdata = {
+            date: dateobj.getDate(),
+            // latitude: 35.6761919,
+            // longitude: 139.6503106,
+            month: dateobj.getMonth()+1,
+            // timezone: 9,
+            year: dateobj.getFullYear(),
         }
-        catch(err){
-            return {status:false,msg:err.message};
-        }
+
+        const apiname = "upcoming_festivals";
+        const festivals = await FetchAPI(apiname,initialdata);
+        return festivals;
     }
+
+
+    // // 20 days festival call
+    // const FestivalAPICall =async(val)=>{
+    //     try {
+    //         let festival = [];
+    //         const initialData = getMultipleDate(val-1);
+    //         const multiple_api_call = await Promise.all([...Array(val)].map(async (_,j) => {
+    //             return await FetchAPI("panchang_festival", initialData[j])
+    //         }));
+    //         for (let i = 0; i < multiple_api_call.length; i++) {
+    //             if(multiple_api_call[i].status){
+    //                 festival.push({festivals:multiple_api_call[i]?.festivals,date:initialData[i]});
+    //             }
+    //         }
+    //         return festival;
+    //     }
+    //     catch(err){
+    //         return {status:false,msg:err.message};
+    //     }
+    // }
 
 
     // planetary events api call
@@ -193,7 +202,7 @@ export async function getStaticProps(context) {
 
 
     const data = await APICall(initialValue);
-    const getfestival =await FestivalAPICall(20);
+    const getfestival =await get15FestivalName();
     const getPlanetaryEvents = await PlnetaryEventsApicall(defaultobject);
     return {
         props: {

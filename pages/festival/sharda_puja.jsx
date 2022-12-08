@@ -1,4 +1,4 @@
-export  default function AhoiAshtami(){
+    export default function SharadPuja(){
     return(
         <div>
 

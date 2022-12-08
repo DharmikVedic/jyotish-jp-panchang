@@ -7,7 +7,7 @@ import { MuhutatDate } from "../../components/festival/utilsComponents";
 import { Decode } from "../../components/utils/decode";
 import FestivalFormdata from "../../components/festival/festivalFilter";
 
-export default function GudiPadwa() {
+export default function GuruPurnima() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
     const [input, setinput] = useState("");
@@ -63,13 +63,13 @@ export default function GudiPadwa() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Gudi Padwa"
+                            festival_name="Guru Purnima"
                             date={tithi?.festival_date}
                         />
                         <MuhutatDate
                             festival_date={tithi?.festival_date}
                             tithi={tithi}
-                            name="Gudi Padwa "
+                            name="Guru Purnima"
                         />
                     </div>
                 </div>
