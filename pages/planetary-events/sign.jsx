@@ -1,0 +1,94 @@
+import {useRouter} from "next/router";
+import React, {useCallback, useEffect, useState} from "react";
+import {FetchAPI} from "../../components/utils/fetchapi";
+import FormYeardata from "../../components/planetary_position/planetaryYearFilter";
+import Loader from "../../components/utils/loader";
+import PlanetaryEventsYearlyCard from "../../components/planetary_position/planetaryEventYearlyCard";
+import Sample from "../sample";
+import usePlace from "../../components/context/usePlace";
+
+
+export default function Sign(){
+    const dateobj = new Date();
+    const {place} = usePlace();
+
+    const defaultobject = {
+        year: dateobj.getFullYear(),
+        ...place
+    };
+    const [planetname,setplanet] = useState("");
+    const [loader,setloader] = useState(false);
+    const [data,setdata] = useState(null);
+    const [input,setinput] = useState(defaultobject);
+
+    const router = useRouter();
+    const query = router.query;
+
+    useEffect(()=>{
+        let mouted = true;
+        if(mouted && place) {
+            if (query.planet) {
+                setplanet(query.planet);
+                Apicall({...input,...place,planet:query.planet});
+            }
+            //router.push("/festival");
+        }
+        return()=> {mouted = false};
+    },[query.planet,place]);
+
+    const Apicall =async(input)=>{
+        setloader(true);
+        const yearlyPlanet = await FetchAPI("vedic_sign_gochara",input);
+        setdata(yearlyPlanet);
+        setloader(false);
+    }
+
+    const getdata = useCallback(async (datestring, res)=>{
+        //setinput(prev => ({...prev, ...res }));
+        const param = new URLSearchParams(window.location.search);
+        const d = param.get('planet')
+       await Apicall({...res,planet:d});
+    },[planetname]);
+
+
+    return(
+        <>
+            <FormYeardata getinput={getdata}/>
+            {/* formdata */}
+            {loader  ?
+                <div className="mt-[100px]">
+                    <Loader/>
+                </div>
+                :
+                <div className="min-h-screen bg-zinc-100">
+                    <div className="pt-[50px] flex flex-col items-center gap-10 px-5 pb-[100px]">
+                        <h1 className="md:text-3xl text-zinc-800 capitalize text-2xl font-bold">
+                            {planetname} ({signSecondName[planetname]}) Sign Transits
+                        </h1>
+                        <div className="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-5 w-full mx-auto">
+                            {data?.transits.map((item,i)=>(
+                                <PlanetaryEventsYearlyCard sign={true} index={i} data={item} key={i}/>
+                            ))}
+                        </div>
+                        <div className="w-full">
+                            <Sample signpage={true} text="Transit To Sign" />
+                            <Sample text="Transit To Nakshatra" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </>
+    )
+}
+
+export const signSecondName = {
+    "sun":"surya",
+    "moon":"chandra",
+    "mars":"mangal",
+    "mercury":"Budha",
+    "jupiter":"guru",
+    "venus":"shukra",
+    "saturn":"shani",
+    "rahu":"rahu",
+
+}
