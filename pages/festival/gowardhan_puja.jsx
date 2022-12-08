@@ -66,10 +66,10 @@ export  default function AhoiAshtami(){
                             <div className="flex md:text-lg  bg-zinc-50 border-2 md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
 
                                     <p className="text-yellow-600 font-semibold">
-                                        Govardhan Puja Pratahkala Muhurat  - {data?.muhurta[0]?.muhurta_start_time} to {data?.muhurta[0]?.muhurta_end_time}
+                                        {input?.japanese} Pratahkala Muhurat  - {data?.muhurta[0]?.muhurta_start_time} to {data?.muhurta[0]?.muhurta_end_time}
                                     </p>
                                 <p className="text-yellow-600 font-semibold">
-                                    Govardhan Puja Sayankala Muhurat  - {data?.muhurta[1]?.muhurta_start_time} to {data?.muhurta[1]?.muhurta_end_time}
+                                    {input?.japanese} Sayankala Muhurat  - {data?.muhurta[1]?.muhurta_start_time} to {data?.muhurta[1]?.muhurta_end_time}
                                 </p>
                             </div>
                             <p >

@@ -1,22 +1,22 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {useRouter} from "next/router";
-import {FetchAPI} from "../../components/utils/fetchapi";
+import { useRouter } from "next/router";
+import { FetchAPI } from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import {MuhuratDetail} from "../../components/festival/utilsComponents";
-import {Decode} from "../../components/utils/decode";
+import { MuhutatDate } from "../../components/festival/utilsComponents";
+import { Decode } from "../../components/utils/decode";
 import FestivalFormdata from "../../components/festival/festivalFilter";
 
-export  default function SitaNavami(){
-    const [loader,setloader] = useState(false);
-    const [data,setdata] = useState("");
-    const [input,setinput] = useState("");
+export default function KartikaAshtahnikaEnds() {
+    const [loader, setloader] = useState(false);
+    const [tithi, setTithi] = useState({});
+    const [input, setinput] = useState("");
     const router = useRouter();
     const query = router.query;
 
-    useEffect(()=>{
+    useEffect(() => {
         let mouted = true;
-        if(mouted) {
+        if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
@@ -25,16 +25,23 @@ export  default function SitaNavami(){
             }
             //router.push("/festival");
         }
-        return()=> {mouted = false};
-    },[query]);
+        return () => {
+            mouted = false;
+        };
+    }, [query]);
 
-
-    const Apicall =async(input)=>{
+    const Apicall = async (input) => {
         setloader(true);
-        const d = await FetchAPI("festival_muhurta",input);
-        setdata(d);
+        const panchang = await FetchAPI("festival_muhurta", input);
+        setTithi({
+            ...panchang,
+            tithi_id: 0,
+            tithi_start_time: panchang.tithi_start,
+            tithi_end_time: panchang.tithi_end,
+        });
+
         setloader(false);
-    }
+    };
 
     const getdata = useCallback(async (datestring, res)=>{
         const windowquery = new URLSearchParams(window.location.search);
@@ -45,22 +52,28 @@ export  default function SitaNavami(){
     },[]);
 
 
-    return(
+
+    return (
         <>
             <FestivalFormdata getinput={getdata} />
-
-            {loader ||data ==""?
+            {loader || input=="" ? (
                 <div className="mt-[100px]">
-                    <Loader/>
+                    <Loader />
                 </div>
-                :
+            ) : (
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
-                        <MuhuratDetail muhurattext="Madhyahna Muhurat" hightlight="Muhurat" muhurtastart={data?.muhurta_start_time} tithiname="9" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name={input?.japanese}/>
+                        <FestivalDetailCard
+                            festival_name={input?.japanese}
+                            date={tithi?.festival_date}
+                        />
+                        <MuhutatDate
+                            festival_date={tithi?.festival_date}
+                            name={input?.japanese}
+                        />
                     </div>
                 </div>
-            }
+            )}
         </>
-    )
+    );
 }
