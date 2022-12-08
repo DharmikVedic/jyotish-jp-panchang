@@ -6,11 +6,12 @@ import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {convert_Date_to_redable} from "../../components/festival/festivalCard";
 import FestivalFormdata from "../../components/festival/festivalFilter";
+import {tithiid} from "../../components/festival/utilsComponents";
 
 export  default function AhoiAshtami(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState("");
+    const [input,setinput] = useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -59,7 +60,7 @@ export  default function AhoiAshtami(){
                                 Maha Shivaratri Muhurta
                             </div>
                             <h6 className="text-center md:text-lg">
-                                Maha Shivaratri  <span className="text-red-600 font-semibold">on {convert_Date_to_redable(data?.festival_date)}</span>
+                                {input?.japanese}  <span className="text-red-600 font-semibold">on {convert_Date_to_redable(data?.festival_date)}</span>
                             </h6>
                             {/* punya kaal */}
                             <div className="flex md:text-lg  bg-zinc-50 border-2 md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
@@ -85,9 +86,9 @@ export  default function AhoiAshtami(){
                             </p>
                            </div>
                             <p >
-                                Chaturdashi Tithi Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
+                                {tithiid[14]} Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
                                 <br/>
-                                Chaturdashi Tithi Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
+                                {tithiid[14]} Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
                             </p>
                         </div>
                     </div>

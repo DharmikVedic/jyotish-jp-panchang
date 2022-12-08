@@ -3,7 +3,6 @@ import {useRouter} from "next/router";
 import {FetchAPI} from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import {convert_Date_to_redable} from "../../components/festival/festivalCard";
 import {Decode} from "../../components/utils/decode";
 import {MuhuratDetail} from "../../components/festival/utilsComponents";
 import FestivalFormdata from "../../components/festival/festivalFilter";
@@ -11,7 +10,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function SheetalaAshtami(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState("");
+    const [input,setinput] = useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -58,8 +57,8 @@ export  default function SheetalaAshtami(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Sheetala Ashtami"  date={data?.festival_date}/>
-                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="Ashtami" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Sheetala Ashtami"/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
+                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="8" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name={input?.japanese}/>
                     </div>
                 </div>
             }

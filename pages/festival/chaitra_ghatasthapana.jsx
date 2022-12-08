@@ -10,7 +10,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function ChaitraGhatasthapana(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState("");
+    const [input,setinput] = useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -56,8 +56,8 @@ export  default function ChaitraGhatasthapana(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Chaitra Ghatasthapana"  date={data?.festival_date}/>
-                        <MuhuratDetail muhurattext="Muhurat" hightlight="Muhurat" muhurtastart={data?.muhurta_start_time} tithiname="Ashtami" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Chaitra Ghatasthapana"/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
+                        <MuhuratDetail muhurattext="Muhurat" hightlight="Muhurat" muhurtastart={data?.muhurta_start_time} tithiname="8" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name={input?.japanese}/>
                     </div>
                 </div>
             }

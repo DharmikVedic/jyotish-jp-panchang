@@ -10,7 +10,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function TulaSankranti(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState("");
+    const [input,setinput] = useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -55,8 +55,8 @@ export  default function TulaSankranti(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Tula Sankranti "  date={data?.festival_date}/>
-                        <SankrantiDetail festival_date={data?.festival_date} moment={data?.sankranti_moment}  punya={data?.punya_kal} mahapunya={data?.maha_punya_kal} name="Tula Sankranti "/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
+                        <SankrantiDetail festival_date={data?.festival_date} moment={data?.sankranti_moment}  punya={data?.punya_kal} mahapunya={data?.maha_punya_kal} name={input?.japanese}/>
                     </div>
                 </div>
             }

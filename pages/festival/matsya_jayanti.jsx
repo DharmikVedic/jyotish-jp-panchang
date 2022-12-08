@@ -57,8 +57,8 @@ export  default function AhoiAshtami(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name={"Matsya Jayanti"}  date={data?.festival_date}/>
-                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="Tritiya" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Matsya Jayanti"/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
+                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="3" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name={input?.japanese}/>
                     </div>
                 </div>
             }

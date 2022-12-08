@@ -10,7 +10,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function BolChoth(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput]= useState("");
+    const [input,setinput]= useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -57,8 +57,8 @@ export  default function BolChoth(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name={"Bol Choth"}  date={data?.festival_date}/>
-                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="Chaturthi" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Bol Choth"/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
+                        <MuhuratDetail muhurtastart={data?.muhurta_start_time} tithiname="4" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name={input?.japanese}/>
                     </div>
                 </div>
             }

@@ -6,11 +6,12 @@ import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {convert_Date_to_redable} from "../../components/festival/festivalCard";
 import FestivalFormdata from "../../components/festival/festivalFilter";
+import {tithiid} from "../../components/festival/utilsComponents";
 
 export  default function AhoiAshtami(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState("");
+    const [input,setinput] = useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -54,30 +55,30 @@ export  default function AhoiAshtami(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Karwa Chauth"  date={data?.festival_date}/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
                         <div className="relative border-2  border-sky-500 bg-white flex flex-col gap-8 pt-10 pb-5 px-5 md:p-10">
                             <div className="absolute text-white px-5 py-2 p-[5px] font-bold top-[-15px] left-[20px] bg-sky-600">
                                 Puja Muhurat and Chandrodaya time on Karwa Chauth
                             </div>
                             <h6 className="text-center md:text-lg">
-                                Karwa Chauth  <span className="text-red-600 font-semibold">on {convert_Date_to_redable(data?.festival_date)}</span>
+                                {input?.japanese}  <span className="text-red-600 font-semibold">on {convert_Date_to_redable(data?.festival_date)}</span>
                             </h6>
                             {/* punya kaal */}
                             <div className="flex md:text-lg  bg-zinc-50 border-2 md:text-lg flex-col gap-2 bg-white p-5 text-center rounded">
                                 <div>
 
                                     <p className="text-yellow-600 font-semibold">
-                                        Karwa Chauth Puja Muhurat  - {data?.muhurta.muhurta_start_time} to {data?.muhurta.muhurta_end_time}
+                                        {input?.japanese} Puja Muhurat  - {data?.muhurta.muhurta_start_time} to {data?.muhurta.muhurta_end_time}
                                     </p>
                                 </div>
                             </div>
                             <p className="">
-                                Karwa Chauth Upavasa Time - <span className="text-yellow-600">{data?.vrata_time.start_time}</span> to <span className="text-yellow-600">{data?.vrata_time.end_time}</span>
+                                {input?.japanese} Upavasa Time - <span className="text-yellow-600">{data?.vrata_time.start_time}</span> to <span className="text-yellow-600">{data?.vrata_time.end_time}</span>
                             </p>
                             <p >
-                                Chaturthi Tithi Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
+                                {tithiid[4]} Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
                                 <br/>
-                                Chaturthi Tithi Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
+                                {tithiid[4]} Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
                             </p>
                         </div>
                     </div>
