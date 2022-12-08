@@ -65,13 +65,13 @@ export default function PanguniUthiram() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Panguni Uthiram"
+                            festival_name={input?.japanese}
                             date={input.festival_date}
                         />
                         <MuhutatDate
                             festival_date={input.festival_date}
                             nakshatra={tithi?.nakshatra}
-                            name="Panguni Uthiram"
+                            name={input?.japanese}
                         />
                     </div>
                 </div>

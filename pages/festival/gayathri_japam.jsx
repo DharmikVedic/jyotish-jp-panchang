@@ -59,12 +59,12 @@ export default function GayathriJapnam() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Gayatri Japam"
-                            date={input.festival_date}
+                            festival_name={input?.japanese}
+                            date={tithi?.festival_date}
                         />
                         <MuhutatDate
-                            festival_date={input.festival_date}
-                            name="Gayatri Japam"
+                            festival_date={tithi?.festival_date}
+                            name={input?.japanese}
                         />
                     </div>
                 </div>

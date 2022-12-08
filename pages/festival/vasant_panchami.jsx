@@ -66,7 +66,7 @@ export default function VasantPanchami() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-14">
                         <FestivalDetailCard
-                            festival_name="Vasanta Panchami"
+                            festival_name={input?.japanese}
                             date={tithi?.festival_date}
                         />
                         <DetailPanchami
@@ -75,7 +75,7 @@ export default function VasantPanchami() {
                             duration={"00 Hours 00 Mins"}
                             tithistart={tithi[0].start_time}
                             tithiend={tithi[0].end_time}
-                            name="Vasanta Panchami"
+                            name={input?.japanese}
                         />
                     </div>
                 </div>

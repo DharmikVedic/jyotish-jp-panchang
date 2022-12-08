@@ -62,10 +62,10 @@ export default function VarahaJayanti() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Varaha Jayanti"
+                            festival_name={input?.japanese}
                             date={input.festival_date}
                         />
-                        <MuhuratDetail muhurattext="Muhurta" muhurtastart={data?.muhurta_start_time} tithiname="Ashtami" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Varaha Jayanti"/>
+                        <MuhuratDetail muhurattext="Muhurta" muhurtastart={data?.muhurta_start_time} tithiname="8" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name={input?.japanese}/>
                     </div>
                 </div>
             )}

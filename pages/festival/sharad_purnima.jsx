@@ -11,7 +11,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function SharadPurnima(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState("");
+    const [input,setinput] = useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -56,13 +56,13 @@ export  default function SharadPurnima(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name="Sharad Purnima "  date={data?.festival_date}/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
                         <div className="relative border-2  border-sky-500 bg-white flex flex-col gap-8 pt-10 pb-5 px-5 md:p-10">
                             <div className="absolute text-white px-5 py-2 p-[5px] font-bold top-[-15px] left-[20px] bg-sky-600">
-                                Sharad Purnima Timing
+                                {input?.japanese} Timing
                             </div>
                             <h6 className="text-center  md:text-lg text-base ">
-                                Sharad Purnima  <span className="text-red-600 font-semibold">on {convert_Date_to_redable(data?.festival_date)}</span>
+                                {input?.japanese}  <span className="text-red-600 font-semibold">on {convert_Date_to_redable(data?.festival_date)}</span>
                             </h6>
                             {/* punya kaal */}
                             <p className="md:text-xl border-2 p-3 rounded text-center text-lg text-yellow-600">
@@ -70,9 +70,9 @@ export  default function SharadPurnima(){
                             </p>
 
                             <p>
-                                Purnima Tithi Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
+                                {tithiid[30]} Begins - <span className="text-yellow-600">{data?.tithi_start}</span>
                                 <br/>
-                                Purnima Tithi Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
+                                {tithiid[30]} Ends - <span className="text-yellow-600">{data?.tithi_end}</span>
                             </p>
                         </div>
                     </div>

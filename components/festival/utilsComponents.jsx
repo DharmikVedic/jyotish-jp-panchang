@@ -19,6 +19,7 @@ export const tithiid = {
     10:"Dashami Tithi"
 };
 
+
 export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
     return(
     <>
@@ -61,8 +62,6 @@ export function SankrantiDetail({name,punya,mahapunya,festival_date,moment}) {
 }
 
 export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_date,tithistart,tithiend,tithiname,muhurattext,nakshatra,nakshatra_start,nakshatra_end}) {
-
-
     return(
         <>
             <div className="relative border-2  border-sky-500 bg-white flex flex-col gap-8 pt-10 pb-5 px-5 md:p-10">
@@ -93,9 +92,9 @@ export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_d
                 }
                 {tithiname &&
                 <p>
-                    {tithiname} Tithi Begins - <span className="text-yellow-600">{tithiend}</span>
+                    {tithiid[tithiname]} Begins - <span className="text-yellow-600">{tithiend}</span>
                     <br/>
-                    {tithiname} Tithi Ends - <span className="text-yellow-600">{tithistart}</span>
+                    {tithiid[tithiname]} Ends - <span className="text-yellow-600">{tithistart}</span>
                 </p>
                 }
             </div>

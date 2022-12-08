@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { FetchAPI } from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import { MuhutatDate } from "../../components/festival/utilsComponents";
 import { Decode } from "../../components/utils/decode";
 import FestivalFormdata from "../../components/festival/festivalFilter";
 
@@ -62,7 +61,7 @@ export default function ChaitraAmavasya() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Chaitra Amavasya"
+                            festival_name={input?.japanese}
                             date={input.festival_date}
                         />
                         {/*array  muhurta*/}

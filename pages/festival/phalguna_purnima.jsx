@@ -6,16 +6,8 @@ import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {MuhutatDate} from "../../components/festival/utilsComponents";
 
 export  default function PhalgunaPurnima(){
-    const commonObj = {
-        festival_date:"2022-11-19",
-        tithi : {
-            tithi_id:11,
-            tithi_start_time : '08:05 AM',
-            tithi_end_time : '04:47 PM'
-        }
-    }
     const [loader,setloader] = useState(false);
-    const [data,setdata] = useState(commonObj);
+    const [data,setdata] = useState('');
     const router = useRouter();
     const query = router.query;
 
@@ -49,7 +41,7 @@ export  default function PhalgunaPurnima(){
 
     return(
         <>
-            {loader ?
+            {loader || data == "" ?
                 <div className="mt-[100px]">
                     <Loader/>
                 </div>

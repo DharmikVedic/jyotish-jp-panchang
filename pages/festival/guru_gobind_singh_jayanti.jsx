@@ -64,13 +64,13 @@ export default function GuruGobindSinghJayanti() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Guru Gobind Singh Jayanti"
+                            festival_name={input?.japanese}
                             date={tithi?.festival_date}
                         />
                         <MuhutatDate
                             festival_date={tithi?.festival_date}
                             tithi={tithi}
-                            name="Guru Gobind Singh Jayanti "
+                            name={input?.japanese}
                         />
                     </div>
                 </div>

@@ -64,13 +64,13 @@ export default function KedarGauriVrat() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Kedar Gauri Vrat"
+                            festival_name={input?.japanese}
                             date={tithi?.festival_date}
                         />
                         <MuhutatDate
                             festival_date={tithi?.festival_date}
                             tithi={tithi}
-                            name="Kedar Gauri Vrat"
+                            name={input?.japanese}
                         />
                     </div>
                 </div>

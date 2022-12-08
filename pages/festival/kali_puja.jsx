@@ -10,7 +10,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function KaliPuja(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput]= useState("");
+    const [input,setinput]= useState({});
     const router = useRouter();
     const query = router.query;
 
@@ -57,8 +57,8 @@ export  default function KaliPuja(){
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name={"Kali Puja"}  date={data?.festival_date}/>
-                        <MuhuratDetail muhurattext="Nishita Time" muhurtastart={data?.muhurta_start_time} tithiname="Amavasya" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name="Kali Puja"/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
+                        <MuhuratDetail muhurattext="Nishita Time" muhurtastart={data?.muhurta_start_time} tithiname="0" muhurtend={data?.muhurta_end_time} festival_date={data?.festival_date} tithiend={data?.tithi_start}  tithistart={data?.tithi_end} name={input?.japanese}/>
                     </div>
                 </div>
             }
