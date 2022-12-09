@@ -1,15 +1,15 @@
 
+
 import React, {useCallback, useEffect, useState} from "react";
-import {useRouter} from "next/router";
-import {Decode} from "../../components/utils/decode";
-import {FetchAPI} from "../../components/utils/fetchapi";
-import FestivalFormdata from "../../components/festival/festivalFilter";
+import { useRouter } from "next/router";
+import { FetchAPI } from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import {MuhutatDate} from "../../components/festival/utilsComponents";
+import { MuhutatDate } from "../../components/festival/utilsComponents";
+import { Decode } from "../../components/utils/decode";
+import FestivalFormdata from "../../components/festival/festivalFilter";
 
-
-export default function Somvati_amavasya() {
+export default function ashwinaAdhikaPurnima() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
     const [input, setinput] = useState("");
@@ -37,13 +37,14 @@ export default function Somvati_amavasya() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            tithi_id: 0,
+            tithi_id: 30,
             tithi_start_time: panchang?.tithi_start,
             tithi_end_time: panchang?.tithi_end,
         });
 
         setloader(false);
     };
+
 
     const getdata = useCallback(async (datestring, res)=>{
         const windowquery = new URLSearchParams(window.location.search);
@@ -53,12 +54,10 @@ export default function Somvati_amavasya() {
         await Apicall({...parse,...res,festival_date:""});
     },[]);
 
-
-
     return (
         <>
             <FestivalFormdata getinput={getdata} />
-            {loader || input=="" ? (
+            {loader ||input=="" ? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>

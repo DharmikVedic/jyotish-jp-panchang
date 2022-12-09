@@ -7,7 +7,7 @@ import { MuhutatDate } from "../../components/festival/utilsComponents";
 import { Decode } from "../../components/utils/decode";
 import FestivalFormdata from "../../components/festival/festivalFilter";
 
-export default function BhanuSaptami() {
+export default function bhanuSaptami() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
     const [input, setinput] = useState("");
@@ -36,12 +36,13 @@ export default function BhanuSaptami() {
         setTithi({
             ...panchang,
             tithi_id: 7,
-            tithi_start_time: panchang.tithi_start,
-            tithi_end_time: panchang.tithi_end,
+            tithi_start_time: panchang?.tithi_start,
+            tithi_end_time: panchang?.tithi_end,
         });
 
         setloader(false);
     };
+
 
     const getdata = useCallback(async (datestring, res)=>{
         const windowquery = new URLSearchParams(window.location.search);
@@ -51,12 +52,10 @@ export default function BhanuSaptami() {
         await Apicall({...parse,...res,festival_date:""});
     },[]);
 
-
-
     return (
         <>
             <FestivalFormdata getinput={getdata} />
-            {loader || input=="" ? (
+            {loader ||input=="" ? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>
@@ -69,7 +68,8 @@ export default function BhanuSaptami() {
                         />
                         <MuhutatDate
                             festival_date={tithi?.festival_date}
-                            name="Bhanu Saptami"
+                            tithi={tithi}
+                            name={input?.japanese}
                         />
                     </div>
                 </div>

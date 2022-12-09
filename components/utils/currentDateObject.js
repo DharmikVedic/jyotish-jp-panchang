@@ -5,6 +5,7 @@ export function currentDateObj(){
     const year= date.getFullYear();
     const initialValue = {
         day: day,
+        date:day,
         month: month,
         year: year,
         min: date.getMinutes(),

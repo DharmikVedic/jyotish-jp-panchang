@@ -40,7 +40,6 @@ export function Text({text,value}){
 
 export function Text2({text,value,data}){
 // const object = {"festival_date":"2022-1-13","timezone":9,"festival_name":"VAIKUNTHA_EKADASHI","latitude":35.6761919,"longitude":139.6503106,"japanese":"ヴァイ"}
-
     return(
         <div className="flex flex-wrap gap-2 py-1 text-[17px] items-center">
             <h6 className="font-semibold text-yellow-600">

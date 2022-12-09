@@ -1,15 +1,13 @@
-
 import React, {useCallback, useEffect, useState} from "react";
-import {useRouter} from "next/router";
-import {Decode} from "../../components/utils/decode";
-import {FetchAPI} from "../../components/utils/fetchapi";
-import FestivalFormdata from "../../components/festival/festivalFilter";
+import { useRouter } from "next/router";
+import { FetchAPI } from "../../components/utils/fetchapi";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import {MuhutatDate} from "../../components/festival/utilsComponents";
+import { MuhutatDate } from "../../components/festival/utilsComponents";
+import { Decode } from "../../components/utils/decode";
+import FestivalFormdata from "../../components/festival/festivalFilter";
 
-
-export default function Baisakhi() {
+export default function ParashuramaDwadashi() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
     const [input, setinput] = useState("");
@@ -37,9 +35,7 @@ export default function Baisakhi() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            tithi_id: 0,
-            tithi_start_time: panchang?.tithi_start,
-            tithi_end_time: panchang?.tithi_end,
+         
         });
 
         setloader(false);
