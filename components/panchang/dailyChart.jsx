@@ -9,7 +9,7 @@ import {drawSouthChart} from "../chartui/southChart";
 import Loader from "../utils/loader";
 import Planets from "./planets";
 
-export default function DailyCharts({horo,planets}){
+export default function DailyCharts({horo,planets,reqData}){
     const [loader,setloader] = useState(false);
     const [data,setData] = useState(null);
     const [eastchart,seteastchart] = useState(null);
@@ -61,11 +61,10 @@ export default function DailyCharts({horo,planets}){
     }
 
 
-    const eastCartApi = async()=>{
-        const Charts= await FetchAPI("horo_chart_image/D1", {...initialValue,...options,chartType:"east"});
+    const eastCartApi = async(req)=>{
+        const Charts= await FetchAPI("horo_chart_image/D1", {...req,...options,chartType:"east"});
         seteastchart(Charts);
     }
-
 
 
     useEffect(()=>{
@@ -74,13 +73,11 @@ export default function DailyCharts({horo,planets}){
             setTimeout(() => drawNorthChart(getPlanetArray(horo), getSignArray(horo), options, "#northChart"), 500);
         }
         else if(horo && chartType === "east"){
-            eastCartApi();
+            eastCartApi(reqData);
         }
        },[horo]);
 
-
-
-
+console.log(horo,initialValue);
     return(
         <PanchangCard link="/planets" style="bg-sky-500/80" title="ラグナ・クンダリー">
             {data ?

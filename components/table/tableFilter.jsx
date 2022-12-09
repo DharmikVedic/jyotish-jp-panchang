@@ -28,6 +28,7 @@ export default function Formdata(props) {
     const passdata = useCallback((date,latlon)=>{
         const passData = ()=> {
             const time = {
+                date:date.getDate(),
                 day: date.getDate(),
                 year: date.getFullYear(),
                 month: date.getMonth() + 1,

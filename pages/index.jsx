@@ -13,6 +13,7 @@ import HomePanchang from "../components/panchang/homePanchang";
 
 export default function Home({events}) {
     const {day,month,year,initialValue} = currentDateObj();
+    const [initialdata,setInitialdata] = useState(initialValue);
     const [loader,setloader]=useState(false);
     const [currentDate,setCurrentDate] = useState({day:day,month:month,year:year});
     const [data,setData] = useState("");
@@ -56,6 +57,7 @@ export default function Home({events}) {
 
     const getdata = useCallback(async (datestring, res,state)=>{
         setCurrentDate({day:res.day,month:res.month,year:res.year})
+        setInitialdata({...initialValue,...res});
          await APICall({...initialValue,...res});
     },[]);
 
@@ -72,7 +74,7 @@ export default function Home({events}) {
                                <HomePanchang data={data['advanced_panchang']} day={currentDate.day} month={currentDate.month} year={currentDate.year}/>
                           }
                       </PanchangCard>
-                      <DailyCharts horo={data['horo_chart/D1']} planets={data['planets']}/>
+                      <DailyCharts reqData={initialdata} horo={data['horo_chart/D1']} planets={data['planets']}/>
                       <Festival data={data['festival']}/>
                       {/* planetary events */}
                       <PlanetaryPosition events={events}/>
