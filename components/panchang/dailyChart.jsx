@@ -9,7 +9,7 @@ import {drawSouthChart} from "../chartui/southChart";
 import Loader from "../utils/loader";
 import Planets from "./planets";
 
-export default function DailyCharts({horo,planets}){
+export default function DailyCharts({horo,planets,reqData}){
     const [loader,setloader] = useState(false);
     const [data,setData] = useState(null);
     const [eastchart,seteastchart] = useState(null);
@@ -32,52 +32,49 @@ export default function DailyCharts({horo,planets}){
     const chart = useCallback(async (charttype)=>{
             setloader(true);
             if( data) {
-                await APICall(charttype)
+                await APICall(charttype,data['horo_chart/D1'])
             }
     },[chartType,data])
 
 
-    const APICall =async(charttype)=>{
+
+    const APICall =async(charttype,horodata)=>{
         try {
             if(charttype =="east"){
                 const Charts= await FetchAPI("horo_chart_image/D1", {...initialValue,...options,chartType:"east"});
                 seteastchart(Charts);
             }
             else if(charttype =="south"){
-                setTimeout(()=>drawSouthChart(getSignPlanetArray(data['horo_chart/D1']),data['horo_chart/D1'][0]['sign'], options,'#northChart'),500);
+                setTimeout(()=>drawSouthChart(getSignPlanetArray(horodata),horodata[0]['sign'], options,'#northChart'),500);
             }
             else{
-                setTimeout(()=>drawNorthChart(getPlanetArray(data['horo_chart/D1']), getSignArray(data['horo_chart/D1']), options,'#northChart'),500);
+                setTimeout(()=>drawNorthChart(getPlanetArray(horodata), getSignArray(horodata), options,'#northChart'),500);
             }
             setloader(false);
         }
         catch (e) {
-            console.log(e.message)
             return e.message
         }
     }
 
 
+    const eastCartApi = async(req)=>{
+        const Charts= await FetchAPI("horo_chart_image/D1", {...req,...options,chartType:"east"});
+        seteastchart(Charts);
+    }
+
 
     useEffect(()=>{
-        if(horo) {
+        if(horo && chartType !== "east") {
             setData({'horo_chart/D1': horo, planets: planets})
             setTimeout(() => drawNorthChart(getPlanetArray(horo), getSignArray(horo), options, "#northChart"), 500);
         }
+        else if(horo && chartType === "east"){
+            eastCartApi(reqData);
+        }
        },[horo]);
 
-
-    // const  handleData =(value)=>{
-    //     if(value.status){
-    //         setData(value.data);
-    //         setTimeout(()=> drawNorthChart(getPlanetArray(value.data['horo_chart/D1']), getSignArray(value.data['horo_chart/D1']), options,"#northChart"),500);
-    //     }
-    //     else{
-    //         alert(value.msg);
-    //     }
-    // }
-
-
+console.log(horo,initialValue);
     return(
         <PanchangCard link="/planets" style="bg-sky-500/80" title="ラグナ・クンダリー">
             {data ?

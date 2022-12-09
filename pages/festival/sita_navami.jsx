@@ -10,7 +10,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function SitaNavami(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState({});
+    const [input,setinput] = useState("");
     const router = useRouter();
     const query = router.query;
 

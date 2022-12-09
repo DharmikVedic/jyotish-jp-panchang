@@ -3,7 +3,12 @@ export function dateDifference(date1,date2){
     const d2 = new Date(date2);
     const diffDateTime = Math.abs(d1-d2);
     const diffDateDays = Math.ceil(diffDateTime /(1000* 60*60*24));
-    return "("+ diffDateDays + " Days" + ")";
+    switch(diffDateDays){
+        case 1:
+            return "(Today)";
+        default:
+            return "("+ diffDateDays + " Days" + ")";
+    }
 }
 
 export function getMultipleDate(numberDates){

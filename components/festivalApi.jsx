@@ -51,7 +51,7 @@ export default function Festival({data}){
     return(
         <>
                 <PanchangCard link="/festival" style="bg-sky-500/80" title="今後のウパヴァーサと祭日">
-                    {data.length == 0 ?
+                    {data?.festivals?.length == 0 ?
                         <div className="flex justify-center pb-10 items-center h-full text-2xl">
                             <h3>
                                 No festival found

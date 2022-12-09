@@ -75,7 +75,7 @@ export function drawSouthChart(planetArr, ascSign, configuration, chartId)
         x = window.innerWidth || document.documentElement.clientWidth || svg1.clientWidth;
         y = window.innerHeight|| document.documentElement.clientHeight|| svg1.clientHeight;
         //svg1.attr("width", x).attr("height", y);
-        console.log("w/h", x, y);
+        // console.log("w/h", x, y);
         calculateDimensions(x-100);
         drawSouthChart(mChartWidth, mChartHeight);
     }
