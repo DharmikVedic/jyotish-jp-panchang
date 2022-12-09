@@ -38,9 +38,6 @@ export default function DailyCharts({horo,planets,reqData}){
 
 
 
-
-
-
     const APICall =async(charttype,horodata)=>{
         try {
             if(charttype =="east"){
