@@ -2,6 +2,7 @@ import {Heading} from "../commoText";
 import React from "react";
 import {useRouter} from "next/router";
 import {Encode} from "../utils/decode";
+import Link from "next/link";
 
 export default function PanchangCard({title,children,style,link,hideborder}){
     const router = useRouter();
@@ -56,7 +57,8 @@ export function Text2({text,value,data,inputdata}){
 
 
  return(
-        <a href={`/festival/${url}?q=${encode}`} target="_blank" className="flex cursor-pointer flex-wrap gap-2 py-1 text-[17px] items-center">
+     <Link href={`/festival/${url}?q=${encode}`}>
+        <a   className="flex cursor-pointer flex-wrap gap-2 py-1 text-[17px] items-center">
             <h6 className="font-semibold text-yellow-600">
                 {text}
             </h6>
@@ -64,5 +66,6 @@ export function Text2({text,value,data,inputdata}){
                 {value}
             </p>
         </a>
+     </Link>
     )
 }
