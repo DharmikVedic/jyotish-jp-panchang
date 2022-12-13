@@ -32,7 +32,7 @@ function FestivalCard({data,input}){
             festival_name:data.festival_key,
             latitude:input.lat,
             longitude:input.lon,
-            japanese:data.japanese
+            japanese:data.name
         }
         const hideLink = ["HOLI","CHHOTI_HOLI","DHANU_SANKRANTI","RAKSHA_BANDHAN","CHAITRA_NAVRATRI","CHANDRA_GRAHAN","VISHWAKARMA_PUJA","HOLIKA_DAHAN","DIWALI","LAKSHMI_PUJA","NAVRATRI_BEGINS","SARASWATI_AVAHAN","SARASWATI_PUJA","VARALAKSHAMI_VRAT","BHAIYA_DOOJ","HANUMAN_JAYANTI"];
 
@@ -66,7 +66,7 @@ function FestivalCard({data,input}){
 
 
 export function convert_Date_to_redable(data){
-    let date = new Date(data.replace(/-/g, "/"))
+    let date = new Date(data.replace(/-/g, "/"));
     let daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return mL[date.getMonth()] + ", " +date.getDate() + " " +date.getFullYear()+", "+daysInWeek[date.getDay()];
 }

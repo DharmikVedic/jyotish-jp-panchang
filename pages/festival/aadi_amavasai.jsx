@@ -36,8 +36,8 @@ export default function AadiAmavasai() {
         setTithi({
             ...panchang,
             tithi_id: 0,
-            tithi_start_time: panchang.tithi_start,
-            tithi_end_time: panchang.tithi_end,
+            tithi_start_time: panchang?.tithi_start,
+            tithi_end_time: panchang?.tithi_end,
         });
 
         setloader(false);

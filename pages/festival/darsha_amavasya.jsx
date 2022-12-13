@@ -21,6 +21,7 @@ export default function Chaitra_adhika_amavasya() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
+                console.log(decode);
                 const parse = JSON.parse(decode);
                 setinput(parse);
                 Apicall(parse);

@@ -5,6 +5,7 @@ import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import { Decode } from "../../components/utils/decode";
 import FestivalFormdata from "../../components/festival/festivalFilter";
+import {MuhutatDate} from "../../components/festival/utilsComponents";
 
 export default function ChaitraAmavasya() {
     const [loader, setloader] = useState(false);
@@ -63,6 +64,10 @@ export default function ChaitraAmavasya() {
                         <FestivalDetailCard
                             festival_name={input?.japanese}
                             date={input.festival_date}
+                        />
+                        <MuhutatDate
+                            festival_date={input?.festival_date}
+                            name={input?.japanese}
                         />
                         {/*array  muhurta*/}
                     </div>

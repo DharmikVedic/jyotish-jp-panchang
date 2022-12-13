@@ -62,7 +62,7 @@ export default function GauriAvahana() {
                             festival_name={input?.japanese}
                             date={tithi?.festival_date}
                         />
-                        <MuhuratDetail nakshatra="Anuradha Nakshatra" muhurattext="Avahana Muhurat" muhurtastart={tithi?.muhurta_start_time} muhurtend={tithi?.muhurta_end_time} festival_date={tithi?.festival_date} nakshatra_start={tithi?.nakshatra_start_time}  nakshatra_end={tithi?.nakshatra_end_time} name={input?.japanese}/>
+                        <MuhuratDetail muhurattext="Avahana Muhurat" muhurtastart={tithi?.muhurta_start_time} muhurtend={tithi?.muhurta_end_time} festival_date={tithi?.festival_date}  name={input?.japanese}/>
 
                     </div>
                 </div>

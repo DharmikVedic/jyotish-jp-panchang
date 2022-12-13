@@ -35,11 +35,6 @@ export default function MasiMagam() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            nakshatra:{
-                name:"Magam",
-                nakshatra_start_time: panchang.nakshatra_start,
-                nakshatra_end_time: panchang.nakshatra_end,
-            }
         });
 
         setloader(false);
@@ -69,7 +64,6 @@ export default function MasiMagam() {
                         />
                         <MuhutatDate
                             festival_date={input.festival_date}
-                            nakshatra={tithi?.nakshatra}
                             name={input?.japanese}
                         />
                     </div>

@@ -22,7 +22,7 @@ export default function PhalgunaAshtahnikaBegins() {
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+               // Apicall(parse);
             }
             //router.push("/festival");
         }
@@ -49,7 +49,7 @@ export default function PhalgunaAshtahnikaBegins() {
         const decode = Decode(windowquery.get('q'));
         const parse = JSON.parse(decode);
         setinput(prev=> ({...prev,...parse,...res}))
-        await Apicall({...parse,...res,festival_date:""});
+       // await Apicall({...parse,...res,festival_date:""});
     },[]);
 
 
@@ -66,10 +66,10 @@ export default function PhalgunaAshtahnikaBegins() {
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
                             festival_name={input?.japanese}
-                            date={tithi?.festival_date}
+                            date={input?.festival_date}
                         />
                         <MuhutatDate
-                            festival_date={tithi?.festival_date}
+                            festival_date={input?.festival_date}
                             name={input?.japanese}
                         />
                     </div>

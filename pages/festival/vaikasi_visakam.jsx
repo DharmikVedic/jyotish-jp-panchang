@@ -35,11 +35,6 @@ export default function VaikasiVisakam() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            nakshatra: {
-                name: "Visakam",
-                nakshatra_start_time: panchang.nakshatra_start_time,
-                nakshatra_end_time: panchang.nakshatra_end_time
-            }
         });
 
         setloader(false);
@@ -71,7 +66,6 @@ export default function VaikasiVisakam() {
                         />
                         <MuhutatDate
                             festival_date={tithi?.festival_date}
-                            nakshatra={tithi?.nakshatra}
                             name={input?.japanese}
                         />
                     </div>

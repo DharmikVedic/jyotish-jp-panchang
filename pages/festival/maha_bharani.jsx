@@ -76,11 +76,6 @@ export default function ChaturdashiShradha() {
                                 </p>
                             </div>
 
-                            <p >
-                                Bharani Nakshatra Begins - <span className="text-yellow-600">{data?.nakashatra_start_time}</span>
-                                <br/>
-                                Bharani Nakshatra Ends - <span className="text-yellow-600">{data?.nakashatra_end_time}</span>
-                            </p>
                         </div>
                     </div>
                 </div>

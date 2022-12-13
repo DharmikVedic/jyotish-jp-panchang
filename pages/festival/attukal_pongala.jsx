@@ -21,7 +21,7 @@ export default function AttukalPongala() {
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+                //Apicall(parse);
             }
             //router.push("/festival");
         }
@@ -35,12 +35,6 @@ export default function AttukalPongala() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            nakshatra:{
-                name:"Pooram",
-                nakshatra_start_time: panchang.nakshatra_start,
-                nakshatra_end_time: panchang.nakshatra_end,
-            }
-
         });
 
         setloader(false);
@@ -51,7 +45,7 @@ export default function AttukalPongala() {
         const decode = Decode(windowquery.get('q'));
         const parse = JSON.parse(decode);
         setinput(prev=> ({...prev,...parse,...res}))
-        await Apicall({...parse,...res,festival_date:""});
+        //await Apicall({...parse,...res,festival_date:""});
     },[]);
 
     return (
@@ -70,7 +64,6 @@ export default function AttukalPongala() {
                         />
                         <MuhutatDate
                             festival_date={input.festival_date}
-                            nakshatra={tithi?.nakshatra}
                             name={input?.japanese}
                         />
                     </div>
