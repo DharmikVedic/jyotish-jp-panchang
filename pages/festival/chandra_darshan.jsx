@@ -1,3 +1,5 @@
+
+
 import React, {useCallback, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {Decode} from "../../components/utils/decode";
@@ -8,7 +10,7 @@ import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {MuhutatDate} from "../../components/festival/utilsComponents";
 
 
-export default function BankHoliday() {
+export default function AdhikaChandraDarshan() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
     const [input, setinput] = useState("");
@@ -20,9 +22,10 @@ export default function BankHoliday() {
         if (mouted) {
             if (query.q) {
                 const decode = Decode(query.q);
+                console.log(decode,query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+                //Apicall(parse);
             }
             //router.push("/festival");
         }
@@ -49,7 +52,7 @@ export default function BankHoliday() {
         const decode = Decode(windowquery.get('q'));
         const parse = JSON.parse(decode);
         setinput(prev=> ({...prev,...parse,...res}))
-        await Apicall({...parse,...res,festival_date:""});
+        //await Apicall({...parse,...res,festival_date:""});
     },[]);
 
 
@@ -66,10 +69,10 @@ export default function BankHoliday() {
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
                             festival_name={input?.japanese}
-                            date={tithi?.festival_date}
+                            date={input?.festival_date}
                         />
                         <MuhutatDate
-                            festival_date={tithi?.festival_date}
+                            festival_date={input?.festival_date}
                             name={input?.japanese}
                         />
                     </div>

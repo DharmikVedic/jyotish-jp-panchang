@@ -35,11 +35,6 @@ export default function ThaiPusam() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            nakshatra:{
-                name:"Poosam",
-                nakshatra_start_time: panchang.nakshatra_start,
-                nakshatra_end_time: panchang.nakshatra_end,
-            }
 
         });
 
@@ -70,7 +65,6 @@ export default function ThaiPusam() {
                         />
                         <MuhutatDate
                             festival_date={input.festival_date}
-                            nakshatra={tithi?.nakshatra}
                             name={input?.japanese}
                         />
                     </div>

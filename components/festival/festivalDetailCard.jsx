@@ -3,6 +3,7 @@ import Day from "../utils/dayConvert";
 import {convert_Date_to_redable} from "./festivalCard";
 
 export default function FestivalDetailCard({festival_name,date}){
+
     const ConvertDate = new Date(date.replace(/-/g, "/"));
     const weekday = weekDay[ConvertDate.getDay()];
     const hindiWeekDayName = hindiWeekDay[ConvertDate.getDay()];

@@ -1,6 +1,7 @@
 import {Heading} from "../commoText";
 import React from "react";
 import {useRouter} from "next/router";
+import {Encode} from "../utils/decode";
 
 export default function PanchangCard({title,children,style,link,hideborder}){
     const router = useRouter();
@@ -38,16 +39,30 @@ export function Text({text,value}){
     )
 }
 
-export function Text2({text,value,data}){
-// const object = {"festival_date":"2022-1-13","timezone":9,"festival_name":"VAIKUNTHA_EKADASHI","latitude":35.6761919,"longitude":139.6503106,"japanese":"ヴァイ"}
-    return(
-        <div className="flex flex-wrap gap-2 py-1 text-[17px] items-center">
+export function Text2({text,value,data,inputdata}){
+    const router = useRouter();
+ // const handleLink = async()=>{
+
+     const date = data.year + "-"+ data.month + "-"+ data.date;
+     const festival_key = data.name.split(" ").map(item=> item.toUpperCase()).join("_");
+     const url = festival_key.toLowerCase();
+     const object = {"festival_date":date,"timezone":9,"festival_name":festival_key,"latitude":inputdata.lat,"longitude":inputdata.lon,"japanese":data.name};
+     const encode = Encode(JSON.stringify(object));
+
+     // await router.push({pathname:`/festival/${url}`,query:{
+     //         q:encode
+     //     }})
+ // }
+
+
+ return(
+        <a href={`/festival/${url}?q=${encode}`} target="_blank" className="flex cursor-pointer flex-wrap gap-2 py-1 text-[17px] items-center">
             <h6 className="font-semibold text-yellow-600">
                 {text}
             </h6>
             <p className="text-[16px] ">
                 {value}
             </p>
-        </div>
+        </a>
     )
 }

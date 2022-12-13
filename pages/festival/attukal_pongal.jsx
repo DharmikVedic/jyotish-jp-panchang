@@ -30,7 +30,7 @@ export default function attukalPongal() {
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+               // Apicall(parse);
             }
             //router.push("/festival");
         }
@@ -58,7 +58,7 @@ export default function attukalPongal() {
         const decode = Decode(windowquery.get('q'));
         const parse = JSON.parse(decode);
         setinput(prev=> ({...prev,...parse,...res}))
-        await Apicall({...parse,...res,festival_date:""});
+       // await Apicall({...parse,...res,festival_date:""});
     },[]);
 
     return (
@@ -72,13 +72,13 @@ export default function attukalPongal() {
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
-                            festival_name="Attukal Pongal "
-                            date={tithi?.festival_date}
+                            festival_name={input?.japanese}
+                            date={input?.festival_date}
                         />
                         <MuhutatDate
-                            festival_date={tithi?.festival_date}
+                            festival_date={input?.festival_date}
                          
-                            name="Attukal Pongal"
+                            name={input?.japanese}
                         />
                     </div>
                 </div>

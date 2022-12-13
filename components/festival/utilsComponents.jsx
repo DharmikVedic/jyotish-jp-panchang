@@ -83,13 +83,6 @@ export function MuhuratDetail({hightlight,name,muhurtastart,muhurtend,festival_d
                         {/*</p>*/}
                     </div>
                 </div>
-                {nakshatra &&
-                <p>
-                    {nakshatra} Nakshatra Begins - <span className="text-yellow-600">{nakshatra_start}</span>
-                    <br/>
-                    {nakshatra} Nakshatra Ends - <span className="text-yellow-600">{nakshatra_end}</span>
-                </p>
-                }
                 {tithiname &&
                 <p>
                     {tithiid[tithiname]} Begins - <span className="text-yellow-600">{tithiend}</span>
@@ -117,13 +110,6 @@ export function MuhutatDate({festival_date,name,tithi,children,nakshatra}){
                 {tithiid[tithi['tithi_id']]} Begins - <span className="text-yellow-600">{tithi.tithi_start_time}</span>
                 <br/>
                 {tithiid[tithi['tithi_id']]} Ends - <span className="text-yellow-600">{tithi.tithi_end_time}</span>
-            </p>
-            }
-            {nakshatra &&
-            <p className="">
-                {nakshatra?.name} Nakshathram Begins - <span className="text-yellow-600">{nakshatra.nakshatra_start_time}</span>
-                <br/>nakshatra
-                {nakshatra?.name} Nakshathram Ends - <span className="text-yellow-600">{nakshatra.nakshatra_end_time}</span>
             </p>
             }
         </div>

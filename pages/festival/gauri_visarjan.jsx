@@ -35,11 +35,6 @@ export default function GauriVisarjan() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            nakshatra: {
-                name: "Mula",
-                nakshatra_start_time: panchang.nakshatra_start_time,
-                nakshatra_end_time: panchang.nakshatra_end_time
-            }
         });
 
         setloader(false);
@@ -67,7 +62,7 @@ export default function GauriVisarjan() {
                             festival_name={input?.japanese}
                             date={tithi?.festival_date}
                         />
-                        <MuhuratDetail muhurtastart={tithi?.muhurta_start_time} nakshatra={tithi?.nakshatra} muhurtend={tithi?.muhurta_end_time} festival_date={tithi?.festival_date}  name={input?.japanese}/>
+                        <MuhuratDetail muhurtastart={tithi?.muhurta_start_time}  muhurtend={tithi?.muhurta_end_time} festival_date={tithi?.festival_date}  name={input?.japanese}/>
                     </div>
                 </div>
             )}

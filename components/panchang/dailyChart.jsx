@@ -74,7 +74,6 @@ export default function DailyCharts({horo,planets,reqData}){
         }
        },[horo]);
 
-console.log(horo,initialValue);
     return(
         <PanchangCard link="/planets" style="bg-sky-500/80" title="ラグナ・クンダリー">
             {data ?

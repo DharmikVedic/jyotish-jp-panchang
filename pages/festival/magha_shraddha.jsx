@@ -76,11 +76,7 @@ export default function ChaturdashiShradha() {
                                 </p>
                             </div>
 
-                            <p >
-                                Magha Nakshatra Begins - <span className="text-yellow-600">{data?.nakashatra_start_time}</span>
-                                <br/>
-                                Magha Nakshatra Ends - <span className="text-yellow-600">{data?.nakashatra_end_time}</span>
-                            </p>
+
                         </div>
                     </div>
                 </div>

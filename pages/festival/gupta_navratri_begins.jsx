@@ -21,7 +21,7 @@ export default function GuptaNavratriBegins() {
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+               // Apicall(parse);
             }
             //router.push("/festival");
         }
@@ -45,7 +45,7 @@ export default function GuptaNavratriBegins() {
         const decode = Decode(windowquery.get('q'));
         const parse = JSON.parse(decode);
         setinput(prev=> ({...prev,...parse,...res}))
-        await Apicall({...parse,...res,festival_date:""});
+        //await Apicall({...parse,...res,festival_date:""});
     },[]);
 
     return (

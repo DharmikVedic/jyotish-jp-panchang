@@ -4,7 +4,7 @@ import {convertDayMonthYearDate, dateDifference, getMultipleDate} from "./utils/
 import PanchangCard, { Text2} from "./panchang/dailyPanhang";
 import Loader from "./utils/loader";
 
-export default function Festival({data}){
+export default function Festival({data,inputdata}){
     // const [festival,setfestival] = useState(data);
     // const [loader,setloader]  = useState(false);
 
@@ -60,7 +60,7 @@ export default function Festival({data}){
                         :
                         <div className="px-5 py-2 max-h-[600px] overflow-y-scroll">
                             {data?.festivals.map((item, i) => (
-                                            <Text2 key={i} text={item.japanese} data={item} value={getFestivalDay({year:item.year,month:item.month,day:item.date})}/>
+                                            <Text2 inputdata={inputdata} key={i} text={item.japanese} data={item} value={getFestivalDay({year:item.year,month:item.month,day:item.date})}/>
                                         ))}
                         </div>
                     }

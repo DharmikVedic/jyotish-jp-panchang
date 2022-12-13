@@ -10,7 +10,7 @@ import FestivalFormdata from "../../components/festival/festivalFilter";
 export  default function DhanuSankranti(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState({});
+    const [input,setinput] = useState("");
     const router = useRouter();
     const query = router.query;
 
@@ -21,7 +21,7 @@ export  default function DhanuSankranti(){
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+               // Apicall(parse);
             }
             //router.push("/festival");
         }
@@ -42,22 +42,24 @@ export  default function DhanuSankranti(){
         const decode = Decode(windowquery.get('q'));
         const parse = JSON.parse(decode);
         setinput(prev=> ({...prev,...parse,...res}))
-        await Apicall({...parse,...res,festival_date:""});
+        //await Apicall({...parse,...res,festival_date:""});
     },[]);
+
+
 
     return(
         <>
             <FestivalFormdata getinput={getdata} />
 
-            {loader || data=="" ?
+            {loader || input == "" ?
                 <div className="mt-[100px]">
                     <Loader/>
                 </div>
                 :
                 <div className="bg-zinc-100 min-h-screen pt-10 pb-28 px-5">
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
-                        <FestivalDetailCard festival_name={input?.japanese}  date={data?.festival_date}/>
-                        <SankrantiDetail festival_date={data?.festival_date} moment={data?.sankranti_moment}  punya={data?.punya_kal} mahapunya={data?.maha_punya_kal} name={input?.japanese}/>
+                        <FestivalDetailCard festival_name={input?.japanese}  date={input?.festival_date}/>
+                        {/*<SankrantiDetail festival_date={data?.festival_date} moment={data?.sankranti_moment}  punya={data?.punya_kal} mahapunya={data?.maha_punya_kal} name={input?.japanese}/>*/}
                     </div>
                 </div>
             }

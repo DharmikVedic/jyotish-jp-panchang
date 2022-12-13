@@ -75,7 +75,7 @@ export default function Home({events}) {
                           }
                       </PanchangCard>
                       <DailyCharts reqData={initialdata} horo={data['horo_chart/D1']} planets={data['planets']}/>
-                      <Festival data={data['festival']}/>
+                      <Festival inputdata={initialdata} data={data['festival']}/>
                       {/* planetary events */}
                       <PlanetaryPosition events={events}/>
                       <PanchangCard link="/muhurat" style="bg-yellow-600/80" title="Hindu Panchang">
