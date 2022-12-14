@@ -21,7 +21,7 @@ export  default function RamNavami(){
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+               // Apicall(parse);
             }
             //router.push("/festival");
         }

@@ -1,11 +1,19 @@
 import EventsCards from "../components/planetary_position/Eventscards";
-import { encode, decode } from 'js-base64';
+import { encode,Base64 } from 'js-base64';
+import {Decode, Encode} from "../components/utils/decode";
 
 export default function Sample({text,signpage}){
 
 
-    const e = encode(JSON.stringify({"festival_date":"2022-4-2","timezone":9,"festival_name":"CHANDRA_DARSHAN","latitude":35.6761919,"longitude":139.6503106,"japanese":"チャンドラ・ダルシャナ"} ));
-console.log(decode("eyJmZXN0aXZhbF9kYXRlIjoiMjAyMi0zLTQiLCJ0aW1lem9uZSI6OSwiZmVzdGl2YWxfbmFtZSI6IlBIVUxFUkFfRE9PSiIsImxhdGl0dWRlIjozNS42NzYxOTE5LCJsb25naXR1ZGUiOjEzOS42NTAzMTA2LCJqYXBhbmVzZSI6IuODl"));
+    const e = Encode(JSON.stringify({
+        "festival_date": "2022-12-20",
+        "timezone": 9,
+        "festival_name": "VAISHNAVA_SAPHALA_EKADASHI",
+        "latitude": 35.6761919,
+        "longitude": 139.6503106,
+        "japanese": "ヴァイシュナヴァ・サファラー・エーカーダシー"
+    }));
+
 
     return(
         <div className="max-w-4xl w-full mx-auto my-[50px]">

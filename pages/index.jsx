@@ -24,7 +24,6 @@ export default function Home({events}) {
 
     // get 15 festivals
     const get15FestivalName = async(initial)=>{
-
         const initialdata = {
             date: initial.day,
             month: initial.month,
