@@ -39,7 +39,6 @@ export default function AadiAmavasai() {
             tithi_start_time: panchang?.tithi_start,
             tithi_end_time: panchang?.tithi_end,
         });
-
         setloader(false);
     };
 

@@ -70,9 +70,9 @@ export default function MahalakshmiVratBegins() {
                             tithi={tithi}
                             name={input?.japanese}
                         >
-                            <p className="text-yellow-600 md:text-lg font-semibold">
-                                Moonrise Time  - 
-                            </p>
+                            {/*<p className="text-yellow-600 md:text-lg font-semibold">*/}
+                            {/*    Moonrise Time  - */}
+                            {/*</p>*/}
                         </MuhutatDate>
                     </div>
                 </div>

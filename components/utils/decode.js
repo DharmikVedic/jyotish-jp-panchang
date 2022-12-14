@@ -3,7 +3,7 @@ export function Encode(text) {
     if (text) {
         //let bufferObj = Buffer.from(text, 'utf8')
         // Encoding into base64
-        let base64String = encode(text)
+        let base64String = encode(text,true)
             //bufferObj.toString('base64')
         return base64String
     } else {

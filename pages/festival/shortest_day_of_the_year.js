@@ -1,13 +1,15 @@
+
 import React, {useCallback, useEffect, useState} from "react";
-import { useRouter } from "next/router";
-import { FetchAPI } from "../../components/utils/fetchapi";
+import {useRouter} from "next/router";
+import {Decode} from "../../components/utils/decode";
+import {FetchAPI} from "../../components/utils/fetchapi";
+import FestivalFormdata from "../../components/festival/festivalFilter";
 import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
-import { MuhutatDate } from "../../components/festival/utilsComponents";
-import { Decode } from "../../components/utils/decode";
-import FestivalFormdata from "../../components/festival/festivalFilter";
+import {MuhutatDate} from "../../components/festival/utilsComponents";
 
-export default function MahalakshmiVratEnds() {
+
+export default function RamalakshmanaDwadashi() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
     const [input, setinput] = useState("");
@@ -21,7 +23,7 @@ export default function MahalakshmiVratEnds() {
                 const decode = Decode(query.q);
                 const parse = JSON.parse(decode);
                 setinput(parse);
-                Apicall(parse);
+               // Apicall(parse);
             }
             //router.push("/festival");
         }
@@ -35,9 +37,6 @@ export default function MahalakshmiVratEnds() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            tithi_id: 8,
-            tithi_start_time: panchang.tithi_start,
-            tithi_end_time: panchang.tithi_end,
         });
 
         setloader(false);
@@ -48,7 +47,7 @@ export default function MahalakshmiVratEnds() {
         const decode = Decode(windowquery.get('q'));
         const parse = JSON.parse(decode);
         setinput(prev=> ({...prev,...parse,...res}))
-        await Apicall({...parse,...res,festival_date:""});
+        //await Apicall({...parse,...res,festival_date:""});
     },[]);
 
 
@@ -65,16 +64,12 @@ export default function MahalakshmiVratEnds() {
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
                             festival_name={input?.japanese}
-                            date={tithi?.festival_date}
+                            date={input?.festival_date}
                         />
                         <MuhutatDate
-                            festival_date={tithi?.festival_date}
-                            tithi={tithi}
+                            festival_date={input?.festival_date}
                             name={input?.japanese}
                         >
-                            {/*<p className="text-yellow-600 md:text-lg font-semibold">*/}
-                            {/*    Moonrise Time  -*/}
-                            {/*</p>*/}
                         </MuhutatDate>
                     </div>
                 </div>

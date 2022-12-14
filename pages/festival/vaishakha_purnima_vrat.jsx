@@ -7,7 +7,7 @@ import { MuhutatDate } from "../../components/festival/utilsComponents";
 import { Decode } from "../../components/utils/decode";
 import FestivalFormdata from "../../components/festival/festivalFilter";
 
-export default function MahalakshmiVratEnds() {
+export default function AadiAmavasai() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
     const [input, setinput] = useState("");
@@ -35,11 +35,10 @@ export default function MahalakshmiVratEnds() {
         const panchang = await FetchAPI("festival_muhurta", input);
         setTithi({
             ...panchang,
-            tithi_id: 8,
-            tithi_start_time: panchang.tithi_start,
-            tithi_end_time: panchang.tithi_end,
+            tithi_id: 30,
+            tithi_start_time: panchang?.tithi_start,
+            tithi_end_time: panchang?.tithi_end,
         });
-
         setloader(false);
     };
 
@@ -51,12 +50,10 @@ export default function MahalakshmiVratEnds() {
         await Apicall({...parse,...res,festival_date:""});
     },[]);
 
-
-
     return (
         <>
             <FestivalFormdata getinput={getdata} />
-            {loader || input=="" ? (
+            {loader||input=="" ? (
                 <div className="mt-[100px]">
                     <Loader />
                 </div>
@@ -65,17 +62,13 @@ export default function MahalakshmiVratEnds() {
                     <div className="max-w-[750px]  mx-auto flex flex-col gap-20">
                         <FestivalDetailCard
                             festival_name={input?.japanese}
-                            date={tithi?.festival_date}
+                            date={input.festival_date}
                         />
                         <MuhutatDate
-                            festival_date={tithi?.festival_date}
+                            festival_date={input.festival_date}
                             tithi={tithi}
                             name={input?.japanese}
-                        >
-                            {/*<p className="text-yellow-600 md:text-lg font-semibold">*/}
-                            {/*    Moonrise Time  -*/}
-                            {/*</p>*/}
-                        </MuhutatDate>
+                        />
                     </div>
                 </div>
             )}
