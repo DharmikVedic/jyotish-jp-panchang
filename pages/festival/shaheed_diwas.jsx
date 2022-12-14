@@ -75,7 +75,7 @@ export default function ShaheedDiwas() {
                     </div>
                 </div>
             )}
-        </>put
+        </>
     );
 }
 

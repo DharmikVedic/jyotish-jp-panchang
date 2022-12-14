@@ -70,7 +70,7 @@ export default function Shravana_adhika_maas_ends() {
                             date={input?.festival_date}
                         />
                         <MuhutatDate
-                            festival_date={?input.festival_date}
+                            festival_date={input?.festival_date}
                             name={input?.japanese}
                         />
                     </div>
