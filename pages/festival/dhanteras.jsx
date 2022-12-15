@@ -11,7 +11,7 @@ import {tithiid} from "../../components/festival/utilsComponents";
 export  default function AhoiAshtami(){
     const [loader,setloader] = useState(false);
     const [data,setdata] = useState("");
-    const [input,setinput] = useState({});
+    const [input,setinput] = useState("");
     const router = useRouter();
     const query = router.query;
 
