@@ -47,7 +47,7 @@ export  default function AhoiAshtami(){
     return(
         <>
             <FestivalFormdata getinput={getdata} />
-            {loader || data==""?
+            {loader || input==""?
                 <div className="mt-[100px]">
                     <Loader/>
                 </div>
