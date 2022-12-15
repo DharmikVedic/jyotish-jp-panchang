@@ -1,8 +1,22 @@
 import {useRouter} from "next/router";
 import {mL} from "../../pages/festival";
 import {Encode} from "../utils/decode";
+import React, {useState} from "react";
 
 export default function FeativalYearCard({year,monthName,festival}){
+    const [showmore,setshowmore] = useState(false);
+    const [data,setdata] = useState(festival.slice(0,13));
+
+    const handleMore = ()=>{
+        if(!showmore){
+            setshowmore(true);
+            setdata(festival);
+        }
+        else{
+            setdata(festival.slice(0,13));
+            setshowmore(false);
+        }
+    }
 
     return(
         <div   className="flex flex-col  bg-white">
@@ -10,10 +24,36 @@ export default function FeativalYearCard({year,monthName,festival}){
                 {monthName} {year.year}
             </h6>
             <div className="grid grid-cols-1 md:grid-cols-2 w-full divide-zinc-100 divide-y">
-                {festival.map((fest,i)=>(
+                {data.map((fest,i)=>(
                 <FestivalCard input={year} data={fest} key={i} />
             ))}
             </div>
+            <button onClick={handleMore}
+                    className={`${showmore ? "flex-row-reverse" :"flex-row justify-end"} text-sky-500 bg-white rounded-b-md w-full  flex py-2 text-lg  hover:underline border-t w-full border-zinc-200 px-5 items-center`}>
+                {showmore ?
+                    (
+                        <span className="text-sky-500 font-semibold">
+                          Hide
+                      </span>
+                    )
+                    :
+                    (
+                        <>
+                            More
+                      <span className="text-sky-500 pl-1">
+                           {monthName}
+                      </span>
+                      </>
+                    )
+                }
+                <span className={`mt-1 ${showmore ? "rotate-180" : "rotate-0"}`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+  <path fillRule="evenodd"
+        d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+        clipRule="evenodd"/>
+</svg>
+                </span>
+            </button>
         </div>
     )
 }
@@ -32,7 +72,7 @@ function FestivalCard({data,input}){
             festival_name:data.festival_key,
             latitude:input.lat,
             longitude:input.lon,
-            japanese:data.name
+            japanese:data.japanese
         }
         const hideLink = ["HOLI","CHHOTI_HOLI","DHANU_SANKRANTI","RAKSHA_BANDHAN","CHAITRA_NAVRATRI","CHANDRA_GRAHAN","VISHWAKARMA_PUJA","HOLIKA_DAHAN","DIWALI","LAKSHMI_PUJA","NAVRATRI_BEGINS","SARASWATI_AVAHAN","SARASWATI_PUJA","VARALAKSHAMI_VRAT","BHAIYA_DOOJ","HANUMAN_JAYANTI"];
 
@@ -46,7 +86,6 @@ function FestivalCard({data,input}){
                 }})
         }
     }
-
 
 
     return(

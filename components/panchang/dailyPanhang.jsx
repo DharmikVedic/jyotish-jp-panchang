@@ -42,31 +42,31 @@ export function Text({text,value}){
 
 export function Text2({text,value,data,inputdata}){
     const router = useRouter();
-    const handleLink =async()=>{
+    // const handleLink =async()=>{
         const date = data.year + "-"+ data.month + "-"+ data.date;
         // const festival_key = data.name.split(" ").map(item=> item.toUpperCase()).join("_");
         const url = data?.festival_key.toLowerCase();
         const object = {"festival_date":date,"timezone":9,"festival_name":data?.festival_key,"latitude":inputdata.lat,"longitude":inputdata.lon,"japanese":text};
         const encode = Encode(JSON.stringify(object));
-        await router.push({
-            pathname:`/festival/${url}`,
-            query:{
-                q:encode
-            }
-        })
-    }
+        // await router.push({
+        //     pathname:`/festival/${url}`,
+        //     query:{
+        //         q:encode
+        //     }
+        // })
+    // }
 
 
  return(
 
-        <button onClick={handleLink}  className="flex cursor-pointer flex-wrap gap-2 py-1 text-[17px] items-center">
+        <a target="_blank" href={`/festival/${url}?q=${encode}`} className="flex cursor-pointer  text-left flex-wrap gap-2 py-1 text-[17px] items-center">
             <h6 className="font-semibold text-yellow-600">
                 {text}
             </h6>
             <p className="text-[16px] ">
                 {value}
             </p>
-        </button>
+        </a>
     )
 }
 // target="_blank" href={`/festival/${url}?q=${encode}`}

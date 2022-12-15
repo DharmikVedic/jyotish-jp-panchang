@@ -7,7 +7,6 @@ import Loader from "../../components/utils/loader";
 import FestivalDetailCard from "../../components/festival/festivalDetailCard";
 import {MuhutatDate} from "../../components/festival/utilsComponents";
 
-
 export default function ShaheedDiwas() {
     const [loader, setloader] = useState(false);
     const [tithi, setTithi] = useState({});
