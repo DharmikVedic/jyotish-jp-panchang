@@ -64,7 +64,7 @@ export default function Festival({festival}){
                 <div className="max-w-4xl flex flex-col gap-5 mx-auto px-5">
                     {data?.map((item,i)=>{
                         return(
-                            <FeativalYearCard year={year} festival={item} monthName={mL[i]} key={i}/>
+                            <FeativalYearCard  year={year} festival={item} monthName={mL[i]} key={i}/>
                         )
                     }
                     )}

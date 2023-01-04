@@ -1,6 +1,5 @@
 import React, {useEffect,  useState} from "react";
-import {drawNorthChart} from "../components/chartui/chart";
-import {getPlanetArray, getSignArray, getSignPlanetArray} from "../components/chartui/utils";
+import {getSignPlanetArray} from "../components/chartui/utils";
 import {drawSouthChart} from "../components/chartui/southChart";
 import {FetchAPI} from "../components/utils/fetchapi";
 import {currentDateObj} from "../components/utils/currentDateObject";
@@ -15,7 +14,7 @@ export default function D3(){
         ascendantColor: 'blue',
         signColor:"#ea580c",
         chartType:"north",
-        width:300,
+        width:500,
     };
 
     useEffect(()=>{
@@ -27,6 +26,7 @@ export default function D3(){
         try {
             if (data) {
                 const planet = await FetchAPI(`horo_chart/D1`,{...data});
+                console.log(getSignPlanetArray(planet),planet[0]['sign'])
                 drawSouthChart(getSignPlanetArray(planet), planet[0]['sign'], options,'#northChart');
                 setdata({svg: planet});
             }

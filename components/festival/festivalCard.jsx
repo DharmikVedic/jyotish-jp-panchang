@@ -2,8 +2,10 @@ import {useRouter} from "next/router";
 import {mL} from "../../pages/festival";
 import {Encode} from "../utils/decode";
 import React, {useState} from "react";
+import {january, LimitedFestival} from "./festivalArray";
 
 export default function FeativalYearCard({year,monthName,festival}){
+
     const [showmore,setshowmore] = useState(false);
     const [data,setdata] = useState(festival.slice(0,13));
 
@@ -17,6 +19,8 @@ export default function FeativalYearCard({year,monthName,festival}){
             setshowmore(false);
         }
     }
+
+    // console.log(LimitedFestival(festival,january));
 
     return(
         <div   className="flex flex-col  bg-white">
@@ -115,6 +119,7 @@ export function convert_Date_to_redable(data){
 function HideClick(array){
     const arr = ["HOLI","CHHOTI_HOLI","DHANU_SANKRANTI","RAKSHA_BANDHAN","CHAITRA_NAVRATRI","CHANDRA_GRAHAN","VISHWAKARMA_PUJA"];
 }
+
 
 
 

@@ -43,7 +43,7 @@ export default function Festival({data,inputdata}){
     // }
     //
     const getFestivalDay =(dateObject)=>{
-        const today = new Date();
+        const today = convertDayMonthYearDate(inputdata);
         const pastdate = convertDayMonthYearDate(dateObject);
         return dateDifference(today,pastdate);
     }
