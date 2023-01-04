@@ -2,12 +2,12 @@ import {useRouter} from "next/router";
 import {mL} from "../../pages/festival";
 import {Encode} from "../utils/decode";
 import React, {useState} from "react";
-import {january, LimitedFestival} from "./festivalArray";
+import {january, limited_festival, LimitedFestival} from "./festivalArray";
 
 export default function FeativalYearCard({year,monthName,festival}){
 
     const [showmore,setshowmore] = useState(false);
-    const [data,setdata] = useState(festival.slice(0,13));
+    const [data,setdata] = useState(LimitedFestival(festival,limited_festival[monthName.toLowerCase()]));
 
     const handleMore = ()=>{
         if(!showmore){
@@ -15,12 +15,12 @@ export default function FeativalYearCard({year,monthName,festival}){
             setdata(festival);
         }
         else{
-            setdata(festival.slice(0,13));
+            setdata(LimitedFestival(festival,limited_festival[monthName.toLowerCase()]));
             setshowmore(false);
         }
     }
 
-    // console.log(LimitedFestival(festival,january));
+    // console.log(monthName,LimitedFestival(festival,limited_festival[monthName.toLowerCase()]));
 
     return(
         <div   className="flex flex-col  bg-white">

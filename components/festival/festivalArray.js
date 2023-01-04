@@ -45,6 +45,18 @@ export let limited_festival = {
         "PARASHURAMA_JAYANTI",
         "SITA_NAVAMI",
     ],
+    may:[
+        "MOHINI_EKADASHI",
+        "NARASIMHA_JAYANTI",
+        "VRISHABHA_SANKRANTI",
+        "BUDDHA_PURNIMA",
+        "CHANDRA_GRAHAN",
+        "APARA_EKADASHI",
+        "SHANI_JAYANTI",
+        "VAT_SAVITRI_VRAT",
+        "NIRJALA_EKADASHI",
+
+    ],
      june:[
         "VAT_PURNIMA_VRAT",
         "MITHUNA_SANKRANTI",
@@ -66,7 +78,7 @@ export let limited_festival = {
         "SIMHA_SANKRANTI",
 
     ],
-     spetember:[
+    september:[
         "KAJARI_TEEJ",
         "JANMASHTAMI",
         "HARTALIKA_TEEJ",
