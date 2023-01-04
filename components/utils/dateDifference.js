@@ -4,7 +4,7 @@ export function dateDifference(date1,date2){
     const diffDateTime = Math.abs(d1-d2);
     const diffDateDays = Math.ceil(diffDateTime /(1000* 60*60*24));
     switch(diffDateDays){
-        case 1:
+        case 0:
             return "(Today)";
         default:
             return "("+ diffDateDays + " Days" + ")";
