@@ -139,8 +139,10 @@ export let limited_festival = {
 
 
 export function LimitedFestival(data,list){
-    const filteredResults = data.filter(item =>
-        list.indexOf(item.festival_key) > -1
-    );
+const filteredResults = data.filter(item=> item?.main_festivals == "main");
+
+    // const filteredResults = data.filter(item =>
+    //     list.indexOf(item.festival_key) > -1
+    // );
   return filteredResults;
 }
